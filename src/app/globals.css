@@ -211,8 +211,34 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-background text-foreground;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  /* Ensure sections are properly spaced for fixed navigation */
+  section[id] {
+    scroll-margin-top: 4rem;
+  }
+  
+  /* Mobile-first button sizing */
+  button, input, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Focus states for accessibility */
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
   }
 }
