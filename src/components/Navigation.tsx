@@ -23,18 +23,20 @@ const navigationItems = [
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [windowHeight, setWindowHeight] = useState(0);
     const { scrollY } = useScroll();
+
+    useEffect(() => {
+        // Set window height and trigger animation after component mounts
+        setWindowHeight(window.innerHeight);
+        setIsVisible(true);
+    }, []);
 
     const backgroundOpacity = useTransform(
         scrollY,
-        [0, window.innerHeight * 0.3], // 0 to 30vh
+        [0, windowHeight * 0.3], // 0 to 30vh
         [0, 0.95] // transparent to 95% opacity
     );
-
-    useEffect(() => {
-        // Trigger animation after component mounts
-        setIsVisible(true);
-    }, []);
 
     const handleNavClick = () => {
         setIsOpen(false);

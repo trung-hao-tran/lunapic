@@ -1,10 +1,11 @@
 import Navigation from '@/components/Navigation';
 import Section from '@/components/Section';
+import IntroAnimation from '@/components/IntroAnimation';
 import Link from 'next/link';
 
 const Page = () => {
     return (
-        <div>
+        <IntroAnimation>
             <Navigation />
             
             {/* Hero Section with Video Overlay - 80% viewport */}
@@ -174,7 +175,7 @@ const Page = () => {
                     </div>
                 </div>
             </Section>
-        </div>
+        </IntroAnimation>
     );
 };
 
