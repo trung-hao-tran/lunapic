@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { AnimatePresence, animate, motion, useMotionValue, useTransform } from 'framer-motion';
 
-const IntroAnimation = ({ children }: { children: React.ReactNode }) => {
+const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNode; onIntroComplete?: () => void }) => {
     const [showIntro, setShowIntro] = useState(false);
     const [isSliding, setIsSliding] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -38,11 +38,17 @@ const IntroAnimation = ({ children }: { children: React.ReactNode }) => {
         // Remove intro after animation completes
         setTimeout(() => {
             setShowIntro(false);
+            onIntroComplete?.(); // Trigger callback when intro fully completes
         }, 1200); // Match animation duration
     };
 
     // If intro shouldn't show, just render children
     if (!showIntro) {
+        // Trigger onIntroComplete immediately if intro was already played
+        useEffect(() => {
+            onIntroComplete?.();
+        }, [onIntroComplete]);
+        
         return <>{children}</>;
     }
 

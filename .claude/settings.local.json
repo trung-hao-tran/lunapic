@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:rsp.com.au)",
+      "WebFetch(domain:www.rsp.com.au)"
+    ],
+    "deny": []
+  }
+}
