@@ -25,7 +25,7 @@ const Page = () => {
             {/* Hero Section with Video Overlay - 80% viewport */}
             <section
                 id='hero'
-                className='relative overflow-hidden bg-[#333136] h-[80vh] flex w-full flex-col items-center justify-center'>
+                className='relative flex h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-[#333136]'>
                 {/* Video Background */}
                 <div
                     className={`absolute inset-0 h-full w-full transition-opacity duration-2000 ease-out ${
@@ -53,9 +53,9 @@ const Page = () => {
             </section>
 
             {/* About Us Transition Section - seamless transition with gradient */}
-            <section 
-                id='about-transition' 
-                className='relative bg-[#333136] flex w-full flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8'>
+            <section
+                id='about-transition'
+                className='relative flex min-h-screen w-full flex-col items-center justify-center bg-[#333136] px-4 sm:px-6 lg:px-8'>
                 <div className='space-y-12 pt-32 text-center'>
                     <div className='space-y-8'>
                         <h2 className='text-3xl font-bold text-white sm:text-5xl lg:text-6xl'>Who We Are</h2>
@@ -83,7 +83,7 @@ const Page = () => {
             {/* Show Reel Section */}
             <section
                 id='showreel'
-                className='relative bg-[#333136] flex w-full flex-col items-center justify-center min-h-screen'>
+                className='relative flex min-h-screen w-full flex-col items-center justify-center bg-[#333136]'>
                 <div className='flex h-full w-full flex-col items-center justify-center'>
                     <div className='mb-8 px-4 text-center'>
                         <h2 className='mb-4 text-3xl font-bold text-white sm:text-5xl lg:text-6xl'>Our Work</h2>
@@ -95,21 +95,21 @@ const Page = () => {
                     {/* Showreel Video */}
                     <div className='mx-auto w-full max-w-6xl px-4'>
                         <div className='relative aspect-video overflow-hidden rounded-lg'>
-                            <video className='h-full w-full object-cover' controls poster='/showreel-poster.jpg'>
+                            {/* <video className='h-full w-full object-cover' controls poster='/showreel-poster.jpg'>
                                 <source src='/showreel.mp4' type='video/mp4' />
                                 <div className='flex h-full w-full items-center justify-center bg-gray-800 text-white'>
                                     <span>Showreel Video Placeholder</span>
                                 </div>
-                            </video>
+                            </video> */}
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Action Banner Section */}
-            <section 
-                id='achievements' 
-                className='bg-[#333136] flex w-full flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8'>
+            <section
+                id='achievements'
+                className='flex min-h-screen w-full flex-col items-center justify-center bg-[#333136] px-4 sm:px-6 lg:px-8'>
                 <div className='space-y-12 text-center'>
                     <h2 className='text-3xl leading-tight font-bold text-white sm:text-5xl lg:text-7xl'>
                         Luna Pictures has helped create
@@ -136,9 +136,9 @@ const Page = () => {
             </section>
 
             {/* Testimonial Section */}
-            <section 
-                id='testimonials' 
-                className='bg-[#333136] flex w-full flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8'>
+            <section
+                id='testimonials'
+                className='flex min-h-screen w-full flex-col items-center justify-center bg-[#333136] px-4 sm:px-6 lg:px-8'>
                 <div className='space-y-12 text-center'>
                     <h2 className='mb-16 text-3xl font-bold text-white sm:text-5xl lg:text-6xl'>
                         What Our Clients Say

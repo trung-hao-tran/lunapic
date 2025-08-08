@@ -20,8 +20,11 @@ const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNo
 
         if (!hasPlayedIntro) {
             setShowIntro(true);
+        } else {
+            // If intro was already played, trigger callback immediately
+            onIntroComplete?.();
         }
-    }, []);
+    }, [onIntroComplete]);
 
     const handleVideoEnd = () => {
         sessionStorage.setItem('lunaIntroPlayed', 'true');
@@ -44,11 +47,6 @@ const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNo
 
     // If intro shouldn't show, just render children
     if (!showIntro) {
-        // Trigger onIntroComplete immediately if intro was already played
-        useEffect(() => {
-            onIntroComplete?.();
-        }, [onIntroComplete]);
-        
         return <>{children}</>;
     }
 
