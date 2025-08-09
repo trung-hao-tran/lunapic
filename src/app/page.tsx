@@ -36,10 +36,12 @@ const Page = () => {
         <IntroAnimation onIntroComplete={handleIntroComplete}>
             <Navigation />
 
-            {/* Hero Section with Video Overlay - Full screen on mobile, 75vh on desktop */}
-            <section
+            {/* First Screen Container - Priority layout for content */}
+            <div className='min-h-screen flex flex-col'>
+                {/* Hero Section with Video Overlay - Adaptive height */}
+                <section
                 id='hero'
-                className='relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#020202] md:h-[75vh]'>
+                className='relative flex flex-1 min-h-0 w-full flex-col items-center justify-center overflow-hidden bg-[#020202]'>
                 {/* Video Background */}
                 <div
                     className={`absolute inset-0 h-full w-full transition-opacity duration-2000 ease-out ${
@@ -78,10 +80,10 @@ const Page = () => {
                 <div className='absolute right-0 bottom-0 left-0 z-20 h-[15vh] bg-gradient-to-b from-transparent to-[#020202]'></div>
             </section>
 
-            {/* About Us Transition Section - seamless transition with gradient */}
-            <section
+                {/* About Us Transition Section - Content priority, never overflows */}
+                <section
                 id='about-transition'
-                className='relative flex h-[25vh] w-full flex-col justify-center bg-[#020202]'>
+                className='relative flex flex-shrink-0 w-full flex-col justify-center bg-[#020202] py-8'>
                 <div className='mx-auto w-[65vw] text-left'>
                     <h2 className='text-2xl leading-[4rem] font-bold text-[#F9F9F9] sm:text-3xl'>About Us</h2>
                     <div className='space-y-2 text-left'>
@@ -102,7 +104,8 @@ const Page = () => {
                         </p>
                     </div>
                 </div>
-            </section>
+                </section>
+            </div>
 
             {/* Read More Button Section - positioned below first screen */}
             <section className='flex w-full bg-[#020202] py-8'>

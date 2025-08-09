@@ -6,7 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -62,6 +63,9 @@ const Navigation = () => {
                                 </Button>
                             </SheetTrigger>
                             <SheetContent side='left' className='w-64'>
+                                <VisuallyHidden>
+                                    <SheetTitle>Navigation Menu</SheetTitle>
+                                </VisuallyHidden>
                                 <div className='mt-8 flex flex-col space-y-4'>
                                     {navigationItems.map((item) => (
                                         <Link
