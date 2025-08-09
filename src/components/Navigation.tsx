@@ -48,7 +48,7 @@ const Navigation = () => {
             style={{
                 backgroundColor: useTransform(
                     backgroundOpacity,
-                    (opacity) => `rgba(75, 85, 99, ${opacity})` // gray-600 with dynamic opacity
+                    (opacity) => `rgba(51, 49, 54, ${opacity})` // #333136 with dynamic opacity
                 )
             }}>
             <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
@@ -82,8 +82,7 @@ const Navigation = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.6, duration: 0.5 }}
-                        >
+                            transition={{ delay: 0.6, duration: 0.5 }}>
                             <Link
                                 href='/about'
                                 className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
@@ -93,8 +92,7 @@ const Navigation = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.4, duration: 0.5 }}
-                        >
+                            transition={{ delay: 0.4, duration: 0.5 }}>
                             <Link
                                 href='/product-team'
                                 className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
@@ -104,8 +102,7 @@ const Navigation = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.2, duration: 0.5 }}
-                        >
+                            transition={{ delay: 0.2, duration: 0.5 }}>
                             <Link
                                 href='/vfx-team'
                                 className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
@@ -115,12 +112,11 @@ const Navigation = () => {
                     </div>
 
                     {/* Logo - centered */}
-                    <motion.div 
-                        className='flex justify-center md:absolute md:left-1/2 md:transform md:-translate-x-1/2'
+                    <motion.div
+                        className='flex justify-center md:absolute md:left-1/2 md:-translate-x-1/2 md:transform'
                         initial={{ opacity: 0, y: -30 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
-                        transition={{ delay: 0, duration: 0.6, ease: "easeOut" }}
-                    >
+                        transition={{ delay: 0, duration: 0.6, ease: 'easeOut' }}>
                         <Link
                             href='/'
                             className='focus:ring-primary rounded-md px-2 py-1 focus:ring-2 focus:outline-none'>
@@ -133,8 +129,7 @@ const Navigation = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.2, duration: 0.5 }}
-                        >
+                            transition={{ delay: 0.2, duration: 0.5 }}>
                             <Link
                                 href='/projects'
                                 className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
@@ -144,8 +139,7 @@ const Navigation = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.4, duration: 0.5 }}
-                        >
+                            transition={{ delay: 0.4, duration: 0.5 }}>
                             <Link
                                 href='/contact'
                                 className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
@@ -155,8 +149,7 @@ const Navigation = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.6, duration: 0.5 }}
-                        >
+                            transition={{ delay: 0.6, duration: 0.5 }}>
                             <Link
                                 href='/join'
                                 className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
