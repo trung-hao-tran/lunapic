@@ -6,6 +6,9 @@ import Link from 'next/link';
 
 import IntroAnimation from '@/components/IntroAnimation';
 import Navigation from '@/components/Navigation';
+import AnimatedBanner from '@/components/AnimatedBanner';
+import StackedCardTestimonials from '@/components/StackedCardTestimonials';
+import CustomVideoPlayer from '@/components/CustomVideoPlayer';
 
 import { animate } from 'framer-motion';
 
@@ -133,97 +136,38 @@ const Page = () => {
                     {/* Showreel Video */}
                     <div className='mx-auto w-full max-w-6xl px-4'>
                         <div className='relative aspect-video overflow-hidden rounded-lg'>
-                            {/* <video className='h-full w-full object-cover' controls poster='/showreel-poster.jpg'>
-                                <source src='/showreel.mp4' type='video/mp4' />
-                                <div className='flex h-full w-full items-center justify-center bg-gray-800 text-white'>
-                                    <span>Showreel Video Placeholder</span>
-                                </div>
-                            </video> */}
+                            <CustomVideoPlayer 
+                                src={[
+                                    {
+                                        label: 'HD',
+                                        src: '/videos/intro.mp4',
+                                        resolution: '1080p'
+                                    },
+                                    {
+                                        label: 'Standard',
+                                        src: '/videos/intro-720p.mp4',
+                                        resolution: '720p'
+                                    },
+                                    {
+                                        label: 'Low',
+                                        src: '/videos/intro-480p.mp4', 
+                                        resolution: '480p'
+                                    }
+                                ]}
+                                className='w-full h-full'
+                                autoPlay={false}
+                                muted={true}
+                            />
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Action Banner Section */}
-            <section
-                id='achievements'
-                className='flex min-h-screen w-full flex-col items-center justify-center bg-[#020202] px-4 sm:px-6 lg:px-8'>
-                <div className='space-y-12 text-center'>
-                    <h2 className='text-3xl leading-tight font-bold text-[#F9F9F9] sm:text-5xl lg:text-7xl'>
-                        Luna Pictures has helped create
-                        <span className='mt-4 block text-4xl text-blue-400 sm:text-6xl lg:text-8xl'>
-                            500+ Amazing Projects
-                        </span>
-                    </h2>
-
-                    <div className='mx-auto grid max-w-4xl grid-cols-1 gap-8 pt-12 md:grid-cols-3'>
-                        <div className='space-y-2 text-center'>
-                            <div className='text-3xl font-bold text-[#F9F9F9] sm:text-4xl lg:text-5xl'>150+</div>
-                            <div className='text-lg text-[#F9F9F9]'>Films & Commercials</div>
-                        </div>
-                        <div className='space-y-2 text-center'>
-                            <div className='text-3xl font-bold text-[#F9F9F9] sm:text-4xl lg:text-5xl'>200+</div>
-                            <div className='text-lg text-[#F9F9F9]'>VFX Shots</div>
-                        </div>
-                        <div className='space-y-2 text-center'>
-                            <div className='text-3xl font-bold text-[#F9F9F9] sm:text-4xl lg:text-5xl'>50+</div>
-                            <div className='text-lg text-[#F9F9F9]'>Happy Clients</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            {/* Animated Action Banner */}
+            <AnimatedBanner />
 
             {/* Testimonial Section */}
-            <section
-                id='testimonials'
-                className='flex min-h-screen w-full flex-col items-center justify-center bg-[#020202] px-4 sm:px-6 lg:px-8'>
-                <div className='space-y-12 text-center'>
-                    <h2 className='mb-16 text-3xl font-bold text-[#F9F9F9] sm:text-5xl lg:text-6xl'>
-                        What Our Clients Say
-                    </h2>
-
-                    <div className='mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-2'>
-                        {/* Testimonial 1 */}
-                        <div className='space-y-6 rounded-lg bg-gray-900/50 p-8'>
-                            <p className='text-lg leading-relaxed text-gray-300 italic sm:text-xl'>
-                                "Luna Pictures transformed our vision into something extraordinary. Their attention to
-                                detail and creative expertise exceeded all our expectations. The final result was simply
-                                breathtaking."
-                            </p>
-                            <div className='space-y-2'>
-                                <div className='font-semibold text-white'>Sarah Johnson</div>
-                                <div className='text-gray-400'>Director, Creative Studios</div>
-                            </div>
-                        </div>
-
-                        {/* Testimonial 2 */}
-                        <div className='space-y-6 rounded-lg bg-gray-900/50 p-8'>
-                            <p className='text-lg leading-relaxed text-gray-300 italic sm:text-xl'>
-                                "Working with Luna Pictures was an absolute pleasure. Their team's professionalism and
-                                technical skills are unmatched. They delivered exactly what we envisioned, on time and
-                                within budget."
-                            </p>
-                            <div className='space-y-2'>
-                                <div className='font-semibold text-white'>Michael Chen</div>
-                                <div className='text-gray-400'>Producer, Epic Films</div>
-                            </div>
-                        </div>
-
-                        {/* Testimonial 3 */}
-                        <div className='mx-auto max-w-3xl space-y-6 rounded-lg bg-gray-900/50 p-8 lg:col-span-2'>
-                            <p className='text-lg leading-relaxed text-gray-300 italic sm:text-xl'>
-                                "Luna Pictures doesn't just create visual effects – they create magic. Their innovative
-                                approach and cutting-edge techniques brought our impossible scenes to life. Highly
-                                recommended!"
-                            </p>
-                            <div className='space-y-2'>
-                                <div className='font-semibold text-white'>Emma Rodriguez</div>
-                                <div className='text-gray-400'>Executive Producer, Visionary Media</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <StackedCardTestimonials />
         </IntroAnimation>
     );
 };

@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:rsp.com.au)",
-      "WebFetch(domain:www.rsp.com.au)"
+      "WebFetch(domain:www.rsp.com.au)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": []
   }

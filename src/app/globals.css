@@ -240,4 +240,47 @@
         outline: 2px solid hsl(var(--ring));
         outline-offset: 2px;
     }
+
+    /* Marquee animation for CTA button */
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .animate-marquee {
+        animation: marquee 3s linear infinite;
+        display: flex;
+        width: 200%;
+    }
+
+    .marquee-content {
+        flex: 0 0 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Simple volume slider styles */
+    input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        background: #F9F9F9;
+        cursor: pointer;
+        border: none;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        background: #F9F9F9;
+        cursor: pointer;
+        border: none;
+    }
 }
