@@ -68,7 +68,7 @@ const TypewriterQuestions = ({ questions }: { questions: string[] }) => {
         <p className='text-base font-light text-[#333136] uppercase'>
             <span className='inline-block size-2 bg-[#020202]' />
             <span className='ml-3'>
-                HAVE AN IDEA? TELL US NOW:{' '}
+                <span className='font-bold text-[#101B39]'>HAVE AN IDEA? TELL US NOW:</span>{' '}
                 {questions[questionIndex].split('').map((letter, i) => (
                     <motion.span
                         initial={{ opacity: 1 }}
