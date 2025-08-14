@@ -5,12 +5,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import MobileMenu from './MobileMenu';
 
 const navigationItems = [
     { name: 'About us', href: '/about' },
@@ -39,47 +35,20 @@ const Navigation = () => {
         [0, 0.95] // transparent to 95% opacity
     );
 
-    const handleNavClick = () => {
-        setIsOpen(false);
-    };
-
     return (
-        <motion.nav
-            className='fixed top-0 right-0 left-0 z-50'
-            style={{
-                backgroundColor: useTransform(
-                    backgroundOpacity,
-                    (opacity) => `rgba(51, 49, 54, ${opacity})` // #333136 with dynamic opacity
-                )
-            }}>
-            <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-                <div className='flex h-16 items-center'>
-                    {/* Mobile menu button */}
-                    <div className='md:hidden'>
-                        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                            <SheetTrigger asChild>
-                                <Button variant='ghost' size='icon' className='h-10 w-10'>
-                                    <Menu className='h-6 w-6' />
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent side='left' className='w-64'>
-                                <VisuallyHidden>
-                                    <SheetTitle>Navigation Menu</SheetTitle>
-                                </VisuallyHidden>
-                                <div className='mt-8 flex flex-col space-y-4'>
-                                    {navigationItems.map((item) => (
-                                        <Link
-                                            key={item.name}
-                                            href={item.href}
-                                            onClick={handleNavClick}
-                                            className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground rounded-md p-3 text-left text-lg font-medium transition-colors'>
-                                            {item.name}
-                                        </Link>
-                                    ))}
-                                </div>
-                            </SheetContent>
-                        </Sheet>
-                    </div>
+        <>
+            <motion.nav
+                className='fixed top-0 right-0 left-0 z-50'
+                style={{
+                    backgroundColor: useTransform(
+                        backgroundOpacity,
+                        (opacity) => `rgba(51, 49, 54, ${opacity})` // #333136 with dynamic opacity
+                    )
+                }}>
+                <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+                    <div className='flex h-16 items-center'>
+                    {/* Mobile hamburger placeholder */}
+                    <div className='w-10 md:hidden'></div>
 
                     {/* Desktop left navigation */}
                     <div className='hidden md:flex md:flex-1 md:justify-end md:space-x-6 md:pr-8'>
@@ -117,7 +86,7 @@ const Navigation = () => {
 
                     {/* Logo - centered */}
                     <motion.div
-                        className='flex justify-center md:absolute md:left-1/2 md:-translate-x-1/2 md:transform'
+                        className='flex flex-1 justify-center md:absolute md:left-1/2 md:-translate-x-1/2 md:transform'
                         initial={{ opacity: 0, y: -30 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
                         transition={{ delay: 0, duration: 0.6, ease: 'easeOut' }}>
@@ -167,6 +136,12 @@ const Navigation = () => {
                 </div>
             </div>
         </motion.nav>
+
+        {/* Mobile Menu */}
+        <div className='md:hidden'>
+            <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        </div>
+    </>
     );
 };
 
