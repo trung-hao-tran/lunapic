@@ -25,7 +25,7 @@ const FlipLink = ({ children, href }: { children: string; href: string }) => {
             href={href}
             target='_blank'
             rel='noopener noreferrer'
-            className='relative block overflow-hidden text-lg font-black whitespace-nowrap text-[#F9F9F9] uppercase sm:text-xl'
+            className='relative block overflow-hidden text-lg font-black whitespace-nowrap text-[#F9F9F9] uppercase transition-all lg:text-xl xl:text-2xl 2xl:text-3xl'
             style={{
                 lineHeight: 0.75
             }}
@@ -97,24 +97,28 @@ const SocialIcon = ({ Component, href, name }: { Component: any; href: string; n
 
 const Footer = () => {
     return (
-        <footer className='bg-[#333136] py-12'>
-            <div className='mx-auto max-w-6xl px-4'>
+        <footer className='bg-[#333136] py-6 md:py-12'>
+            <div className='mx-auto w-[65vw]'>
                 {/* Desktop Layout */}
-                <div className='hidden md:flex md:items-center md:justify-between'>
-                    {/* Logo Section */}
-                    <div className='flex-shrink-0'>
-                        <img src='/Logo full.svg' alt='Luna Pictures Logo' className='h-8 w-auto' />
+                <div className='hidden md:flex md:items-baseline md:justify-between md:gap-4 lg:gap-6'>
+                    {/* Logo and Copyright Section */}
+                    <div className='flex flex-shrink-0 items-baseline gap-3 lg:gap-4'>
+                        <img src='/Logo full.svg' alt='Luna Pictures Logo' className='h-6 w-auto lg:h-8' />
+                        <p className='text-xs text-[#BDBDBD] lg:text-sm xl:text-base'>
+                            Luna Pictures 2025. All rights reserved.
+                        </p>
                     </div>
-                    <p className='text-[#BDBDBD]'>Luna Pictures 2025. All rights reserved.</p>
-                    {/* Social Links Section - Horizontal Stack */}
-                    <div className='flex gap-4'>
+
+                    {/* Social Links Section - Responsive Scaling */}
+                    <div className='flex flex-shrink gap-2 lg:gap-3'>
                         <FlipLink href='https://youtube.com'>YouTube</FlipLink>
                         <FlipLink href='https://instagram.com'>Instagram</FlipLink>
                         <FlipLink href='https://x.com'>X</FlipLink>
                         <FlipLink href='https://linkedin.com'>LinkedIn</FlipLink>
                     </div>
+
                     {/* Contact and Privacy Links */}
-                    <div className='flex gap-3 text-right'>
+                    <div className='flex flex-shrink-0 gap-2 lg:gap-3'>
                         <Link href='/contact' className='text-[#F9F9F9] transition-colors hover:text-[#BDBDBD]'>
                             Contact Us
                         </Link>
