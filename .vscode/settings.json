@@ -31,4 +31,12 @@
     ],
     "eslint.format.enable": true,
     "npm.packageManager": "npm",
+    // Extension: Tailwind CSS
+    "tailwindCSS.experimental.configFile": "./tailwind.config.ts",
+    "tailwindCSS.includeLanguages": {
+        "typescript": "javascript",
+        "typescriptreact": "javascript"
+    },
+    "tailwindCSS.validate": true,
+    "css.validate": false
 }

@@ -35,6 +35,7 @@ export default [
     eslintConfigPrettier, // ? https://github.com/prettier/eslint-config-prettier
     ...tailwind.configs['flat/recommended'], // ? https://github.com/francoismassart/eslint-plugin-tailwindcss
     {
+        files: ['**/*.{js,ts,jsx,tsx}'],
         rules: {
             'no-unused-vars': 'off',
             'react/react-in-jsx-scope': 'off',
@@ -48,6 +49,12 @@ export default [
             'tailwindcss/migration-from-tailwind-2': 'off',
             'import/no-unresolved': 'off',
             'import/no-named-as-default': 'off'
+        },
+        settings: {
+            tailwindcss: {
+                config: './tailwind.config.ts',
+                cssFiles: ['./src/app/globals.css']
+            }
         }
     },
     // ! ===================== DISCLAIMER =====================
