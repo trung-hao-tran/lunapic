@@ -98,9 +98,9 @@ const SocialIcon = ({ Component, href, name }: { Component: any; href: string; n
 const Footer = () => {
     return (
         <footer className='bg-[#333136] py-6 md:py-12'>
-            <div className='mx-auto w-[65vw]'>
+            <div className='mx-auto w-[90vw] md:w-[65vw]'>
                 {/* Desktop Layout */}
-                <div className='hidden md:flex md:items-baseline md:justify-between md:gap-4 lg:gap-6'>
+                <div className='hidden xl:flex xl:items-baseline xl:justify-between xl:gap-4 2xl:gap-6'>
                     {/* Logo and Copyright Section */}
                     <div className='flex flex-shrink-0 items-baseline gap-3 lg:gap-4'>
                         <img src='/Logo full.svg' alt='Luna Pictures Logo' className='h-6 w-auto lg:h-8' />
@@ -128,8 +128,8 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Mobile Layout - Stacked Vertically */}
-                <div className='flex flex-col items-center space-y-6 md:hidden'>
+                {/* Mobile Layout - Stacked Vertically (Default) */}
+                <div className='flex flex-col items-center space-y-6 xl:hidden'>
                     {/* Logo Section */}
                     <div className='flex-shrink-0'>
                         <img src='/Logo full.svg' alt='Luna Pictures Logo' className='h-8 w-auto' />
