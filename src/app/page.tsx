@@ -58,7 +58,7 @@ const Page = () => {
                             muted
                             loop
                             playsInline>
-                            <source src='http://localhost:3000/videos/hero.mp4' type='video/mp4' />
+                            <source src='videos/hero.mp4' type='video/mp4' />
                             {/* Fallback for browsers that don't support video */}
                             <div className='h-full w-full bg-[#020202]'></div>
                         </video>
