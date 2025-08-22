@@ -2,17 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { AnimatePresence, animate, motion, useMotionValue, useTransform } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNode; onIntroComplete?: () => void }) => {
     const [showIntro, setShowIntro] = useState(false);
-    const [isSliding, setIsSliding] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
-
-    // Motion values for smooth animation
-    const slideProgress = useMotionValue(0);
-    const backgroundOpacity = useTransform(slideProgress, [0, 0.5, 1], [1, 0.7, 0]);
-    const videoOpacity = useTransform(slideProgress, [0, 0.5, 1], [1, 0.7, 0]);
 
     useEffect(() => {
         // Check if intro has been played this session
@@ -29,20 +23,9 @@ const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNo
     const handleVideoEnd = () => {
         sessionStorage.setItem('lunaIntroPlayed', 'true');
 
-        // Start slide-down animation
-        setIsSliding(true);
-
-        // Animate the slide progress from 0 to 1 over 1.2 seconds
-        animate(slideProgress, 1, {
-            duration: 1.2,
-            ease: [0.22, 1, 0.36, 1]
-        });
-
-        // Remove intro after animation completes
-        setTimeout(() => {
-            setShowIntro(false);
-            onIntroComplete?.(); // Trigger callback when intro fully completes
-        }, 1200); // Match animation duration
+        // Immediately hide intro without animation
+        setShowIntro(false);
+        onIntroComplete?.(); // Trigger callback when intro completes
     };
 
     // If intro shouldn't show, just render children
@@ -55,22 +38,8 @@ const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNo
             <AnimatePresence>
                 {showIntro && (
                     <>
-                        {/* Black background that stays in place and fades out */}
-                        <motion.div
-                            className='fixed inset-0 z-[9998] bg-black'
-                            style={{ opacity: backgroundOpacity }}
-                        />
-
-                        {/* Video overlay that slides down */}
-                        <motion.div
-                            className='fixed inset-0 z-[9999]'
-                            initial={{ y: 0 }}
-                            animate={{ y: isSliding ? '100%' : 0 }}
-                            // style={{ opacity: videoOpacity }}
-                            transition={{
-                                duration: 2.2,
-                                ease: [0.25, 0.46, 0.45, 0.94]
-                            }}>
+                        {/* Video overlay - no animation */}
+                        <div className='fixed inset-0 z-[9999] bg-black'>
                             <video
                                 ref={videoRef}
                                 className='h-full w-full object-cover'
@@ -85,7 +54,7 @@ const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNo
                                     <div className='animate-pulse text-2xl font-bold text-white'>LUNA PICTURES</div>
                                 </div>
                             </video>
-                        </motion.div>
+                        </div>
                     </>
                 )}
             </AnimatePresence>
