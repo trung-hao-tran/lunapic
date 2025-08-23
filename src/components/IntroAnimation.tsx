@@ -14,7 +14,7 @@ const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNo
 
         if (!hasPlayedIntro) {
             setShowIntro(true);
-            
+
             // Auto-complete intro after WebP animation duration (adjust based on your animation length)
             const introTimer = setTimeout(() => {
                 handleIntroEnd();
@@ -46,10 +46,10 @@ const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNo
                 {showIntro && (
                     <>
                         {/* WebP Animation overlay - no exit animation */}
-                        <div className='fixed inset-0 z-[9999] bg-black flex items-center justify-center'>
+                        <div className='fixed inset-0 z-[9999] flex items-center justify-center bg-black'>
                             <img
                                 ref={imageRef}
-                                src='/intro.webp'
+                                src='videos/intro.webp'
                                 alt='Luna Pictures Intro'
                                 className='max-h-full max-w-full object-contain'
                                 onLoad={() => console.log('WebP animation loaded')}
