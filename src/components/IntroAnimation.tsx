@@ -18,7 +18,7 @@ const IntroAnimation = ({ children, onIntroComplete }: { children: React.ReactNo
             // Auto-complete intro after WebP animation duration (adjust based on your animation length)
             const introTimer = setTimeout(() => {
                 handleIntroEnd();
-            }, 5150); // Adjust this to match your WebP duration
+            }, 5500); // Adjust this to match your WebP duration
 
             return () => clearTimeout(introTimer);
         } else {
