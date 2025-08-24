@@ -4,14 +4,16 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import MobileMenu from './MobileMenu';
+import { AnimatedCircle } from './AnimatedUnderline';
 
 const navigationItems = [
     { name: 'About us', href: '/about' },
     { name: 'Product team', href: '/product-team' },
-    { name: 'VFX team', href: '/vfx-team' },
+    { name: 'VFX team', href: '/vfx' },
     { name: 'Projects', href: '/projects' },
     { name: 'Contact us', href: '/contact' },
     { name: 'Join us', href: '/join' }
@@ -22,6 +24,7 @@ const Navigation = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [windowHeight, setWindowHeight] = useState(0);
     const { scrollY } = useScroll();
+    const pathname = usePathname();
 
     useEffect(() => {
         // Set window height and trigger animation after component mounts
@@ -58,8 +61,10 @@ const Navigation = () => {
                             transition={{ delay: 0.6, duration: 0.5 }}>
                             <Link
                                 href='/about'
-                                className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
-                                About us
+                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
+                                <AnimatedCircle isActive={pathname === '/about'} strokeColor="#F9F9F9">
+                                    About us
+                                </AnimatedCircle>
                             </Link>
                         </motion.div>
                         <motion.div
@@ -68,8 +73,10 @@ const Navigation = () => {
                             transition={{ delay: 0.4, duration: 0.5 }}>
                             <Link
                                 href='/product-team'
-                                className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
-                                Product team
+                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
+                                <AnimatedCircle isActive={pathname === '/product-team'} strokeColor="#F9F9F9">
+                                    Product team
+                                </AnimatedCircle>
                             </Link>
                         </motion.div>
                         <motion.div
@@ -77,9 +84,11 @@ const Navigation = () => {
                             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
                             transition={{ delay: 0.2, duration: 0.5 }}>
                             <Link
-                                href='/vfx-team'
-                                className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
-                                VFX team
+                                href='/vfx'
+                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
+                                <AnimatedCircle isActive={pathname === '/vfx'} strokeColor="#F9F9F9">
+                                    VFX team
+                                </AnimatedCircle>
                             </Link>
                         </motion.div>
                     </div>
@@ -105,8 +114,10 @@ const Navigation = () => {
                             transition={{ delay: 0.2, duration: 0.5 }}>
                             <Link
                                 href='/projects'
-                                className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
-                                Projects
+                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
+                                <AnimatedCircle isActive={pathname === '/projects'} strokeColor="#F9F9F9">
+                                    Projects
+                                </AnimatedCircle>
                             </Link>
                         </motion.div>
                         <motion.div
@@ -115,8 +126,10 @@ const Navigation = () => {
                             transition={{ delay: 0.4, duration: 0.5 }}>
                             <Link
                                 href='/contact'
-                                className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
-                                Contact us
+                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
+                                <AnimatedCircle isActive={pathname === '/contact'} strokeColor="#F9F9F9">
+                                    Contact us
+                                </AnimatedCircle>
                             </Link>
                         </motion.div>
                         <motion.div
@@ -125,8 +138,10 @@ const Navigation = () => {
                             transition={{ delay: 0.6, duration: 0.5 }}>
                             <Link
                                 href='/join'
-                                className='focus:bg-accent focus:text-accent-foreground active:bg-accent active:text-accent-foreground flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors'>
-                                Join us
+                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
+                                <AnimatedCircle isActive={pathname === '/join'} strokeColor="#F9F9F9">
+                                    Join us
+                                </AnimatedCircle>
                             </Link>
                         </motion.div>
                     </div>

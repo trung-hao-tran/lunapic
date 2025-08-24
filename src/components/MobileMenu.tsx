@@ -18,7 +18,7 @@ interface MobileMenuProps {
 const navigationItems = [
     { name: 'About us', href: '/about' },
     { name: 'Product team', href: '/product-team' },
-    { name: 'VFX team', href: '/vfx-team' },
+    { name: 'VFX team', href: '/vfx' },
     { name: 'Projects', href: '/projects' },
     { name: 'Join us', href: '/join' }
 ];
