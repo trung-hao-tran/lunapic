@@ -12,7 +12,8 @@ import { AnimatedCircle } from './AnimatedUnderline';
 
 const navigationItems = [
     { name: 'About us', href: '/about' },
-    { name: 'Product team', href: '/product-team' },
+    { name: 'Team', href: '/team' },
+    { name: 'Production team', href: '/production-team' },
     { name: 'VFX team', href: '/vfx' },
     { name: 'Projects', href: '/projects' },
     { name: 'Contact us', href: '/contact' },
@@ -70,12 +71,24 @@ const Navigation = () => {
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                            transition={{ delay: 0.5, duration: 0.5 }}>
+                            <Link
+                                href='/team'
+                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
+                                <AnimatedCircle isActive={pathname === '/team'} strokeColor="#F9F9F9">
+                                    Team
+                                </AnimatedCircle>
+                            </Link>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
                             transition={{ delay: 0.4, duration: 0.5 }}>
                             <Link
-                                href='/product-team'
+                                href='/production-team'
                                 className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
-                                <AnimatedCircle isActive={pathname === '/product-team'} strokeColor="#F9F9F9">
-                                    Product team
+                                <AnimatedCircle isActive={pathname === '/production-team'} strokeColor="#F9F9F9">
+                                    Production team
                                 </AnimatedCircle>
                             </Link>
                         </motion.div>

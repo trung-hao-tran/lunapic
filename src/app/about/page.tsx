@@ -1,44 +1,13 @@
 import HeaderSection from '@/components/HeaderSection';
 import Footer from '@/components/Footer';
 import CustomVideoPlayer from '@/components/CustomVideoPlayer';
-import TeamMember, { TeamMemberProps } from '@/components/TeamMember';
+import TeamMember from '@/components/TeamMember';
 import AnimatedBanner from '@/components/AnimatedBanner';
+import { getFeaturedTeamMembers } from '@/lib/content';
 
-// Mock team data
-const teamMembers: TeamMemberProps[] = [
-    {
-        name: 'Alex Chen',
-        role: 'Creative Director',
-        image: '/images/team/alex.jpg',
-        bio: 'With over 10 years of experience in visual storytelling, Alex leads our creative vision and ensures every project delivers exceptional impact.'
-    },
-    {
-        name: 'Maria Rodriguez',
-        role: 'Lead Animator',
-        image: '/images/team/maria.jpg',
-        bio: 'Maria brings characters and concepts to life through her expertise in 2D and 3D animation, creating memorable visual experiences.'
-    },
-    {
-        name: 'David Kim',
-        role: 'Cinematographer',
-        image: '/images/team/david.jpg',
-        bio: 'David captures stunning visuals with his keen eye for composition and lighting, transforming every frame into cinematic art.'
-    },
-    {
-        name: 'Sarah Johnson',
-        role: 'Producer',
-        image: '/images/team/sarah.jpg',
-        bio: 'Sarah ensures smooth project execution from pre-production to delivery, coordinating teams and maintaining our high quality standards.'
-    },
-    {
-        name: 'Marcus Thompson',
-        role: 'VFX Supervisor',
-        image: '/images/team/marcus.jpg',
-        bio: 'Marcus specializes in cutting-edge visual effects and post-production, bringing impossible scenes to life with technical expertise and artistic vision.'
-    }
-];
+const AboutPage = async () => {
+    const featuredTeamMembers = await getFeaturedTeamMembers();
 
-const AboutPage = () => {
     return (
         <div>
             {/* Header Section */}
@@ -81,13 +50,14 @@ const AboutPage = () => {
                         </p>
                     </div>
                     <div className='grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-                        {teamMembers.map((member, index) => (
+                        {featuredTeamMembers.map((member) => (
                             <TeamMember
-                                key={index}
+                                key={member.slug}
                                 name={member.name}
                                 role={member.role}
-                                image={member.image}
+                                image="/images/placeholder.png"
                                 bio={member.bio}
+                                href={`/team/${member.slug}`}
                             />
                         ))}
                     </div>
