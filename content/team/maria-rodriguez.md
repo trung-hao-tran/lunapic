@@ -9,7 +9,6 @@ order: 2
 social:
     linkedin: 'https://linkedin.com/in/mariarodriguez'
     behance: 'https://behance.net/mariarodriguez'
-skills: ['Creative Strategy', 'Art Direction', 'Brand Development', 'Team Leadership']
 ---
 
 # About Maria

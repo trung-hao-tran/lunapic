@@ -9,7 +9,6 @@ order: 3
 social:
   instagram: "https://instagram.com/davidkim_dp"
   vimeo: "https://vimeo.com/davidkim"
-skills: ["Cinematography", "Lighting Design", "Camera Operation", "Color Theory"]
 ---
 
 # About David

@@ -9,7 +9,6 @@ order: 1
 social:
   linkedin: "https://linkedin.com/in/alexchen"
   portfolio: "https://alexchen.dev"
-skills: ["Cinema 4D", "After Effects", "Houdini", "Nuke"]
 ---
 
 # About Alex

@@ -6,13 +6,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
 import MobileMenu from './MobileMenu';
-import { AnimatedCircle } from './AnimatedUnderline';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const navigationItems = [
     { name: 'About us', href: '/about' },
-    { name: 'Team', href: '/team' },
     { name: 'Production team', href: '/production-team' },
     { name: 'VFX team', href: '/vfx' },
     { name: 'Projects', href: '/projects' },
@@ -51,125 +49,101 @@ const Navigation = () => {
                 }}>
                 <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
                     <div className='flex h-16 items-center'>
-                    {/* Mobile hamburger placeholder */}
-                    <div className='w-10 md:hidden'></div>
+                        {/* Mobile hamburger placeholder */}
+                        <div className='w-10 md:hidden'></div>
 
-                    {/* Desktop left navigation */}
-                    <div className='hidden md:flex md:flex-1 md:justify-end md:space-x-6 md:pr-8'>
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.6, duration: 0.5 }}>
-                            <Link
-                                href='/about'
-                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
-                                <AnimatedCircle isActive={pathname === '/about'} strokeColor="#F9F9F9">
+                        {/* Desktop left navigation */}
+                        <div className='hidden md:flex md:flex-1 md:justify-end md:space-x-6 md:pr-8'>
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                                transition={{ delay: 0.6, duration: 0.5 }}>
+                                <Link
+                                    href='/about'
+                                    className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-[#F9F9F9] transition-colors focus:outline-none'>
                                     About us
-                                </AnimatedCircle>
-                            </Link>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.5, duration: 0.5 }}>
-                            <Link
-                                href='/team'
-                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
-                                <AnimatedCircle isActive={pathname === '/team'} strokeColor="#F9F9F9">
-                                    Team
-                                </AnimatedCircle>
-                            </Link>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.4, duration: 0.5 }}>
-                            <Link
-                                href='/production-team'
-                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
-                                <AnimatedCircle isActive={pathname === '/production-team'} strokeColor="#F9F9F9">
+                                </Link>
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                                transition={{ delay: 0.4, duration: 0.5 }}>
+                                <Link
+                                    href='/production-team'
+                                    className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-[#F9F9F9] transition-colors focus:outline-none'>
                                     Production team
-                                </AnimatedCircle>
-                            </Link>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.2, duration: 0.5 }}>
-                            <Link
-                                href='/vfx'
-                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
-                                <AnimatedCircle isActive={pathname === '/vfx'} strokeColor="#F9F9F9">
+                                </Link>
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                                transition={{ delay: 0.2, duration: 0.5 }}>
+                                <Link
+                                    href='/vfx'
+                                    className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-[#F9F9F9] transition-colors focus:outline-none'>
                                     VFX team
-                                </AnimatedCircle>
+                                </Link>
+                            </motion.div>
+                        </div>
+
+                        {/* Logo - centered */}
+                        <motion.div
+                            className='flex flex-1 justify-center md:absolute md:left-1/2 md:-translate-x-1/2 md:transform'
+                            initial={{ opacity: 0, y: -30 }}
+                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+                            transition={{ delay: 0, duration: 0.6, ease: 'easeOut' }}>
+                            <Link
+                                href='/'
+                                className='focus:ring-primary rounded-md px-2 py-1 focus:ring-2 focus:outline-none'>
+                                <Image src='/logo.svg' alt='Logo' width={120} height={40} className='h-8 w-auto' />
                             </Link>
                         </motion.div>
-                    </div>
 
-                    {/* Logo - centered */}
-                    <motion.div
-                        className='flex flex-1 justify-center md:absolute md:left-1/2 md:-translate-x-1/2 md:transform'
-                        initial={{ opacity: 0, y: -30 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
-                        transition={{ delay: 0, duration: 0.6, ease: 'easeOut' }}>
-                        <Link
-                            href='/'
-                            className='focus:ring-primary rounded-md px-2 py-1 focus:ring-2 focus:outline-none'>
-                            <Image src='/logo.svg' alt='Logo' width={120} height={40} className='h-8 w-auto' />
-                        </Link>
-                    </motion.div>
-
-                    {/* Desktop right navigation */}
-                    <div className='hidden md:flex md:flex-1 md:justify-start md:space-x-6 md:pl-8'>
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.2, duration: 0.5 }}>
-                            <Link
-                                href='/projects'
-                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
-                                <AnimatedCircle isActive={pathname === '/projects'} strokeColor="#F9F9F9">
+                        {/* Desktop right navigation */}
+                        <div className='hidden md:flex md:flex-1 md:justify-start md:space-x-6 md:pl-8'>
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                                transition={{ delay: 0.2, duration: 0.5 }}>
+                                <Link
+                                    href='/projects'
+                                    className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-[#F9F9F9] transition-colors focus:outline-none'>
                                     Projects
-                                </AnimatedCircle>
-                            </Link>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.4, duration: 0.5 }}>
-                            <Link
-                                href='/contact'
-                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
-                                <AnimatedCircle isActive={pathname === '/contact'} strokeColor="#F9F9F9">
+                                </Link>
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                                transition={{ delay: 0.4, duration: 0.5 }}>
+                                <Link
+                                    href='/contact'
+                                    className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-[#F9F9F9] transition-colors focus:outline-none'>
                                     Contact us
-                                </AnimatedCircle>
-                            </Link>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                            transition={{ delay: 0.6, duration: 0.5 }}>
-                            <Link
-                                href='/join'
-                                className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors focus:outline-none'>
-                                <AnimatedCircle isActive={pathname === '/join'} strokeColor="#F9F9F9">
+                                </Link>
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                                transition={{ delay: 0.6, duration: 0.5 }}>
+                                <Link
+                                    href='/join'
+                                    className='flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-[#F9F9F9] transition-colors focus:outline-none'>
                                     Join us
-                                </AnimatedCircle>
-                            </Link>
-                        </motion.div>
+                                </Link>
+                            </motion.div>
+                        </div>
+
+                        {/* Empty div for mobile layout balance */}
+                        <div className='w-10 md:hidden'></div>
                     </div>
-
-                    {/* Empty div for mobile layout balance */}
-                    <div className='w-10 md:hidden'></div>
                 </div>
-            </div>
-        </motion.nav>
+            </motion.nav>
 
-        {/* Mobile Menu */}
-        <div className='md:hidden'>
-            <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
-        </div>
-    </>
+            {/* Mobile Menu */}
+            <div className='md:hidden'>
+                <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
+            </div>
+        </>
     );
 };
 

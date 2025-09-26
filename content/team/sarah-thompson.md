@@ -8,7 +8,6 @@ featured: false
 order: 4
 social:
     linkedin: 'https://linkedin.com/in/sarahthompson'
-skills: ['Video Editing', 'Sound Design', 'Color Correction', 'Motion Graphics']
 ---
 
 # About Sarah

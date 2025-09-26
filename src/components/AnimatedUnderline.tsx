@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -21,7 +21,6 @@ export const AnimatedUnderline: React.FC<AnimatedUnderlineProps> = ({
             <svg viewBox='0 0 200 20' fill='none' className='absolute top-auto -right-1 -bottom-1 -left-1 h-3 w-full'>
                 <motion.path
                     initial={{ pathLength: 0 }}
-                    whileHover={{ pathLength: 1 }}
                     animate={{ pathLength: isActive ? 1 : 0 }}
                     transition={{
                         duration: 0.6,
@@ -44,13 +43,8 @@ export const AnimatedCircle: React.FC<AnimatedUnderlineProps> = ({
     strokeColor = '#F9F9F9',
     className = ''
 }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
     return (
-        <span
-            className={`relative ${className}`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}>
+        <span className={`relative ${className}`}>
             {children}
             <svg
                 viewBox='0 0 286 75'
@@ -58,7 +52,7 @@ export const AnimatedCircle: React.FC<AnimatedUnderlineProps> = ({
                 className='pointer-events-none absolute -top-1 -right-2 -bottom-1 -left-2 h-full scale-y-120 rotate-5'>
                 <motion.path
                     initial={{ pathLength: 0 }}
-                    animate={{ pathLength: isActive || isHovered ? 1 : 0 }}
+                    animate={{ pathLength: isActive ? 1 : 0 }}
                     transition={{
                         duration: 0.5,
                         ease: 'easeInOut'

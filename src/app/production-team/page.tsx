@@ -46,7 +46,7 @@ const ProductionTeamPage = async () => {
                                 role={member.role}
                                 image="/images/placeholder.png"
                                 bio={member.bio}
-                                href={`/team/${member.slug}`}
+                                href={`/about/${member.slug}`}
                                 className='bg-[#333136]'
                             />
                         ))}
