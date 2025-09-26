@@ -82,7 +82,7 @@ const FlipLink = ({ children, href }: { children: string; href: string }) => {
     );
 };
 
-const SocialIcon = ({ Component, href, name }: { Component: any; href: string; name: string }) => {
+const SocialIcon = ({ Component, href, name }: { Component: React.ElementType; href: string; name: string }) => {
     return (
         <a
             href={href}

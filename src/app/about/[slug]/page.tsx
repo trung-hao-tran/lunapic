@@ -14,6 +14,7 @@ interface TeamMemberPageProps {
 
 export async function generateStaticParams() {
     const slugs = getAllTeamMemberSlugs();
+
     return slugs.map((slug) => ({ slug }));
 }
 
@@ -47,11 +48,10 @@ export default async function TeamMemberPage({ params }: TeamMemberPageProps) {
     }
 
     return (
-        <div className='min-h-screen flex flex-col'>
+        <div className='flex min-h-screen flex-col'>
             <Navigation />
-            <section className='bg-[#020202] py-16 pt-32 flex-1'>
+            <section className='flex-1 bg-[#020202] py-16 pt-32'>
                 <div className='mx-auto w-[90vw] md:w-[65vw]'>
-
                     <div className='grid items-start gap-12 md:grid-cols-2'>
                         {/* Left Column - Member Image and Social Links */}
                         <div className='space-y-6'>
@@ -102,7 +102,7 @@ export default async function TeamMemberPage({ params }: TeamMemberPageProps) {
                             {/* Extended Content from Markdown */}
                             {member.content && (
                                 <div
-                                    className='mt-6 space-y-6 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:text-[#F9F9F9] [&>h1]:mb-4 [&>h2]:text-xl [&>h2]:font-semibold [&>h2]:text-[#F9F9F9] [&>h2]:mb-3 [&>h3]:text-lg [&>h3]:font-medium [&>h3]:text-[#F9F9F9] [&>h3]:mb-2 [&>p]:text-[#BDBDBD] [&>p]:leading-relaxed [&>p]:mb-4 [&>ul]:text-[#BDBDBD] [&>ul]:space-y-2 [&>ul]:ml-6 [&>ul]:list-disc [&>ol]:text-[#BDBDBD] [&>ol]:space-y-2 [&>ol]:ml-6 [&>ol]:list-decimal [&>li]:leading-relaxed [&>strong]:font-semibold [&>strong]:text-[#F9F9F9] [&>em]:italic [&>blockquote]:border-l-4 [&>blockquote]:border-[#333136] [&>blockquote]:pl-4 [&>blockquote]:text-[#BDBDBD] [&>blockquote]:italic'
+                                    className='mt-6 space-y-6 [&>blockquote]:border-l-4 [&>blockquote]:border-[#333136] [&>blockquote]:pl-4 [&>blockquote]:text-[#BDBDBD] [&>blockquote]:italic [&>em]:italic [&>h1]:mb-4 [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:text-[#F9F9F9] [&>h2]:mb-3 [&>h2]:text-xl [&>h2]:font-semibold [&>h2]:text-[#F9F9F9] [&>h3]:mb-2 [&>h3]:text-lg [&>h3]:font-medium [&>h3]:text-[#F9F9F9] [&>li]:leading-relaxed [&>ol]:ml-6 [&>ol]:list-decimal [&>ol]:space-y-2 [&>ol]:text-[#BDBDBD] [&>p]:mb-4 [&>p]:leading-relaxed [&>p]:text-[#BDBDBD] [&>strong]:font-semibold [&>strong]:text-[#F9F9F9] [&>ul]:ml-6 [&>ul]:list-disc [&>ul]:space-y-2 [&>ul]:text-[#BDBDBD]'
                                     dangerouslySetInnerHTML={{ __html: member.content }}
                                 />
                             )}

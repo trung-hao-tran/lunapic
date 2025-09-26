@@ -126,7 +126,7 @@ const Card = ({ Icon, description, name, title, position, selected, setSelected 
             onClick={() => setSelected(position)}
             className='absolute top-0 left-0 flex min-h-full w-full cursor-pointer flex-col justify-between border border-[#BDBDBD] p-8 lg:p-12'>
             <Icon className='mx-auto text-7xl' />
-            <p className='my-8 text-lg font-light italic lg:text-xl'>"{description}"</p>
+            <p className='my-8 text-lg font-light italic lg:text-xl'>&quot;{description}&quot;</p>
             <div>
                 <span className='block text-lg font-semibold'>{name}</span>
                 <span className='block text-sm opacity-75'>{title}</span>

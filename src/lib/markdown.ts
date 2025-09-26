@@ -9,6 +9,7 @@ import remarkHtml from 'remark-html';
  */
 export async function markdownToHtml(markdown: string): Promise<string> {
     const result = await remark().use(remarkHtml).process(markdown);
+
     return result.toString();
 }
 
@@ -40,6 +41,7 @@ export function getMarkdownFiles(directory: string): string[] {
     }
 
     const files = fs.readdirSync(fullPath);
+
     return files.filter((file) => file.endsWith('.md'));
 }
 
@@ -62,5 +64,6 @@ export function getContentPath(type: 'team' | 'projects', slug: string): string 
  */
 export function contentExists(type: 'team' | 'projects', slug: string): boolean {
     const filePath = getContentPath(type, slug);
+
     return fs.existsSync(filePath);
 }

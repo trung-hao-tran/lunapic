@@ -32,6 +32,7 @@ const RollingNumber = () => {
         if (value >= 1000) {
             return Math.floor(value).toLocaleString();
         }
+
         return Math.floor(value).toString();
     });
 
@@ -42,6 +43,7 @@ const RollingNumber = () => {
                 ease: [0.25, 0.46, 0.45, 0.94],
                 delay: 0.5
             });
+
             return animation.stop;
         }
     }, [isInView]);
