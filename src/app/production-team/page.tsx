@@ -4,7 +4,7 @@ import AnimatedBanner from '@/components/AnimatedBanner';
 import CardCarousel from '@/components/CardCarousel';
 import Footer from '@/components/Footer';
 import HeaderSection from '@/components/HeaderSection';
-import TeamMember from '@/components/TeamMember';
+import TeamMemberProfile from '@/components/TeamMemberProfile';
 import { getTeamMembersByCategory, getFeaturedProjects } from '@/lib/content';
 
 const ProductionTeamPage = async () => {
@@ -38,16 +38,12 @@ const ProductionTeamPage = async () => {
                         </p>
                     </div>
 
-                    <div className='grid grid-cols-1 gap-6 md:grid-cols-5'>
-                        {productionTeamMembers.map((member) => (
-                            <TeamMember
+                    <div className='space-y-16'>
+                        {productionTeamMembers.map((member, index) => (
+                            <TeamMemberProfile
                                 key={member.slug}
-                                name={member.name}
-                                role={member.role}
-                                image="/images/placeholder.png"
-                                bio={member.bio}
-                                href={`/about/${member.slug}`}
-                                className='bg-[#333136]'
+                                member={member}
+                                className={index < productionTeamMembers.length - 1 ? 'border-b border-[#333136]' : ''}
                             />
                         ))}
                     </div>

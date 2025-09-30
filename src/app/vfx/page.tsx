@@ -3,7 +3,7 @@ import CustomVideoPlayer from '@/components/CustomVideoPlayer';
 import Footer from '@/components/Footer';
 import HeaderSection from '@/components/HeaderSection';
 import StackedCardTestimonials from '@/components/StackedCardTestimonials';
-import TeamMember from '@/components/TeamMember';
+import TeamMemberProfile from '@/components/TeamMemberProfile';
 import { getTeamMembersByCategory } from '@/lib/content';
 
 const VFXPage = async () => {
@@ -44,22 +44,19 @@ const VFXPage = async () => {
                 </div>
             </section>
 
-            {/* Team Members Section - White */}
-            <section className='bg-[#F9F9F9] py-16'>
+            {/* Team Members Section - Black */}
+            <section className='bg-[#020202] py-16'>
                 <div className='mx-auto w-[90vw] md:w-[65vw]'>
                     <div className='mb-12 text-center'>
-                        <h2 className='text-3xl font-bold text-[#020202] sm:text-4xl lg:text-5xl'>Our VFX Team</h2>
-                        <p className='mt-4 text-lg text-[#333136]'>Meet the talented artists behind the magic</p>
+                        <h2 className='text-3xl font-bold text-[#F9F9F9] sm:text-4xl lg:text-5xl'>Our VFX Team</h2>
+                        <p className='mt-4 text-lg text-[#BDBDBD]'>Meet the talented artists behind the magic</p>
                     </div>
-                    <div className='grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-                        {vfxTeamMembers.map((member) => (
-                            <TeamMember
+                    <div className='space-y-16'>
+                        {vfxTeamMembers.map((member, index) => (
+                            <TeamMemberProfile
                                 key={member.slug}
-                                name={member.name}
-                                role={member.role}
-                                image="/images/placeholder.png"
-                                bio={member.bio}
-                                href={`/about/${member.slug}`}
+                                member={member}
+                                className={index < vfxTeamMembers.length - 1 ? 'border-b border-[#333136]' : ''}
                             />
                         ))}
                     </div>
