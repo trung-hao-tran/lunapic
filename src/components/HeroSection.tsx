@@ -22,7 +22,7 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <section className='relative min-h-screen bg-[#1B1B1B] text-white overflow-hidden'>
+        <section className='relative min-h-screen overflow-hidden bg-[#040404] text-white'>
             {/* Background Media */}
             {backgroundMedia && (
                 <>
@@ -47,12 +47,14 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
                         />
                     )}
                     {/* Overlay to tone down background */}
-                    <div className='absolute inset-0 bg-[#1B1B1B]/60' style={{ zIndex: 1 }} />
+                    <div className='absolute inset-0 bg-[#040404]/60' style={{ zIndex: 1 }} />
                 </>
             )}
 
             {/* Navigation */}
-            <nav className='fixed top-0 right-0 left-0 z-50'>
+            <nav className={`fixed top-0 right-0 left-0 z-50 transition-colors duration-300 ${
+                mobileMenuOpen ? 'bg-[#040404]' : ''
+            }`}>
                 <div className='container mx-auto px-6 md:px-12 lg:px-16'>
                     <div className='flex items-center justify-between py-6'>
                         {/* Logo */}
@@ -129,10 +131,10 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
 
                 {/* Mobile Menu */}
                 <div
-                    className={`overflow-hidden transition-all duration-300 md:hidden ${
-                        mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    className={`fixed inset-0 top-[72px] bg-[#040404] transition-all duration-300 md:hidden ${
+                        mobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
                     }`}>
-                    <div className='container mx-auto flex flex-col gap-4 px-6 pb-6'>
+                    <div className='container mx-auto flex flex-col gap-4 px-6 pt-6'>
                         {menuItems.map((item) => (
                             <Link
                                 key={item.label}
@@ -152,15 +154,12 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
                                 <span className='absolute top-1/2 right-0 h-4 w-2 -translate-y-1/2 border-t border-r border-b border-white/40' />
                             </Link>
                         ))}
-                        <div className='pt-2'>
-                            <Image src='/star.svg' alt='Star' width={24} height={24} className='h-6 w-6' />
-                        </div>
                     </div>
                 </div>
             </nav>
 
             {/* Hero Content */}
-            <div className='container relative z-10 mx-auto flex min-h-screen flex-col justify-end px-6 pt-32 pb-[20vh] md:px-12 lg:px-16'>
+            <div className='relative z-10 container mx-auto flex min-h-screen flex-col justify-end px-6 pt-32 pb-[20vh] md:px-12 lg:px-16'>
                 <div className='max-w-2xl space-y-4'>{children}</div>
             </div>
 

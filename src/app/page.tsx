@@ -15,14 +15,14 @@ const Page = () => {
                         alt='Luna Pictures'
                         width={470}
                         height={60}
-                        className='h-auto max-w-2xl'
+                        className='h-auto w-full max-w-[240px] sm:max-w-md md:max-w-lg lg:max-w-2xl'
                         priority
                     />
                 </StarFrame>
 
                 {/* Subtitle */}
                 <p
-                    className='max-w-2xl text-base text-white/80 md:text-lg lg:text-xl'
+                    className='max-w-2xl text-xs text-white/80 sm:text-base md:text-lg lg:text-xl'
                     style={{
                         fontFamily: '"Geist Mono", monospace',
                         letterSpacing: '-0.07px'
