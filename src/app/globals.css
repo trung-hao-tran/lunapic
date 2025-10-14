@@ -208,7 +208,7 @@
 @layer base {
     * {
         @apply border-border outline-ring/50;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
     }
 
     html {
@@ -217,7 +217,7 @@
 
     body {
         @apply bg-background text-foreground;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
     }
 
     /* Ensure sections are properly spaced for fixed navigation */

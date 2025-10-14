@@ -5,7 +5,10 @@
       "WebFetch(domain:www.rsp.com.au)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:github.com)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "mcp__figma__get_screenshot",
+      "mcp__figma__get_metadata",
+      "WebFetch(domain:www.shadcn.io)"
     ],
     "deny": []
   }
