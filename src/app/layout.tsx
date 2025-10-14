@@ -1,9 +1,6 @@
 import type { ReactNode } from 'react';
-
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-
-import { ThemeProvider } from 'next-themes';
 
 import '@/app/globals.css';
 
@@ -12,6 +9,7 @@ const geistSans = localFont({
     variable: '--font-geist-sans',
     weight: '100 900'
 });
+
 const geistMono = localFont({
     src: './fonts/GeistMonoVF.woff',
     variable: '--font-geist-mono',
@@ -19,21 +17,15 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: 'Luna Pictures',
-    description: 'Professional Animation, Video Recording & Filming Services - Coming Soon',
-    icons: {
-        icon: '/Logo.svg',
-        apple: '/Logo.svg'
-    }
+    title: 'Next.js Starter',
+    description: 'A minimal Next.js starter with Tailwind CSS'
 };
 
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
-        // ? https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
-        // ? https://react.dev/reference/react-dom/client/hydrateRoot#suppressing-unavoidable-hydration-mismatch-errors
-        <html suppressHydrationWarning lang='en'>
-            <body className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground antialiased`}>
-                <ThemeProvider attribute='class'>{children}</ThemeProvider>
+        <html lang='en'>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                {children}
             </body>
         </html>
     );

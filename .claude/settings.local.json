@@ -4,7 +4,8 @@
       "WebFetch(domain:rsp.com.au)",
       "WebFetch(domain:www.rsp.com.au)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
