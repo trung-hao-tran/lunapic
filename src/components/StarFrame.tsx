@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 
 type Corner = 'tl' | 'tr' | 'bl' | 'br';
 
@@ -9,289 +8,41 @@ interface StarFrameProps {
     children: React.ReactNode;
     className?: string;
     color?: string;
+    borderColor?: string;
     direction?: Corner[];
     padding?: number;
     starSize?: number;
+    thickness?: number;
     haveBorder?: boolean;
-    hasAnimation?: boolean;
 }
 
 /**
  * StarFrame component
- * Creates a border around children with star icons at each corner
- * The border lines pass through the center of each star
- * If haveBorder is true: color applies to border, stars are white
- * If haveBorder is false: color applies to stars
+ * Creates a border around children with star/cross shapes at corners
+ * Stars are formed by extending the borders outward at each corner
+ * The color prop controls the color of stars (defaults to white)
+ * The borderColor prop controls the color of borders (defaults to grey #787878)
+ * The thickness prop controls the width of both borders and stars
  */
 export function StarFrame({
     children,
     className = '',
-    color = '#787878',
+    color = 'white',
+    borderColor = '#787878',
     direction = ['tl', 'tr', 'bl', 'br'],
     padding = 10,
     starSize = 20,
-    haveBorder = true,
-    hasAnimation = false
+    thickness = 1,
+    haveBorder = true
 }: StarFrameProps) {
-    const halfStar = starSize / 2; // Offset to center star on corner
-    const borderWidth = 1; // Match star thickness
-
+    const halfStar = starSize / 2;
     const showStar = (corner: Corner) => direction.includes(corner);
 
-    // Animation only works if all 4 stars are present
-    const hasAllStars = direction.length === 4;
-    const shouldAnimate = hasAnimation && hasAllStars;
-
-    // If haveBorder is true, stars are white and border uses color
-    // If haveBorder is false, stars use color
-    const starColor = haveBorder ? 'white' : color;
-    const borderColor = color;
-
     return (
-        <motion.div className={`relative inline-block ${className}`}>
-            {/* Top-left star - stays in corner, fades in */}
-            {showStar('tl') && (
-                <motion.div
-                    className='absolute z-10'
-                    initial={shouldAnimate ? { opacity: 0, scale: 0.8 } : false}
-                    animate={shouldAnimate ? { opacity: 1, scale: 1 } : false}
-                    transition={shouldAnimate ? {
-                        duration: 0.3,
-                        delay: 0.1,
-                        ease: 'easeOut'
-                    } : undefined}
-                    style={{
-                        top: -halfStar,
-                        left: -halfStar,
-                        width: starSize,
-                        height: starSize
-                    }}>
-                    <svg viewBox='0 0 300 300' className='h-full w-full'>
-                        <rect x='98.39' y='139.27' width='103.22' height='21.46' fill={starColor} />
-                        <rect x='139.27' y='98.39' width='21.46' height='103.22' fill={starColor} />
-                    </svg>
-                </motion.div>
-            )}
-
-            {/* Top-right star - stays in corner, fades in */}
-            {showStar('tr') && (
-                <motion.div
-                    className='absolute z-10'
-                    initial={shouldAnimate ? { opacity: 0, scale: 0.8 } : false}
-                    animate={shouldAnimate ? { opacity: 1, scale: 1 } : false}
-                    transition={shouldAnimate ? {
-                        duration: 0.3,
-                        delay: 0.1,
-                        ease: 'easeOut'
-                    } : undefined}
-                    style={{
-                        top: -halfStar,
-                        right: -halfStar,
-                        width: starSize,
-                        height: starSize
-                    }}>
-                    <svg viewBox='0 0 300 300' className='h-full w-full'>
-                        <rect x='98.39' y='139.27' width='103.22' height='21.46' fill={starColor} />
-                        <rect x='139.27' y='98.39' width='21.46' height='103.22' fill={starColor} />
-                    </svg>
-                </motion.div>
-            )}
-
-            {/* Bottom-left star - stays in corner, fades in */}
-            {showStar('bl') && (
-                <motion.div
-                    className='absolute z-10'
-                    initial={shouldAnimate ? { opacity: 0, scale: 0.8 } : false}
-                    animate={shouldAnimate ? { opacity: 1, scale: 1 } : false}
-                    transition={shouldAnimate ? {
-                        duration: 0.3,
-                        delay: 0.1,
-                        ease: 'easeOut'
-                    } : undefined}
-                    style={{
-                        bottom: -halfStar,
-                        left: -halfStar,
-                        width: starSize,
-                        height: starSize
-                    }}>
-                    <svg viewBox='0 0 300 300' className='h-full w-full'>
-                        <rect x='98.39' y='139.27' width='103.22' height='21.46' fill={starColor} />
-                        <rect x='139.27' y='98.39' width='21.46' height='103.22' fill={starColor} />
-                    </svg>
-                </motion.div>
-            )}
-
-            {/* Bottom-right star - stays in corner, fades in */}
-            {showStar('br') && (
-                <motion.div
-                    className='absolute z-10'
-                    initial={shouldAnimate ? { opacity: 0, scale: 0.8 } : false}
-                    animate={shouldAnimate ? { opacity: 1, scale: 1 } : false}
-                    transition={shouldAnimate ? {
-                        duration: 0.3,
-                        delay: 0.1,
-                        ease: 'easeOut'
-                    } : undefined}
-                    style={{
-                        bottom: -halfStar,
-                        right: -halfStar,
-                        width: starSize,
-                        height: starSize
-                    }}>
-                    <svg viewBox='0 0 300 300' className='h-full w-full'>
-                        <rect x='98.39' y='139.27' width='103.22' height='21.46' fill={starColor} />
-                        <rect x='139.27' y='98.39' width='21.46' height='103.22' fill={starColor} />
-                    </svg>
-                </motion.div>
-            )}
-
-            {/* Content with animated border - border grows from corners */}
-            <motion.div
-                initial={shouldAnimate ? {
-                    ...(haveBorder && {
-                        clipPath: 'inset(0 0 0 0)'
-                    })
-                } : false}
-                animate={shouldAnimate ? {
-                    ...(haveBorder && {
-                        clipPath: 'inset(0 0 0 0)'
-                    })
-                } : false}
-                style={{
-                    ...(haveBorder && {
-                        borderColor: borderColor,
-                        borderStyle: 'solid'
-                    }),
-                    padding: `${padding}px`,
-                    position: 'relative'
-                }}>
-                {/* Animated borders - each grows from both stars and meets in middle */}
-                {haveBorder && shouldAnimate && (
-                    <>
-                        {/* Top border - left half grows from left star */}
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 0.4, delay: 0.4, ease: 'easeOut' }}
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: '50%',
-                                height: borderWidth,
-                                backgroundColor: borderColor,
-                                transformOrigin: 'left'
-                            }}
-                        />
-                        {/* Top border - right half grows from right star */}
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 0.4, delay: 0.4, ease: 'easeOut' }}
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                right: 0,
-                                width: '50%',
-                                height: borderWidth,
-                                backgroundColor: borderColor,
-                                transformOrigin: 'right'
-                            }}
-                        />
-                        {/* Right border - top half grows from top star */}
-                        <motion.div
-                            initial={{ scaleY: 0 }}
-                            animate={{ scaleY: 1 }}
-                            transition={{ duration: 0.4, delay: 0.5, ease: 'easeOut' }}
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                right: 0,
-                                width: borderWidth,
-                                height: '50%',
-                                backgroundColor: borderColor,
-                                transformOrigin: 'top'
-                            }}
-                        />
-                        {/* Right border - bottom half grows from bottom star */}
-                        <motion.div
-                            initial={{ scaleY: 0 }}
-                            animate={{ scaleY: 1 }}
-                            transition={{ duration: 0.4, delay: 0.5, ease: 'easeOut' }}
-                            style={{
-                                position: 'absolute',
-                                bottom: 0,
-                                right: 0,
-                                width: borderWidth,
-                                height: '50%',
-                                backgroundColor: borderColor,
-                                transformOrigin: 'bottom'
-                            }}
-                        />
-                        {/* Bottom border - right half grows from right star */}
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 0.4, delay: 0.6, ease: 'easeOut' }}
-                            style={{
-                                position: 'absolute',
-                                bottom: 0,
-                                right: 0,
-                                width: '50%',
-                                height: borderWidth,
-                                backgroundColor: borderColor,
-                                transformOrigin: 'right'
-                            }}
-                        />
-                        {/* Bottom border - left half grows from left star */}
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ duration: 0.4, delay: 0.6, ease: 'easeOut' }}
-                            style={{
-                                position: 'absolute',
-                                bottom: 0,
-                                left: 0,
-                                width: '50%',
-                                height: borderWidth,
-                                backgroundColor: borderColor,
-                                transformOrigin: 'left'
-                            }}
-                        />
-                        {/* Left border - bottom half grows from bottom star */}
-                        <motion.div
-                            initial={{ scaleY: 0 }}
-                            animate={{ scaleY: 1 }}
-                            transition={{ duration: 0.4, delay: 0.7, ease: 'easeOut' }}
-                            style={{
-                                position: 'absolute',
-                                bottom: 0,
-                                left: 0,
-                                width: borderWidth,
-                                height: '50%',
-                                backgroundColor: borderColor,
-                                transformOrigin: 'bottom'
-                            }}
-                        />
-                        {/* Left border - top half grows from top star */}
-                        <motion.div
-                            initial={{ scaleY: 0 }}
-                            animate={{ scaleY: 1 }}
-                            transition={{ duration: 0.4, delay: 0.7, ease: 'easeOut' }}
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: borderWidth,
-                                height: '50%',
-                                backgroundColor: borderColor,
-                                transformOrigin: 'top'
-                            }}
-                        />
-                    </>
-                )}
-                {/* Static border for non-animated case - with gaps at stars */}
-                {haveBorder && !shouldAnimate && (
+        <div className={`relative inline-block ${className}`}>
+            <div style={{ padding: `${padding}px`, position: 'relative' }}>
+                {/* Border segments */}
+                {haveBorder && (
                     <>
                         {/* Top border segments */}
                         {showStar('tl') && (
@@ -299,9 +50,9 @@ export function StarFrame({
                                 style={{
                                     position: 'absolute',
                                     top: 0,
-                                    left: halfStar + starSize * 0.05,
-                                    right: showStar('tr') ? halfStar + starSize * 0.05 : 0,
-                                    height: borderWidth,
+                                    left: halfStar,
+                                    right: showStar('tr') ? halfStar : 0,
+                                    height: thickness,
                                     backgroundColor: borderColor
                                 }}
                             />
@@ -312,8 +63,8 @@ export function StarFrame({
                                     position: 'absolute',
                                     top: 0,
                                     left: 0,
-                                    right: showStar('tr') ? halfStar + starSize * 0.05 : 0,
-                                    height: borderWidth,
+                                    right: showStar('tr') ? halfStar : 0,
+                                    height: thickness,
                                     backgroundColor: borderColor
                                 }}
                             />
@@ -324,10 +75,10 @@ export function StarFrame({
                             <div
                                 style={{
                                     position: 'absolute',
-                                    top: halfStar + starSize * 0.05,
+                                    top: halfStar,
                                     right: 0,
-                                    bottom: showStar('br') ? halfStar + starSize * 0.05 : 0,
-                                    width: borderWidth,
+                                    bottom: showStar('br') ? halfStar : 0,
+                                    width: thickness,
                                     backgroundColor: borderColor
                                 }}
                             />
@@ -338,8 +89,8 @@ export function StarFrame({
                                     position: 'absolute',
                                     top: 0,
                                     right: 0,
-                                    bottom: showStar('br') ? halfStar + starSize * 0.05 : 0,
-                                    width: borderWidth,
+                                    bottom: showStar('br') ? halfStar : 0,
+                                    width: thickness,
                                     backgroundColor: borderColor
                                 }}
                             />
@@ -351,9 +102,9 @@ export function StarFrame({
                                 style={{
                                     position: 'absolute',
                                     bottom: 0,
-                                    right: halfStar + starSize * 0.05,
-                                    left: showStar('bl') ? halfStar + starSize * 0.05 : 0,
-                                    height: borderWidth,
+                                    right: halfStar,
+                                    left: showStar('bl') ? halfStar : 0,
+                                    height: thickness,
                                     backgroundColor: borderColor
                                 }}
                             />
@@ -364,8 +115,8 @@ export function StarFrame({
                                     position: 'absolute',
                                     bottom: 0,
                                     right: 0,
-                                    left: showStar('bl') ? halfStar + starSize * 0.05 : 0,
-                                    height: borderWidth,
+                                    left: showStar('bl') ? halfStar : 0,
+                                    height: thickness,
                                     backgroundColor: borderColor
                                 }}
                             />
@@ -376,10 +127,10 @@ export function StarFrame({
                             <div
                                 style={{
                                     position: 'absolute',
-                                    bottom: halfStar + starSize * 0.05,
+                                    bottom: halfStar,
                                     left: 0,
-                                    top: showStar('tl') ? halfStar + starSize * 0.05 : 0,
-                                    width: borderWidth,
+                                    top: showStar('tl') ? halfStar : 0,
+                                    width: thickness,
                                     backgroundColor: borderColor
                                 }}
                             />
@@ -390,26 +141,216 @@ export function StarFrame({
                                     position: 'absolute',
                                     bottom: 0,
                                     left: 0,
-                                    top: showStar('tl') ? halfStar + starSize * 0.05 : 0,
-                                    width: borderWidth,
+                                    top: showStar('tl') ? halfStar : 0,
+                                    width: thickness,
                                     backgroundColor: borderColor
                                 }}
                             />
                         )}
                     </>
                 )}
-                {/* Content fades in after border animation */}
-                <motion.div
-                    initial={shouldAnimate ? { opacity: 0 } : false}
-                    animate={shouldAnimate ? { opacity: 1 } : false}
-                    transition={shouldAnimate ? {
-                        duration: 0.4,
-                        delay: 1.1,
-                        ease: 'easeOut'
-                    } : undefined}>
-                    {children}
-                </motion.div>
-            </motion.div>
-        </motion.div>
+
+                {/* Star extensions at corners */}
+                <>
+                    {showStar('tl') && (
+                        <>
+                            {/* Top-left horizontal extension (outward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: -halfStar,
+                                    width: halfStar,
+                                    height: thickness,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Top-left horizontal connector (inward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: halfStar,
+                                    height: thickness,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Top-left vertical extension (outward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: -halfStar,
+                                    left: 0,
+                                    width: thickness,
+                                    height: halfStar,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Top-left vertical connector (inward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    width: thickness,
+                                    height: halfStar,
+                                    backgroundColor: color
+                                }}
+                            />
+                        </>
+                    )}
+
+                    {showStar('tr') && (
+                        <>
+                            {/* Top-right horizontal extension (outward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: -halfStar,
+                                    width: halfStar,
+                                    height: thickness,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Top-right horizontal connector (inward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 0,
+                                    width: halfStar,
+                                    height: thickness,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Top-right vertical extension (outward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: -halfStar,
+                                    right: 0,
+                                    width: thickness,
+                                    height: halfStar,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Top-right vertical connector (inward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 0,
+                                    width: thickness,
+                                    height: halfStar,
+                                    backgroundColor: color
+                                }}
+                            />
+                        </>
+                    )}
+
+                    {showStar('bl') && (
+                        <>
+                            {/* Bottom-left horizontal extension (outward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    left: -halfStar,
+                                    width: halfStar,
+                                    height: thickness,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Bottom-left horizontal connector (inward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    left: 0,
+                                    width: halfStar,
+                                    height: thickness,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Bottom-left vertical extension (outward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: -halfStar,
+                                    left: 0,
+                                    width: thickness,
+                                    height: halfStar,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Bottom-left vertical connector (inward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    left: 0,
+                                    width: thickness,
+                                    height: halfStar,
+                                    backgroundColor: color
+                                }}
+                            />
+                        </>
+                    )}
+
+                    {showStar('br') && (
+                        <>
+                            {/* Bottom-right horizontal extension (outward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    right: -halfStar,
+                                    width: halfStar,
+                                    height: thickness,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Bottom-right horizontal connector (inward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    right: 0,
+                                    width: halfStar,
+                                    height: thickness,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Bottom-right vertical extension (outward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: -halfStar,
+                                    right: 0,
+                                    width: thickness,
+                                    height: halfStar,
+                                    backgroundColor: color
+                                }}
+                            />
+                            {/* Bottom-right vertical connector (inward) */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    right: 0,
+                                    width: thickness,
+                                    height: halfStar,
+                                    backgroundColor: color
+                                }}
+                            />
+                        </>
+                    )}
+                </>
+
+                {children}
+            </div>
+        </div>
     );
 }

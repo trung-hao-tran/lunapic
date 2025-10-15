@@ -80,7 +80,7 @@ const Page = () => {
                             direction={['tr', 'bl']}
                             starSize={30}
                             color='white'
-                            padding={5}
+                            padding={7}
                             className='w-full'>
                             <div className='relative aspect-[3/2] w-full overflow-hidden'>
                                 <Image src='/images/home_about_us.jpg' alt='About Us' fill className='object-cover' />
@@ -92,7 +92,7 @@ const Page = () => {
 
             {/* Our Work Section */}
             <Section title='OUR WORK' number='3' bgColor='#040404' headerColor='#fdfdfd'>
-                <div className='relative h-[35vh] min-h-[300px] md:h-[80vh] md:min-h-[500px]'>
+                <div className='relative h-[35vh] min-h-[300px] md:h-[55vh] md:min-h-[500px]'>
                     {/* SHOW text - top left, behind media */}
                     <h3
                         className='absolute top-0 left-0 z-0 text-[4rem] md:text-[8rem] lg:text-[12.5rem]'
@@ -128,7 +128,7 @@ const Page = () => {
                         <StarFrame
                             haveBorder={true}
                             direction={['tr', 'bl']}
-                            starSize={30}
+                            starSize={40}
                             color='white'
                             className='w-full'
                             padding={2}>
