@@ -20,7 +20,7 @@ const socialLinks = [
 
 export function Footer() {
     return (
-        <footer className='bg-[#040404] py-4 text-white'>
+        <footer className='bg-[#151515] py-4 text-white'>
             <div className='container mx-auto px-6 md:px-12 lg:px-16'>
                 {/* Outer StarFrame */}
                 <StarFrame

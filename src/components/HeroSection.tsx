@@ -40,7 +40,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: HeroSectionProps) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [servicesDropdownOpen, setServicesDropdownOpen] = useState(true); // Set to true for debugging
+    const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
 
     return (
         <section className='relative min-h-screen overflow-hidden bg-[#040404] text-white'>
@@ -288,17 +288,8 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
             {/* Scroll Indicator - Positioned at bottom center */}
             <div className='absolute bottom-8 left-1/2 z-10 -translate-x-1/2'>
                 <div className='animate-bounce'>
-                    <svg
-                        className='h-8 w-8'
-                        fill='none'
-                        stroke='white'
-                        viewBox='0 0 24 24'>
-                        <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            strokeWidth={2}
-                            d='M19 9l-7 7-7-7'
-                        />
+                    <svg className='h-8 w-8' fill='none' stroke='white' viewBox='0 0 24 24'>
+                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
                     </svg>
                 </div>
             </div>
