@@ -8,7 +8,8 @@
       "Bash(rm:*)",
       "mcp__figma__get_screenshot",
       "mcp__figma__get_metadata",
-      "WebFetch(domain:www.shadcn.io)"
+      "WebFetch(domain:www.shadcn.io)",
+      "mcp__figma__get_code"
     ],
     "deny": []
   }

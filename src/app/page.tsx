@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { BoxButton } from '@/components/BoxButton';
+import { Footer } from '@/components/Footer';
 import { HeroSection } from '@/components/HeroSection';
 import { StarFrame } from '@/components/StarFrame';
 
@@ -35,6 +36,7 @@ const Page = () => {
                     <BoxButton text="LET'S TALK" />
                 </div>
             </HeroSection>
+            <Footer />
         </main>
     );
 };
