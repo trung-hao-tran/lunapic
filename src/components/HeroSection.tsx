@@ -5,9 +5,29 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const menuItems = [
+interface MenuItem {
+    label: string;
+    href?: string;
+    dropdown?: { label: string; href: string }[];
+}
+
+const desktopMenuItems: MenuItem[] = [
     { label: 'ABOUT US', href: '#about' },
-    { label: 'SERVICES', href: '#services' },
+    {
+        label: 'SERVICES',
+        dropdown: [
+            { label: 'VFX', href: '#vfx' },
+            { label: 'PRODUCTION', href: '#production' }
+        ]
+    },
+    { label: 'WORK', href: '#work' },
+    { label: 'CONTACT US', href: '#contact' }
+];
+
+const mobileMenuItems = [
+    { label: 'ABOUT US', href: '#about' },
+    { label: 'VFX', href: '#vfx' },
+    { label: 'PRODUCTION', href: '#production' },
     { label: 'WORK', href: '#work' },
     { label: 'CONTACT US', href: '#contact' }
 ];
@@ -20,6 +40,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: HeroSectionProps) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [servicesDropdownOpen, setServicesDropdownOpen] = useState(true); // Set to true for debugging
 
     return (
         <section className='relative min-h-screen overflow-hidden bg-[#040404] text-white'>
@@ -52,9 +73,10 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
             )}
 
             {/* Navigation */}
-            <nav className={`fixed top-0 right-0 left-0 z-50 transition-colors duration-300 ${
-                mobileMenuOpen ? 'bg-[#040404]' : ''
-            }`}>
+            <nav
+                className={`fixed top-0 right-0 left-0 z-50 transition-colors duration-300 ${
+                    mobileMenuOpen ? 'bg-[#040404]' : ''
+                }`}>
                 <div className='container mx-auto px-6 md:px-12 lg:px-16'>
                     <div className='flex items-center justify-between py-6'>
                         {/* Logo */}
@@ -70,28 +92,128 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <div className='hidden items-center gap-8 md:flex'>
-                            {menuItems.map((item) => (
-                                <Link
-                                    key={item.label}
-                                    href={item.href}
-                                    className='group relative px-3 py-1'
-                                    style={{
-                                        fontFamily: '"Geist Mono", monospace',
-                                        fontSize: '14px',
-                                        fontWeight: 500,
-                                        letterSpacing: '-0.07px'
-                                    }}>
-                                    {/* Left bracket using borders */}
-                                    <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-b border-l border-white/40 transition-colors group-hover:border-white' />
+                        <div className='hidden items-center gap-4 md:flex'>
+                            {desktopMenuItems.map((item) =>
+                                item.dropdown ? (
+                                    <div
+                                        key={item.label}
+                                        className='relative'
+                                        onMouseEnter={() => setServicesDropdownOpen(true)}
+                                        onMouseLeave={() => setServicesDropdownOpen(false)}>
+                                        {/* Button - first item with top bracket */}
+                                        <button
+                                            className='group relative flex items-center gap-1 px-3 py-1'
+                                            style={{
+                                                fontFamily: '"Geist Mono", monospace',
+                                                fontSize: '14px',
+                                                fontWeight: 500,
+                                                letterSpacing: '-0.07px'
+                                            }}>
+                                            {/* Top bracket corners when expanded */}
+                                            {servicesDropdownOpen && (
+                                                <>
+                                                    <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-l border-white' />
+                                                    <span className='absolute top-1/2 right-0 h-4 w-2 -translate-y-1/2 border-t border-r border-white' />
+                                                    {/* Vertical borders extending down */}
+                                                    <span className='absolute top-[calc(50%+0.5rem)] bottom-0 left-0 border-l border-white' />
+                                                    <span className='absolute top-[calc(50%+0.5rem)] right-0 bottom-0 border-r border-white' />
+                                                </>
+                                            )}
 
-                                    {/* Menu text */}
-                                    <span className='transition-colors group-hover:text-white/80'>{item.label}</span>
+                                            {/* Small bracket corners when not expanded */}
+                                            {!servicesDropdownOpen && (
+                                                <>
+                                                    <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-b border-l border-white/40 transition-colors group-hover:border-white' />
+                                                    <span className='absolute top-1/2 right-0 h-4 w-2 -translate-y-1/2 border-t border-r border-b border-white/40 transition-colors group-hover:border-white' />
+                                                </>
+                                            )}
 
-                                    {/* Right bracket using borders */}
-                                    <span className='absolute top-1/2 right-0 h-4 w-2 -translate-y-1/2 border-t border-r border-b border-white/40 transition-colors group-hover:border-white' />
-                                </Link>
-                            ))}
+                                            {/* Menu text */}
+                                            <span className='transition-colors group-hover:text-white/80'>
+                                                {item.label}
+                                            </span>
+
+                                            {/* Dropdown icon */}
+                                            <svg
+                                                className={`ml-2 h-3 w-3 transition-transform ${
+                                                    servicesDropdownOpen ? 'rotate-180' : ''
+                                                }`}
+                                                fill='none'
+                                                stroke='currentColor'
+                                                viewBox='0 0 24 24'>
+                                                <path
+                                                    strokeLinecap='round'
+                                                    strokeLinejoin='round'
+                                                    strokeWidth={2}
+                                                    d='M19 9l-7 7-7-7'
+                                                />
+                                            </svg>
+                                        </button>
+
+                                        {/* Dropdown items - appear on hover */}
+                                        {servicesDropdownOpen && (
+                                            <div className='absolute top-full right-0 left-0 -mt-1'>
+                                                {item.dropdown?.map((subItem, idx) => {
+                                                    const isLast = item.dropdown && idx === item.dropdown.length - 1;
+
+                                                    return (
+                                                        <Link
+                                                            key={subItem.label}
+                                                            href={subItem.href}
+                                                            className='group relative block px-4 py-1 text-sm transition-colors'
+                                                            style={{
+                                                                fontFamily: '"Geist Mono", monospace',
+                                                                letterSpacing: '-0.07px'
+                                                            }}>
+                                                            {/* Left and right borders for all items */}
+                                                            <span
+                                                                className={`absolute top-0 left-0 border-l border-white ${isLast ? 'bottom-1/2' : 'bottom-0'}`}
+                                                            />
+                                                            <span
+                                                                className={`absolute top-0 right-0 border-r border-white ${isLast ? 'bottom-1/2' : 'bottom-0'}`}
+                                                            />
+
+                                                            {/* Bottom corners for last item */}
+                                                            {isLast && (
+                                                                <>
+                                                                    <span className='absolute bottom-1/2 left-0 h-4 w-2 translate-y-1/2 border-b border-l border-white' />
+                                                                    <span className='absolute right-0 bottom-1/2 h-4 w-2 translate-y-1/2 border-r border-b border-white' />
+                                                                </>
+                                                            )}
+
+                                                            <span className='transition-colors group-hover:text-white/80'>
+                                                                {subItem.label}
+                                                            </span>
+                                                        </Link>
+                                                    );
+                                                })}
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href!}
+                                        className='group relative px-3 py-1'
+                                        style={{
+                                            fontFamily: '"Geist Mono", monospace',
+                                            fontSize: '14px',
+                                            fontWeight: 500,
+                                            letterSpacing: '-0.07px'
+                                        }}>
+                                        {/* Left bracket using borders */}
+                                        <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-b border-l border-white/40 transition-colors group-hover:border-white' />
+
+                                        {/* Menu text */}
+                                        <span className='transition-colors group-hover:text-white/80'>
+                                            {item.label}
+                                        </span>
+
+                                        {/* Right bracket using borders */}
+                                        <span className='absolute top-1/2 right-0 h-4 w-2 -translate-y-1/2 border-t border-r border-b border-white/40 transition-colors group-hover:border-white' />
+                                    </Link>
+                                )
+                            )}
 
                             {/* Star Icon */}
                             <div className='relative h-6 w-6'>
@@ -135,7 +257,7 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
                         mobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
                     }`}>
                     <div className='container mx-auto flex flex-col gap-4 px-6 pt-6'>
-                        {menuItems.map((item) => (
+                        {mobileMenuItems.map((item) => (
                             <Link
                                 key={item.label}
                                 href={item.href}
