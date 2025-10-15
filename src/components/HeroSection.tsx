@@ -289,12 +289,16 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
             <div className='absolute bottom-8 left-1/2 z-10 -translate-x-1/2'>
                 <div className='animate-bounce'>
                     <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 8 8'
-                        width='32'
-                        height='32'
-                        className='rotate-90'>
-                        <path d='M2.5 0L1 1.5L3.5 4L1 6.5L2.5 8l4-4z' fill='white' />
+                        className='h-8 w-8'
+                        fill='none'
+                        stroke='white'
+                        viewBox='0 0 24 24'>
+                        <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M19 9l-7 7-7-7'
+                        />
                     </svg>
                 </div>
             </div>
