@@ -290,16 +290,113 @@ export function StarFrame({
                         />
                     </>
                 )}
-                {/* Static border for non-animated case */}
+                {/* Static border for non-animated case - with gaps at stars */}
                 {haveBorder && !shouldAnimate && (
-                    <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        border: `${borderWidth}px solid ${borderColor}`
-                    }} />
+                    <>
+                        {/* Top border segments */}
+                        {showStar('tl') && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: halfStar + starSize * 0.05,
+                                    right: showStar('tr') ? halfStar + starSize * 0.05 : 0,
+                                    height: borderWidth,
+                                    backgroundColor: borderColor
+                                }}
+                            />
+                        )}
+                        {!showStar('tl') && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: showStar('tr') ? halfStar + starSize * 0.05 : 0,
+                                    height: borderWidth,
+                                    backgroundColor: borderColor
+                                }}
+                            />
+                        )}
+
+                        {/* Right border segments */}
+                        {showStar('tr') && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: halfStar + starSize * 0.05,
+                                    right: 0,
+                                    bottom: showStar('br') ? halfStar + starSize * 0.05 : 0,
+                                    width: borderWidth,
+                                    backgroundColor: borderColor
+                                }}
+                            />
+                        )}
+                        {!showStar('tr') && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 0,
+                                    bottom: showStar('br') ? halfStar + starSize * 0.05 : 0,
+                                    width: borderWidth,
+                                    backgroundColor: borderColor
+                                }}
+                            />
+                        )}
+
+                        {/* Bottom border segments */}
+                        {showStar('br') && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    right: halfStar + starSize * 0.05,
+                                    left: showStar('bl') ? halfStar + starSize * 0.05 : 0,
+                                    height: borderWidth,
+                                    backgroundColor: borderColor
+                                }}
+                            />
+                        )}
+                        {!showStar('br') && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    right: 0,
+                                    left: showStar('bl') ? halfStar + starSize * 0.05 : 0,
+                                    height: borderWidth,
+                                    backgroundColor: borderColor
+                                }}
+                            />
+                        )}
+
+                        {/* Left border segments */}
+                        {showStar('bl') && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: halfStar + starSize * 0.05,
+                                    left: 0,
+                                    top: showStar('tl') ? halfStar + starSize * 0.05 : 0,
+                                    width: borderWidth,
+                                    backgroundColor: borderColor
+                                }}
+                            />
+                        )}
+                        {!showStar('bl') && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    left: 0,
+                                    top: showStar('tl') ? halfStar + starSize * 0.05 : 0,
+                                    width: borderWidth,
+                                    backgroundColor: borderColor
+                                }}
+                            />
+                        )}
+                    </>
                 )}
                 {/* Content fades in after border animation */}
                 <motion.div
