@@ -1,10 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { BoxButton } from '@/components/BoxButton';
 import { Footer } from '@/components/Footer';
 import { HeroSection } from '@/components/HeroSection';
 import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
+import { portfolioItems } from '@/data/dummyData';
 
 const Page = () => {
     return (
@@ -142,6 +144,163 @@ const Page = () => {
                                 />
                             </div>
                         </StarFrame>
+                    </div>
+                </div>
+
+                {/* Portfolio Gallery */}
+                <div className='mt-16 space-y-8 md:mt-24'>
+                    {/* Portfolio Heading */}
+                    <h2
+                        className='mb-16 inline-block border-b border-white pb-2'
+                        style={{
+                            color: '#FFF',
+                            fontFamily: 'Inter, sans-serif',
+                            fontSize: '2rem',
+                            fontWeight: 600,
+                            lineHeight: 'normal',
+                            letterSpacing: '-0.1rem'
+                        }}>
+                        OUR PORTFOLIO
+                    </h2>
+
+                    {/* Dynamic Portfolio Rows */}
+                    {(() => {
+                        // Group items by row
+                        const rowGroups = portfolioItems.reduce(
+                            (acc, item) => {
+                                const rowNum = item.row || 1;
+                                if (!acc[rowNum]) acc[rowNum] = [];
+                                acc[rowNum].push(item);
+
+                                return acc;
+                            },
+                            {} as Record<number, typeof portfolioItems>
+                        );
+
+                        return Object.entries(rowGroups)
+                            .sort(([a], [b]) => Number(a) - Number(b))
+                            .map(([rowNum, rowItems]) => {
+                                // Calculate grid template columns based on weights
+                                const gridCols = rowItems.map((item) => `${item.weight || 1}fr`).join(' ');
+
+                                return (
+                                    <div
+                                        key={rowNum}
+                                        className='grid grid-cols-1 gap-8 md:[grid-template-columns:var(--grid-template)]'
+                                        style={
+                                            {
+                                                '--grid-template': gridCols
+                                            } as React.CSSProperties
+                                        }>
+                                        {rowItems.map((item, idx) => {
+                                            const isFirst = idx === 0;
+                                            const isLast = idx === rowItems.length - 1;
+                                            const starDirection = isFirst ? ['tl', 'bl'] : isLast ? ['tr', 'br'] : [];
+
+                                            return (
+                                                <Link
+                                                    key={item.id}
+                                                    href={item.href || '#'}
+                                                    className='group relative block transition-transform duration-300 hover:scale-[1.02]'>
+                                                    <StarFrame
+                                                        haveBorder={true}
+                                                        direction={starDirection as Array<'tl' | 'tr' | 'bl' | 'br'>}
+                                                        starSize={30}
+                                                        color='white'
+                                                        borderColor='white'
+                                                        padding={7}
+                                                        className='w-full'>
+                                                        <div
+                                                            className={`relative w-full overflow-hidden ${
+                                                                item.height
+                                                                    ? 'aspect-[4/3] md:aspect-auto md:h-[var(--item-height)]'
+                                                                    : 'aspect-[4/3]'
+                                                            }`}
+                                                            style={
+                                                                item.height
+                                                                    ? ({
+                                                                          '--item-height': item.height
+                                                                      } as React.CSSProperties)
+                                                                    : undefined
+                                                            }>
+                                                            <Image
+                                                                src={item.image}
+                                                                alt={item.title}
+                                                                fill
+                                                                className='object-cover transition-transform duration-300 group-hover:scale-105'
+                                                            />
+                                                        </div>
+                                                    </StarFrame>
+
+                                                    {/* Item Info */}
+                                                    <div className='mt-6 mb-8 flex items-start justify-between'>
+                                                        <div className='space-y-2'>
+                                                            <p
+                                                                style={{
+                                                                    color: '#FFF',
+                                                                    fontFamily: '"Geist Mono", monospace',
+                                                                    fontSize: '1rem',
+                                                                    fontWeight: 700,
+                                                                    lineHeight: 'normal',
+                                                                    letterSpacing: '-0.005rem'
+                                                                }}>
+                                                                [{item.title}]
+                                                            </p>
+                                                            <p
+                                                                style={{
+                                                                    color: '#FFF',
+                                                                    fontFamily: '"Geist Mono", monospace',
+                                                                    fontSize: '1rem',
+                                                                    fontWeight: 400,
+                                                                    lineHeight: 'normal',
+                                                                    letterSpacing: '-0.005rem'
+                                                                }}>
+                                                                {item.date}
+                                                            </p>
+                                                        </div>
+                                                        <div className='flex flex-col items-end justify-between'>
+                                                            <span
+                                                                className='flex items-center justify-center rounded-full border border-white/40'
+                                                                style={{
+                                                                    color: '#FFF',
+                                                                    fontFamily: '"Geist Mono", monospace',
+                                                                    fontSize: '1rem',
+                                                                    fontWeight: 400,
+                                                                    lineHeight: 'normal',
+                                                                    letterSpacing: '-0.005rem',
+                                                                    width: '10.1875rem',
+                                                                    height: '2.1875rem',
+                                                                    flexShrink: 0
+                                                                }}>
+                                                                {item.category}
+                                                            </span>
+                                                            <svg
+                                                                className='mt-4 transition-transform duration-300 group-hover:translate-x-1'
+                                                                xmlns='http://www.w3.org/2000/svg'
+                                                                width='22'
+                                                                height='22'
+                                                                viewBox='0 0 22 22'
+                                                                fill='none'>
+                                                                <path
+                                                                    d='M1 11H20.5M20.5 11L11.5 1M20.5 11L11.5 20.5'
+                                                                    stroke='white'
+                                                                    strokeWidth='2'
+                                                                    strokeLinecap='round'
+                                                                />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                );
+                            });
+                    })()}
+
+                    {/* View Portfolio Button */}
+                    <div className='flex justify-center pt-8'>
+                        <BoxButton text='VIEW PORTFOLIO' />
                     </div>
                 </div>
             </Section>
