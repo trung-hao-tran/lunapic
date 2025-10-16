@@ -6,7 +6,8 @@ import { Footer } from '@/components/Footer';
 import { HeroSection } from '@/components/HeroSection';
 import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
-import { portfolioItems } from '@/data/dummyData';
+import { TestimonialsSection } from '@/components/TestimonialsSection';
+import { portfolioItems, testimonials } from '@/data/dummyData';
 
 const Page = () => {
     return (
@@ -303,6 +304,11 @@ const Page = () => {
                         <BoxButton text='VIEW PORTFOLIO' />
                     </div>
                 </div>
+            </Section>
+
+            {/* Testimonials Section */}
+            <Section title='TESTIMONIALS' number='4' bgColor='#FDFDFD' headerColor='#000000'>
+                <TestimonialsSection testimonials={testimonials} />
             </Section>
 
             <Footer />

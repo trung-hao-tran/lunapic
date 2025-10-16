@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Inter } from 'next/font/google';
 
 import '@/app/globals.css';
 
@@ -16,6 +17,12 @@ const geistMono = localFont({
     weight: '100 900'
 });
 
+const inter = Inter({
+    subsets: ['latin'],
+    variable: '--font-inter',
+    weight: ['300', '400', '500', '600', '700']
+});
+
 export const metadata: Metadata = {
     title: 'Next.js Starter',
     description: 'A minimal Next.js starter with Tailwind CSS'
@@ -24,7 +31,7 @@ export const metadata: Metadata = {
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
         <html lang='en'>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}>
                 {children}
             </body>
         </html>
