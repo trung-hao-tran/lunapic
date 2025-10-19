@@ -13,9 +13,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: HeroSectionProps) {
-
     return (
-        <section className='relative min-h-screen overflow-hidden bg-[#040404] text-white'>
+        <section className='relative min-h-screen overflow-hidden bg-[#080808] text-white'>
             {/* Background Media */}
             {backgroundMedia && (
                 <>
@@ -40,7 +39,7 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video' }: 
                         />
                     )}
                     {/* Overlay to tone down background */}
-                    <div className='absolute inset-0 bg-[#040404]/60' style={{ zIndex: 1 }} />
+                    <div className='absolute inset-0 bg-[#080808]/60' style={{ zIndex: 1 }} />
                 </>
             )}
 

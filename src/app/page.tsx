@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { BoxButton } from '@/components/BoxButton';
+import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
 import { HeroSection } from '@/components/HeroSection';
 import { Section } from '@/components/Section';
@@ -309,6 +310,11 @@ const Page = () => {
             {/* Testimonials Section */}
             <Section title='TESTIMONIALS' number='4' bgColor='#FDFDFD' headerColor='#000000'>
                 <TestimonialsSection testimonials={testimonials} />
+            </Section>
+
+            {/* Contact Section */}
+            <Section title='CONTACT US' number='5' bgColor='#FDFDFD' headerColor='#000000'>
+                <ContactSection />
             </Section>
 
             <Footer />
