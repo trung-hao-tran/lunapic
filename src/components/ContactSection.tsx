@@ -2,7 +2,13 @@
 
 import React, { useState } from 'react';
 
-export function ContactSection() {
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+interface ContactSectionProps {
+    bgColor?: 'white' | 'black';
+}
+
+export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -20,6 +26,15 @@ export function ContactSection() {
         budget: '',
         message: ''
     });
+
+    // Determine colors based on background
+    const textColor = bgColor === 'black' ? '#FFF' : '#000';
+    const borderColor = bgColor === 'black' ? 'rgba(255, 255, 255, 0.44)' : 'rgba(0, 0, 0, 0.44)';
+    const solidBorderColor = bgColor === 'black' ? '#FFF' : '#000';
+    const errorColor = '#dc2626';
+    const hoverBg = bgColor === 'black' ? '#FFF' : '#000';
+    const hoverText = bgColor === 'black' ? '#000' : '#FFF';
+    const dropdownHoverBg = bgColor === 'black' ? '#151515' : '#f5f5f5';
 
     const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -127,7 +142,7 @@ export function ContactSection() {
                     <h2 className='mb-6'>
                         <span
                             style={{
-                                color: 'rgba(0, 0, 0, 0.50)',
+                                color: bgColor === 'black' ? 'rgba(255, 255, 255, 0.50)' : 'rgba(0, 0, 0, 0.50)',
                                 fontFamily: 'Inter',
                                 fontSize: '2.25rem',
                                 fontStyle: 'normal',
@@ -140,7 +155,7 @@ export function ContactSection() {
                         <span
                             style={{
                                 display: 'block',
-                                color: '#000',
+                                color: textColor,
                                 fontFamily: 'Inter',
                                 fontSize: '2.25rem',
                                 fontStyle: 'normal',
@@ -153,7 +168,7 @@ export function ContactSection() {
                     </h2>
                     <p
                         style={{
-                            color: '#000',
+                            color: textColor,
                             fontFamily: 'Inter',
                             fontSize: '1rem',
                             fontStyle: 'normal',
@@ -176,7 +191,7 @@ export function ContactSection() {
                                 <label
                                     htmlFor='name'
                                     style={{
-                                        color: errors.name ? '#dc2626' : '#000',
+                                        color: errors.name ? errorColor : textColor,
                                         fontFamily: 'var(--font-geist-mono), monospace',
                                         fontSize: '1rem',
                                         fontStyle: 'normal',
@@ -196,7 +211,7 @@ export function ContactSection() {
                                 onChange={handleChange}
                                 className='w-full border-0 border-b bg-transparent pb-1 focus:ring-0 focus:outline-none'
                                 style={{
-                                    color: '#000',
+                                    color: textColor,
                                     fontFamily: 'var(--font-inter), sans-serif',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
@@ -204,11 +219,11 @@ export function ContactSection() {
                                     lineHeight: 'normal',
                                     letterSpacing: '-0.005rem',
                                     borderBottomWidth: '1px',
-                                    borderBottomColor: errors.name ? '#dc2626' : 'rgba(0, 0, 0, 0.44)'
+                                    borderBottomColor: errors.name ? errorColor : borderColor
                                 }}
-                                onFocus={(e) => (e.target.style.borderBottomColor = errors.name ? '#dc2626' : '#000')}
+                                onFocus={(e) => (e.target.style.borderBottomColor = errors.name ? errorColor : solidBorderColor)}
                                 onBlur={(e) =>
-                                    (e.target.style.borderBottomColor = errors.name ? '#dc2626' : 'rgba(0, 0, 0, 0.44)')
+                                    (e.target.style.borderBottomColor = errors.name ? errorColor : borderColor)
                                 }
                             />
                         </div>
@@ -217,7 +232,7 @@ export function ContactSection() {
                                 <label
                                     htmlFor='email'
                                     style={{
-                                        color: errors.email ? '#dc2626' : '#000',
+                                        color: errors.email ? errorColor : textColor,
                                         fontFamily: 'var(--font-geist-mono), monospace',
                                         fontSize: '1rem',
                                         fontStyle: 'normal',
@@ -237,7 +252,7 @@ export function ContactSection() {
                                 onChange={handleChange}
                                 className='w-full border-0 border-b bg-transparent pb-1 focus:ring-0 focus:outline-none'
                                 style={{
-                                    color: '#000',
+                                    color: textColor,
                                     fontFamily: 'var(--font-inter), sans-serif',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
@@ -245,13 +260,13 @@ export function ContactSection() {
                                     lineHeight: 'normal',
                                     letterSpacing: '-0.005rem',
                                     borderBottomWidth: '1px',
-                                    borderBottomColor: errors.email ? '#dc2626' : 'rgba(0, 0, 0, 0.44)'
+                                    borderBottomColor: errors.email ? errorColor : borderColor
                                 }}
-                                onFocus={(e) => (e.target.style.borderBottomColor = errors.email ? '#dc2626' : '#000')}
+                                onFocus={(e) => (e.target.style.borderBottomColor = errors.email ? errorColor : solidBorderColor)}
                                 onBlur={(e) =>
                                     (e.target.style.borderBottomColor = errors.email
-                                        ? '#dc2626'
-                                        : 'rgba(0, 0, 0, 0.44)')
+                                        ? errorColor
+                                        : borderColor)
                                 }
                             />
                         </div>
@@ -263,7 +278,7 @@ export function ContactSection() {
                             <label
                                 htmlFor='company'
                                 style={{
-                                    color: errors.company ? '#dc2626' : '#000',
+                                    color: errors.company ? errorColor : textColor,
                                     fontFamily: 'var(--font-geist-mono), monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
@@ -283,7 +298,7 @@ export function ContactSection() {
                             onChange={handleChange}
                             className='w-full border-0 border-b bg-transparent pb-1 focus:ring-0 focus:outline-none'
                             style={{
-                                color: '#000',
+                                color: textColor,
                                 fontFamily: 'var(--font-inter), sans-serif',
                                 fontSize: '1rem',
                                 fontStyle: 'normal',
@@ -291,22 +306,22 @@ export function ContactSection() {
                                 lineHeight: 'normal',
                                 letterSpacing: '-0.005rem',
                                 borderBottomWidth: '1px',
-                                borderBottomColor: errors.company ? '#dc2626' : 'rgba(0, 0, 0, 0.44)'
+                                borderBottomColor: errors.company ? errorColor : borderColor
                             }}
-                            onFocus={(e) => (e.target.style.borderBottomColor = errors.company ? '#dc2626' : '#000')}
+                            onFocus={(e) => (e.target.style.borderBottomColor = errors.company ? errorColor : solidBorderColor)}
                             onBlur={(e) =>
-                                (e.target.style.borderBottomColor = errors.company ? '#dc2626' : 'rgba(0, 0, 0, 0.44)')
+                                (e.target.style.borderBottomColor = errors.company ? errorColor : borderColor)
                             }
                         />
                     </div>
 
                     {/* Services Dropdown */}
-                    <div className='relative'>
+                    <div>
                         <div className='mb-2 flex items-center gap-2'>
                             <label
                                 htmlFor='service'
                                 style={{
-                                    color: errors.service ? '#dc2626' : '#000',
+                                    color: errors.service ? errorColor : textColor,
                                     fontFamily: 'var(--font-geist-mono), monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
@@ -318,52 +333,88 @@ export function ContactSection() {
                             </label>
                             {errors.service && <span className='text-xs text-red-600'>({errors.service})</span>}
                         </div>
-                        <select
-                            id='service'
-                            name='service'
+                        <Select
                             value={formData.service}
-                            onChange={handleChange}
-                            className='w-full appearance-none border-0 border-b bg-transparent pb-1 focus:ring-0 focus:outline-none'
-                            style={{
-                                color: '#000',
-                                fontFamily: 'var(--font-inter), sans-serif',
-                                fontSize: '1rem',
-                                fontStyle: 'normal',
-                                fontWeight: 400,
-                                lineHeight: 'normal',
-                                letterSpacing: '-0.005rem',
-                                borderBottomWidth: '1px',
-                                borderBottomColor: errors.service ? '#dc2626' : 'rgba(0, 0, 0, 0.44)'
-                            }}
-                            onFocus={(e) => (e.target.style.borderBottomColor = errors.service ? '#dc2626' : '#000')}
-                            onBlur={(e) =>
-                                (e.target.style.borderBottomColor = errors.service ? '#dc2626' : 'rgba(0, 0, 0, 0.44)')
-                            }>
-                            <option value=''></option>
-                            <option value='web-development'>Web Development</option>
-                            <option value='mobile-app'>Mobile App Development</option>
-                            <option value='ui-ux-design'>UI/UX Design</option>
-                            <option value='branding'>Branding</option>
-                            <option value='consulting'>Consulting</option>
-                        </select>
-                        <svg
-                            className='pointer-events-none absolute right-0 bottom-3'
-                            width='16'
-                            height='16'
-                            viewBox='0 0 16 16'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <path d='M4 6L8 10L12 6' stroke='black' strokeWidth='1.5' strokeLinecap='round' />
-                        </svg>
+                            onValueChange={(value) => {
+                                setFormData({ ...formData, service: value });
+                                if (errors.service) {
+                                    setErrors({ ...errors, service: '' });
+                                }
+                            }}>
+                            <SelectTrigger
+                                className='w-full rounded-none border-0 border-b bg-transparent px-0 pb-1 shadow-none focus:ring-0'
+                                style={{
+                                    color: textColor,
+                                    fontFamily: 'var(--font-inter), sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 400,
+                                    letterSpacing: '-0.005rem',
+                                    borderBottomWidth: '1px',
+                                    borderBottomColor: errors.service ? errorColor : borderColor
+                                }}>
+                                <SelectValue placeholder='' />
+                            </SelectTrigger>
+                            <SelectContent
+                                style={{
+                                    backgroundColor: bgColor === 'black' ? '#000' : '#fff',
+                                    borderColor: solidBorderColor
+                                }}>
+                                <SelectItem
+                                    value='web-development'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    Web Development
+                                </SelectItem>
+                                <SelectItem
+                                    value='mobile-app'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    Mobile App Development
+                                </SelectItem>
+                                <SelectItem
+                                    value='ui-ux-design'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    UI/UX Design
+                                </SelectItem>
+                                <SelectItem
+                                    value='branding'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    Branding
+                                </SelectItem>
+                                <SelectItem
+                                    value='consulting'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    Consulting
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
 
                     {/* Budget Dropdown */}
-                    <div className='relative'>
+                    <div>
                         <div className='mb-2 flex items-center gap-2'>
                             <label
                                 htmlFor='budget'
                                 style={{
-                                    color: errors.budget ? '#dc2626' : '#000',
+                                    color: errors.budget ? errorColor : textColor,
                                     fontFamily: 'var(--font-geist-mono), monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
@@ -375,43 +426,79 @@ export function ContactSection() {
                             </label>
                             {errors.budget && <span className='text-xs text-red-600'>({errors.budget})</span>}
                         </div>
-                        <select
-                            id='budget'
-                            name='budget'
+                        <Select
                             value={formData.budget}
-                            onChange={handleChange}
-                            className='w-full appearance-none border-0 border-b bg-transparent pb-1 focus:ring-0 focus:outline-none'
-                            style={{
-                                color: '#000',
-                                fontFamily: 'var(--font-inter), sans-serif',
-                                fontSize: '1rem',
-                                fontStyle: 'normal',
-                                fontWeight: 400,
-                                lineHeight: 'normal',
-                                letterSpacing: '-0.005rem',
-                                borderBottomWidth: '1px',
-                                borderBottomColor: errors.budget ? '#dc2626' : 'rgba(0, 0, 0, 0.44)'
-                            }}
-                            onFocus={(e) => (e.target.style.borderBottomColor = errors.budget ? '#dc2626' : '#000')}
-                            onBlur={(e) =>
-                                (e.target.style.borderBottomColor = errors.budget ? '#dc2626' : 'rgba(0, 0, 0, 0.44)')
-                            }>
-                            <option value=''></option>
-                            <option value='under-10k'>Under $10,000</option>
-                            <option value='10k-25k'>$10,000 - $25,000</option>
-                            <option value='25k-50k'>$25,000 - $50,000</option>
-                            <option value='50k-100k'>$50,000 - $100,000</option>
-                            <option value='over-100k'>Over $100,000</option>
-                        </select>
-                        <svg
-                            className='pointer-events-none absolute right-0 bottom-3'
-                            width='16'
-                            height='16'
-                            viewBox='0 0 16 16'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <path d='M4 6L8 10L12 6' stroke='black' strokeWidth='1.5' strokeLinecap='round' />
-                        </svg>
+                            onValueChange={(value) => {
+                                setFormData({ ...formData, budget: value });
+                                if (errors.budget) {
+                                    setErrors({ ...errors, budget: '' });
+                                }
+                            }}>
+                            <SelectTrigger
+                                className='w-full rounded-none border-0 border-b bg-transparent px-0 pb-1 shadow-none focus:ring-0'
+                                style={{
+                                    color: textColor,
+                                    fontFamily: 'var(--font-inter), sans-serif',
+                                    fontSize: '1rem',
+                                    fontWeight: 400,
+                                    letterSpacing: '-0.005rem',
+                                    borderBottomWidth: '1px',
+                                    borderBottomColor: errors.budget ? errorColor : borderColor
+                                }}>
+                                <SelectValue placeholder='' />
+                            </SelectTrigger>
+                            <SelectContent
+                                style={{
+                                    backgroundColor: bgColor === 'black' ? '#000' : '#fff',
+                                    borderColor: solidBorderColor
+                                }}>
+                                <SelectItem
+                                    value='under-10k'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    Under $10,000
+                                </SelectItem>
+                                <SelectItem
+                                    value='10k-25k'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    $10,000 - $25,000
+                                </SelectItem>
+                                <SelectItem
+                                    value='25k-50k'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    $25,000 - $50,000
+                                </SelectItem>
+                                <SelectItem
+                                    value='50k-100k'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    $50,000 - $100,000
+                                </SelectItem>
+                                <SelectItem
+                                    value='over-100k'
+                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    style={{
+                                        color: textColor,
+                                        fontFamily: 'var(--font-inter), sans-serif'
+                                    }}>
+                                    Over $100,000
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
 
                     {/* Message Textarea */}
@@ -420,7 +507,7 @@ export function ContactSection() {
                             <label
                                 htmlFor='message'
                                 style={{
-                                    color: errors.message ? '#dc2626' : '#000',
+                                    color: errors.message ? errorColor : textColor,
                                     fontFamily: 'var(--font-geist-mono), monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
@@ -441,7 +528,7 @@ export function ContactSection() {
                             placeholder='Tell us more about your project here ....'
                             className='w-full resize-none border-0 border-b bg-transparent pb-1 placeholder:text-gray-400 focus:ring-0 focus:outline-none'
                             style={{
-                                color: '#000',
+                                color: textColor,
                                 fontFamily: 'var(--font-inter), sans-serif',
                                 fontSize: '1rem',
                                 fontStyle: 'normal',
@@ -449,11 +536,11 @@ export function ContactSection() {
                                 lineHeight: 'normal',
                                 letterSpacing: '-0.005rem',
                                 borderBottomWidth: '1px',
-                                borderBottomColor: errors.message ? '#dc2626' : 'rgba(0, 0, 0, 0.44)'
+                                borderBottomColor: errors.message ? errorColor : borderColor
                             }}
-                            onFocus={(e) => (e.target.style.borderBottomColor = errors.message ? '#dc2626' : '#000')}
+                            onFocus={(e) => (e.target.style.borderBottomColor = errors.message ? errorColor : solidBorderColor)}
                             onBlur={(e) =>
-                                (e.target.style.borderBottomColor = errors.message ? '#dc2626' : 'rgba(0, 0, 0, 0.44)')
+                                (e.target.style.borderBottomColor = errors.message ? errorColor : borderColor)
                             }
                         />
                     </div>
@@ -462,12 +549,22 @@ export function ContactSection() {
                     <div className='flex justify-center pt-4'>
                         <button
                             type='submit'
-                            className='border-2 border-black bg-transparent px-12 py-3 transition-colors hover:bg-black hover:text-white'
+                            className='border-2 bg-transparent px-12 py-3 transition-colors'
                             style={{
                                 fontFamily: 'var(--font-geist-mono), monospace',
                                 fontSize: '0.875rem',
                                 fontWeight: 400,
-                                letterSpacing: '0.02em'
+                                letterSpacing: '0.02em',
+                                borderColor: solidBorderColor,
+                                color: textColor
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = hoverBg;
+                                e.currentTarget.style.color = hoverText;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                                e.currentTarget.style.color = textColor;
                             }}>
                             SEND MESSAGE
                         </button>

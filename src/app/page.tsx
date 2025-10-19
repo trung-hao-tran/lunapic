@@ -314,7 +314,7 @@ const Page = () => {
 
             {/* Contact Section */}
             <Section title='CONTACT US' number='5' bgColor='#FDFDFD' headerColor='#000000'>
-                <ContactSection />
+                <ContactSection bgColor='white' />
             </Section>
 
             <Footer />
