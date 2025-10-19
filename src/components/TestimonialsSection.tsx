@@ -41,6 +41,54 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
 
     return (
         <div className='space-y-12'>
+            {/* Banner */}
+            <div className='mb-16'>
+                <div
+                    className='relative flex w-full items-center border-2 border-black bg-white px-8 py-4'
+                    style={{
+                        height: '4.9375rem',
+                        flexShrink: 0
+                    }}>
+                    {/* Top line - left to right 65% */}
+                    <div
+                        className='absolute left-0 h-[2px] bg-black'
+                        style={{ width: '65%', top: '-1rem' }}
+                    />
+
+                    {/* Bottom line - right to left 65% */}
+                    <div
+                        className='absolute right-0 h-[2px] bg-black'
+                        style={{ width: '65%', bottom: '-1rem' }}
+                    />
+
+                    <p
+                        style={{
+                            color: '#000',
+                            fontFamily: 'var(--font-geist-mono), monospace',
+                            fontSize: '2.25rem',
+                            fontStyle: 'normal',
+                            fontWeight: 500,
+                            lineHeight: 'normal',
+                            letterSpacing: '-0.01125rem'
+                        }}>
+                        LUNA HAS HELPED{' '}
+                        <span
+                            style={{
+                                color: '#000',
+                                fontFamily: 'var(--font-geist-mono), monospace',
+                                fontSize: '2.25rem',
+                                fontStyle: 'normal',
+                                fontWeight: 700,
+                                lineHeight: 'normal',
+                                letterSpacing: '-0.01125rem'
+                            }}>
+                            5034+
+                        </span>{' '}
+                        PROJECTS
+                    </p>
+                </div>
+            </div>
+
             {/* Main Content - Two Columns */}
             <div className='grid grid-cols-1 gap-12 lg:grid-cols-2'>
                 {/* Left Column - Testimonial Card */}
