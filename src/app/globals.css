@@ -225,6 +225,11 @@
         scroll-margin-top: 4rem;
     }
 
+    /* Ensure smooth scrolling for section headers */
+    div[id] {
+        scroll-margin-top: 0;
+    }
+
     /* Mobile-first button sizing */
     button,
     input,

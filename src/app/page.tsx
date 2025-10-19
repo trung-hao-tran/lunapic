@@ -43,7 +43,7 @@ const Page = () => {
             </HeroSection>
 
             {/* About Us Section */}
-            <Section title='ABOUT US' number='2' bgColor='#040404' headerColor='#fdfdfd'>
+            <Section id='about-us' title='ABOUT US' number='2' bgColor='#040404' headerColor='#fdfdfd'>
                 <div className='grid grid-cols-1 gap-12 md:grid-cols-2'>
                     {/* Left Column - Text Content */}
                     <div className='order-2 space-y-6 md:order-1'>

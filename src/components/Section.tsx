@@ -6,14 +6,15 @@ interface SectionProps {
     bgColor?: string;
     headerColor?: string;
     children: React.ReactNode;
+    id?: string;
 }
 
-export function Section({ title, number, bgColor = '#F9F9F9', headerColor = '#000000', children }: SectionProps) {
+export function Section({ title, number, bgColor = '#F9F9F9', headerColor = '#000000', children, id }: SectionProps) {
     return (
         <section className='pb-24 pt-16' style={{ backgroundColor: bgColor }}>
             <div className='container mx-auto px-6 md:px-12 lg:px-16'>
                 {/* Section Header */}
-                <div className='mb-32 flex items-center gap-4' style={{ color: headerColor }}>
+                <div id={id} className='mb-32 flex items-center gap-4' style={{ color: headerColor }}>
                     <h2
                         className='whitespace-nowrap text-base font-medium uppercase tracking-wide md:text-lg'
                         style={{
