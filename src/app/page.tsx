@@ -13,7 +13,7 @@ import { portfolioItems, testimonials } from '@/data/dummyData';
 const Page = () => {
     return (
         <main>
-            <HeroSection backgroundMedia='/videos/hero.mp4'>
+            <HeroSection backgroundMedia='/videos/hero.mp4' scrollTargetId='about-us' scrollDuration={1500}>
                 {/* Main Heading - Logo with StarFrame */}
                 <StarFrame haveBorder={false} starSize={40} direction={['tl', 'br']} color='white'>
                     <Image
