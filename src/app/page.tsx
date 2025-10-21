@@ -12,7 +12,8 @@ import { portfolioItems, testimonials } from '@/data/dummyData';
 
 const Page = () => {
     return (
-        <main>
+        <>
+            <main>
             <HeroSection backgroundMedia='/videos/hero.mp4' scrollTargetId='about-us' scrollDuration={1500}>
                 {/* Main Heading - Logo with StarFrame */}
                 <StarFrame haveBorder={false} starSize={40} direction={['tl', 'br']} color='white'>
@@ -316,9 +317,10 @@ const Page = () => {
             <Section title='CONTACT US' number='5' bgColor='#FDFDFD' headerColor='#000000'>
                 <ContactSection bgColor='white' />
             </Section>
+            </main>
 
             <Footer />
-        </main>
+        </>
     );
 };
 

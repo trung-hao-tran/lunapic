@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+
 import Image from 'next/image';
 
 import { BoxButton } from '@/components/BoxButton';
@@ -59,11 +60,10 @@ export function TeamCardGallery({ teamMembers }: TeamCardGalleryProps) {
                                 haveBorder={true}
                                 padding={1}
                                 color='white'
-                                borderColor='white'
                                 starSize={40}
                                 thickness={1}>
                                 <div
-                                    className='group relative overflow-hidden bg-gray-200 w-full md:w-[24.375rem]'
+                                    className='group relative w-full overflow-hidden bg-gray-200 md:w-[24.375rem]'
                                     style={{
                                         aspectRatio: '195/292'
                                     }}>
