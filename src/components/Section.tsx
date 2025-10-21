@@ -7,9 +7,18 @@ interface SectionProps {
     headerColor?: string;
     children: React.ReactNode;
     id?: string;
+    headerSeparator?: boolean;
 }
 
-export function Section({ title, number, bgColor = '#F9F9F9', headerColor = '#000000', children, id }: SectionProps) {
+export function Section({
+    title,
+    number,
+    bgColor = '#F9F9F9',
+    headerColor = '#000000',
+    children,
+    id,
+    headerSeparator = true
+}: SectionProps) {
     return (
         <section className='pb-24 pt-16' style={{ backgroundColor: bgColor }}>
             <div className='container mx-auto px-6 md:px-12 lg:px-16'>
@@ -24,7 +33,7 @@ export function Section({ title, number, bgColor = '#F9F9F9', headerColor = '#00
                         {number && `${number}/ `}
                         {title}
                     </h2>
-                    <div className='h-px flex-1 bg-current opacity-20' />
+                    {headerSeparator && <div className='h-px flex-1 bg-current opacity-20' />}
                 </div>
 
                 {/* Section Content */}

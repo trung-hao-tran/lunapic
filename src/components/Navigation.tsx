@@ -12,7 +12,7 @@ interface MenuItem {
 }
 
 const desktopMenuItems: MenuItem[] = [
-    { label: 'ABOUT US', href: '#about' },
+    { label: 'ABOUT US', href: '/about' },
     {
         label: 'SERVICES',
         dropdown: [
@@ -25,7 +25,7 @@ const desktopMenuItems: MenuItem[] = [
 ];
 
 const mobileMenuItems = [
-    { label: 'ABOUT US', href: '#about' },
+    { label: 'ABOUT US', href: '/about' },
     { label: 'VFX', href: '#vfx' },
     { label: 'PRODUCTION', href: '#production' },
     { label: 'WORK', href: '#work' },

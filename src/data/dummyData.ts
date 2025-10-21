@@ -101,3 +101,10 @@ export const testimonials: Testimonial[] = [
         image: '/images/testimonial-3.jpg'
     }
 ];
+
+export const ourStoryText = `[Over the past three decades, Luna Pictures has been delighting and inspiring audiences worldwide, by creating some of Hollywood's most memorable screen moments.] /newline
+RSP was established in 1995 in Adelaide, South Australia, by co-founders Tony Clark, Wayne Lewis and Gail Fuller, who named it after the Rising Sun Inn, the site of the first board meeting which was held over a Coopers Ale.
+RSP's notable clients include Disney, Marvel, Warner Bros., Netflix, Amazon, and MGM, among many others.
+Its Adelaide studio is home to more than 240 exceptional crew who enjoy the advantage of being located in one of the world's most liveable cities. Its sterling reputation, cemented by its creative leadership, has made it a trusted partner for studios and filmmakers worldwide.
+Focusing on producing only the highest quality and innovative solutions, RSP has an extremely flexible, custom pipeline, which allows the company to scale up quickly and adjust its workflow to meet the needs of clients and audiences' demand for ever more spectacular visuals.
+RSP has received countless awards for its work over the years, including the 2020 Australian Academy of Cinema and Television Arts (AACTA) 'Award for Best Visual Effects or Animation' for its work on The Eight Hundred, the winner of the Creative Industries award at the 57th Australian 2019 Export Awards, a plethora of Visual Effects Society (VES) and AEAF awards, accolades for its work on the Quicksilver Pentagon Kitchen sequence in X-Men: Days of Future Past including both an Academy Award ® and BAFTA Award nomination, as well as honours for its work on the 2013 Academy-Award® winning Gravity.`;
