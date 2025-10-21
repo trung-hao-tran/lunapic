@@ -107,7 +107,8 @@ const Page = () => {
                             fontWeight: 700,
                             lineHeight: 'normal',
                             letterSpacing: '-0.0625rem',
-                            color: '#FFF'
+                            color: '#FFF',
+                            userSelect: 'none'
                         }}>
                         SHOW
                     </h3>
@@ -123,7 +124,8 @@ const Page = () => {
                             letterSpacing: '-0.0625rem',
                             WebkitTextStroke: '2px #FFF',
                             WebkitTextFillColor: 'transparent',
-                            color: 'transparent'
+                            color: 'transparent',
+                            userSelect: 'none'
                         }}>
                         REEL
                     </h3>
