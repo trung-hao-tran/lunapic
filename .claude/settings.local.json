@@ -9,7 +9,8 @@
       "mcp__figma__get_screenshot",
       "mcp__figma__get_metadata",
       "WebFetch(domain:www.shadcn.io)",
-      "mcp__figma__get_code"
+      "mcp__figma__get_code",
+      "Bash(awk 'NR>=160 && NR<=290' \"D:\\Code\\nextjs-15-starter-tailwind\\src\\app\\about\\page.tsx\")"
     ],
     "deny": []
   }

@@ -6,7 +6,8 @@ import { BoxButton } from '@/components/BoxButton';
 import { HeroSection } from '@/components/HeroSection';
 import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
-import { ourStoryText } from '@/data/dummyData';
+import { TeamCardGallery } from '@/components/TeamCardGallery';
+import { ourStoryText, teamMembers } from '@/data/dummyData';
 
 const AboutPage = () => {
     const [isAnimating, setIsAnimating] = useState(false);
@@ -150,6 +151,11 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </div>
+            </Section>
+
+            {/* Team Section */}
+            <Section title='TEAM' number='2' bgColor='#040404' headerColor='#fdfdfd'>
+                <TeamCardGallery teamMembers={teamMembers} />
             </Section>
         </main>
     );

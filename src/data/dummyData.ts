@@ -108,3 +108,42 @@ RSP's notable clients include Disney, Marvel, Warner Bros., Netflix, Amazon, and
 Its Adelaide studio is home to more than 240 exceptional crew who enjoy the advantage of being located in one of the world's most liveable cities. Its sterling reputation, cemented by its creative leadership, has made it a trusted partner for studios and filmmakers worldwide.
 Focusing on producing only the highest quality and innovative solutions, RSP has an extremely flexible, custom pipeline, which allows the company to scale up quickly and adjust its workflow to meet the needs of clients and audiences' demand for ever more spectacular visuals.
 RSP has received countless awards for its work over the years, including the 2020 Australian Academy of Cinema and Television Arts (AACTA) 'Award for Best Visual Effects or Animation' for its work on The Eight Hundred, the winner of the Creative Industries award at the 57th Australian 2019 Export Awards, a plethora of Visual Effects Society (VES) and AEAF awards, accolades for its work on the Quicksilver Pentagon Kitchen sequence in X-Men: Days of Future Past including both an Academy Award ® and BAFTA Award nomination, as well as honours for its work on the 2013 Academy-Award® winning Gravity.`;
+
+export interface TeamMember {
+    id: string;
+    name: string;
+    role: string;
+    image: string;
+    bio: string;
+}
+
+export const teamMembers: TeamMember[] = [
+    {
+        id: '1',
+        name: 'TRAM NGUYEN',
+        role: 'VFX Team',
+        image: '/images/team/Tram Nguyen.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+    {
+        id: '2',
+        name: 'LONG DINH',
+        role: 'VFX Team',
+        image: '/images/team/Long Dinh.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+    {
+        id: '3',
+        name: 'MINH NGUYEN',
+        role: 'VFX & Production Team',
+        image: '/images/team/Minh Nguyen.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+    {
+        id: '4',
+        name: 'LINH MAI',
+        role: 'Production Team',
+        image: '/images/team/Linh Mai.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    }
+];
