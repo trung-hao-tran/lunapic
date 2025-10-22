@@ -5,11 +5,11 @@ import { StarFrame } from './StarFrame';
 
 const footerLinks = [
     { label: 'HOME', href: '/' },
-    { label: 'ABOUT US', href: '#about' },
-    { label: 'PRODUCTION', href: '#production' },
-    { label: 'VFX', href: '#vfx' },
-    { label: 'PROJECT', href: '#work' },
-    { label: 'CONTACT US', href: '#contact' }
+    { label: 'ABOUT US', href: 'about' },
+    { label: 'PRODUCTION', href: 'production' },
+    { label: 'VFX', href: 'vfx' },
+    { label: 'PROJECT', href: 'work' },
+    { label: 'CONTACT US', href: 'contact' }
 ];
 
 const socialLinks = [

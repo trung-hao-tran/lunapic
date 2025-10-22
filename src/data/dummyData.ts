@@ -148,6 +148,23 @@ export const teamMembers: TeamMember[] = [
     }
 ];
 
+export const productionTeamMembers: TeamMember[] = [
+    {
+        id: '3',
+        name: 'MINH NGUYEN',
+        role: 'VFX & Production Team',
+        image: '/images/team/Minh Nguyen.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+    {
+        id: '4',
+        name: 'LINH MAI',
+        role: 'Production Team',
+        image: '/images/team/Linh Mai.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    }
+];
+
 export const vfxTeamMembers: TeamMember[] = [
     {
         id: '1',

@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
+
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import '@/app/globals.css';
 

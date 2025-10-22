@@ -26,7 +26,7 @@ const desktopMenuItems: MenuItem[] = [
         label: 'SERVICES',
         dropdown: [
             { label: 'VFX', href: '/vfx' },
-            { label: 'PRODUCTION', href: '#production' }
+            { label: 'PRODUCTION', href: '/production' }
         ]
     },
     { label: 'WORK', href: '#work' },
@@ -36,9 +36,9 @@ const desktopMenuItems: MenuItem[] = [
 const mobileMenuItems = [
     { label: 'ABOUT US', href: '/about' },
     { label: 'VFX', href: '/vfx' },
-    { label: 'PRODUCTION', href: '#production' },
-    { label: 'WORK', href: '#work' },
-    { label: 'CONTACT US', href: '#contact' }
+    { label: 'PRODUCTION', href: '/production' },
+    { label: 'WORK', href: '/work' },
+    { label: 'CONTACT US', href: '/contact' }
 ];
 
 export function Navigation() {
@@ -127,7 +127,9 @@ export function Navigation() {
                                         )}
 
                                         {/* Menu text */}
-                                        <span className='transition-colors group-hover:text-white/80'>{item.label}</span>
+                                        <span className='transition-colors group-hover:text-white/80'>
+                                            {item.label}
+                                        </span>
 
                                         {/* Dropdown icon */}
                                         <svg
@@ -148,9 +150,10 @@ export function Navigation() {
 
                                     {/* Dropdown items - appear on hover */}
                                     {servicesDropdownOpen && (
-                                        <div className={`absolute top-full right-0 left-0 -mt-1 transition-colors duration-300 ${
-                                            !isAtTop ? NAV_BG_COLOR : ''
-                                        }`}>
+                                        <div
+                                            className={`absolute top-full right-0 left-0 -mt-1 transition-colors duration-300 ${
+                                                !isAtTop ? NAV_BG_COLOR : ''
+                                            }`}>
                                             {item.dropdown?.map((subItem, idx) => {
                                                 const isLast = item.dropdown && idx === item.dropdown.length - 1;
 
