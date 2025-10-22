@@ -14,7 +14,7 @@ const Page = () => {
     return (
         <>
             <main>
-            <HeroSection backgroundMedia='/videos/hero.mp4' scrollTargetId='about-us' scrollDuration={1500}>
+            <HeroSection backgroundMedia='/videos/hero.mp4' scrollTargetId='about-us' scrollDuration={1500} vh={100}>
                 {/* Main Heading - Logo with StarFrame */}
                 <StarFrame haveBorder={false} starSize={40} direction={['tl', 'br']} color='white'>
                     <Image

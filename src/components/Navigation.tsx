@@ -11,6 +11,15 @@ interface MenuItem {
     dropdown?: { label: string; href: string }[];
 }
 
+// Design tokens - single source of truth
+const NAV_BG_COLOR = 'bg-[#040404]';
+const MENU_FONT_STYLE = {
+    fontFamily: '"Geist Mono", monospace',
+    fontSize: '14px',
+    fontWeight: 500,
+    letterSpacing: '-0.07px'
+} as const;
+
 const desktopMenuItems: MenuItem[] = [
     { label: 'ABOUT US', href: '/about' },
     {
@@ -68,8 +77,8 @@ export function Navigation() {
 
     return (
         <nav
-            className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-                mobileMenuOpen || !isAtTop ? 'bg-[#040404]' : ''
+            className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${NAV_BG_COLOR} ${
+                isAtTop ? 'md:bg-transparent' : ''
             } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className='container mx-auto px-6 md:px-12 lg:px-16'>
                 <div className='flex items-center justify-between py-6'>
@@ -97,12 +106,7 @@ export function Navigation() {
                                     {/* Button - first item with top bracket */}
                                     <button
                                         className='group relative flex items-center gap-1 px-3 py-1'
-                                        style={{
-                                            fontFamily: '"Geist Mono", monospace',
-                                            fontSize: '14px',
-                                            fontWeight: 500,
-                                            letterSpacing: '-0.07px'
-                                        }}>
+                                        style={MENU_FONT_STYLE}>
                                         {/* Top bracket corners when expanded */}
                                         {servicesDropdownOpen && (
                                             <>
@@ -144,7 +148,9 @@ export function Navigation() {
 
                                     {/* Dropdown items - appear on hover */}
                                     {servicesDropdownOpen && (
-                                        <div className='absolute top-full right-0 left-0 -mt-1'>
+                                        <div className={`absolute top-full right-0 left-0 -mt-1 transition-colors duration-300 ${
+                                            !isAtTop ? NAV_BG_COLOR : ''
+                                        }`}>
                                             {item.dropdown?.map((subItem, idx) => {
                                                 const isLast = item.dropdown && idx === item.dropdown.length - 1;
 
@@ -153,10 +159,7 @@ export function Navigation() {
                                                         key={subItem.label}
                                                         href={subItem.href}
                                                         className='group relative block px-4 py-1 text-sm transition-colors'
-                                                        style={{
-                                                            fontFamily: '"Geist Mono", monospace',
-                                                            letterSpacing: '-0.07px'
-                                                        }}>
+                                                        style={MENU_FONT_STYLE}>
                                                         {/* Left and right borders for all items */}
                                                         <span
                                                             className={`absolute top-0 left-0 border-l border-white ${isLast ? 'bottom-1/2' : 'bottom-0'}`}
@@ -187,12 +190,7 @@ export function Navigation() {
                                     key={item.label}
                                     href={item.href!}
                                     className='group relative px-3 py-1'
-                                    style={{
-                                        fontFamily: '"Geist Mono", monospace',
-                                        fontSize: '14px',
-                                        fontWeight: 500,
-                                        letterSpacing: '-0.07px'
-                                    }}>
+                                    style={MENU_FONT_STYLE}>
                                     {/* Left bracket using borders */}
                                     <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-b border-l border-white/40 transition-colors group-hover:border-white' />
 
@@ -243,7 +241,7 @@ export function Navigation() {
 
             {/* Mobile Menu */}
             <div
-                className={`fixed inset-0 top-[72px] bg-[#040404] transition-all duration-300 md:hidden ${
+                className={`fixed inset-0 top-[72px] ${NAV_BG_COLOR} transition-all duration-300 md:hidden ${
                     mobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
                 }`}>
                 <div className='container mx-auto flex flex-col gap-4 px-6 pt-6'>
@@ -253,10 +251,7 @@ export function Navigation() {
                             href={item.href}
                             onClick={() => setMobileMenuOpen(false)}
                             className='relative inline-block w-fit px-3 py-1 text-sm font-medium'
-                            style={{
-                                fontFamily: '"Geist Mono", monospace',
-                                letterSpacing: '-0.07px'
-                            }}>
+                            style={MENU_FONT_STYLE}>
                             {/* Left bracket using borders */}
                             <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-b border-l border-white/40' />
 

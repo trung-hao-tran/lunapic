@@ -13,11 +13,12 @@ interface HeroSectionProps {
     mediaType?: 'image' | 'video';
     scrollTargetId?: string;
     scrollDuration?: number;
+    vh?: number;
 }
 
-export function HeroSection({ children, backgroundMedia, mediaType = 'video', scrollTargetId, scrollDuration }: HeroSectionProps) {
+export function HeroSection({ children, backgroundMedia, mediaType = 'video', scrollTargetId, scrollDuration, vh = 55 }: HeroSectionProps) {
     return (
-        <section className='relative min-h-screen overflow-hidden bg-[#080808] text-white'>
+        <section className='relative overflow-hidden bg-[#080808] text-white' style={{ minHeight: `${vh}vh` }}>
             {/* Background Media */}
             {backgroundMedia && (
                 <>
@@ -50,7 +51,7 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video', sc
             <Navigation />
 
             {/* Hero Content */}
-            <div className='relative z-10 container mx-auto flex min-h-screen flex-col justify-end px-6 pt-32 pb-[20vh] md:px-12 lg:px-16'>
+            <div className='relative z-10 container mx-auto flex flex-col justify-end px-6 pt-32 md:px-12 lg:px-16' style={{ minHeight: `${vh}vh`, paddingBottom: `${vh / 5}vh` }}>
                 <div className='max-w-2xl space-y-4'>{children}</div>
             </div>
 
