@@ -5,11 +5,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { Accordion } from '@/components/Accordion';
+import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
 import { HeroSection } from '@/components/HeroSection';
 import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
-import { faqItems } from '@/data/dummyData';
+import { TeamCardGallery } from '@/components/TeamCardGallery';
+import { faqItems, showreelItems, vfxTeamMembers } from '@/data/dummyData';
 
 const VFXPage = () => {
     const [isAnimating, setIsAnimating] = useState(false);
@@ -56,19 +58,9 @@ const VFXPage = () => {
                                 lineHeight: 'normal',
                                 letterSpacing: '-0.015rem'
                             }}>
-                            VFX
+                            VFX PRODUCTION
                         </h1>
                     </StarFrame>
-
-                    {/* Subtitle */}
-                    <p
-                        className='max-w-2xl text-xs text-white/80 sm:text-base md:text-lg lg:text-xl'
-                        style={{
-                            fontFamily: '"Geist Mono", monospace',
-                            letterSpacing: '-0.07px'
-                        }}>
-                        Bringing imagination to life through visual effects
-                    </p>
                 </HeroSection>
 
                 {/* Why Choosing Us Section */}
@@ -233,6 +225,130 @@ const VFXPage = () => {
                             <Accordion items={faqItems} />
                         </div>
                     </div>
+                </Section>
+
+                {/* Show Reel Section */}
+                <Section title='SHOW REEL' number='2' bgColor='#040404' headerColor='#fdfdfd'>
+                    <div className='flex w-full flex-col space-y-8'>
+                        {showreelItems.map((item) => (
+                            <div
+                                key={item.id}
+                                className='w-full'
+                                style={{
+                                    height: '23.625rem',
+                                    flexShrink: 0
+                                }}>
+                                <StarFrame
+                                    haveBorder={true}
+                                    direction={['tl', 'br']}
+                                    color='white'
+                                    padding={1}
+                                    className='h-full w-full'>
+                                    <div className='group relative h-full w-full'>
+                                        {/* Title on the left */}
+                                        <div className='absolute bottom-4 left-4 z-10 transition-opacity duration-300 group-hover:opacity-0'>
+                                            <h3
+                                                style={{
+                                                    color: '#FFF',
+                                                    fontFamily: '"Syne", sans-serif',
+                                                    fontOpticalSizing: 'auto',
+                                                    fontSize: '1.5rem',
+                                                    fontStyle: 'normal',
+                                                    fontWeight: 700,
+                                                    lineHeight: 'normal',
+                                                    letterSpacing: '-0.0075rem'
+                                                }}>
+                                                {item.number}/ {item.title}
+                                            </h3>
+                                        </div>
+
+                                        {/* Image */}
+                                        <div className='relative h-full w-full overflow-hidden'>
+                                            <Image
+                                                src={item.image}
+                                                alt={item.title}
+                                                fill
+                                                sizes='75.625rem'
+                                                className='h-full w-full object-cover grayscale'
+                                            />
+                                            {/* Grey gradient overlay */}
+                                            <div
+                                                className='absolute inset-0 transition-opacity duration-300 group-hover:opacity-0'
+                                                style={{
+                                                    background:
+                                                        'linear-gradient(to bottom, transparent 0%, rgba(40, 40, 40, 0.8) 100%)'
+                                                }}
+                                            />
+                                        </div>
+
+                                        {/* Metadata on the bottom right */}
+                                        <div
+                                            className='absolute right-4 bottom-4 z-10 flex gap-8 text-white transition-opacity duration-300 group-hover:opacity-0'
+                                            style={{
+                                                fontFamily: '"Geist Mono", monospace',
+                                                fontSize: '0.875rem',
+                                                fontStyle: 'normal',
+                                                fontWeight: 400,
+                                                lineHeight: 'normal',
+                                                letterSpacing: '-0.004375rem'
+                                            }}>
+                                            <div>
+                                                <div className='text-white/60'>DATE</div>
+                                                <div>{item.date}</div>
+                                            </div>
+                                            <div>
+                                                <div className='text-white/60'>CLIENT</div>
+                                                <div>{item.client}</div>
+                                            </div>
+                                            <div>
+                                                <div className='text-white/60'>TYPE</div>
+                                                <div>{item.type}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </StarFrame>
+                            </div>
+                        ))}
+
+                        {/* Buttons */}
+                        <div className='flex items-center justify-center gap-4 pt-8'>
+                            <button
+                                className='border border-white bg-white px-8 py-3 text-black transition-all duration-300 hover:bg-transparent hover:text-white'
+                                style={{
+                                    fontFamily: '"Geist Mono", monospace',
+                                    fontSize: '0.875rem',
+                                    fontStyle: 'normal',
+                                    fontWeight: 500,
+                                    lineHeight: 'normal',
+                                    letterSpacing: '-0.00438rem',
+                                    borderRadius: '9999px'
+                                }}>
+                                BROWSE ALL PROJECT
+                            </button>
+                            <button
+                                className='border border-white bg-transparent px-8 py-3 text-white transition-all duration-300 hover:bg-white hover:text-black'
+                                style={{
+                                    fontFamily: '"Geist Mono", monospace',
+                                    fontSize: '0.875rem',
+                                    fontStyle: 'normal',
+                                    fontWeight: 500,
+                                    lineHeight: 'normal',
+                                    letterSpacing: '-0.00438rem',
+                                    borderRadius: '9999px'
+                                }}>
+                                CONTACT US
+                            </button>
+                        </div>
+                    </div>
+                </Section>
+                {/* Team Section */}
+                <Section title='TEAM' number='3' bgColor='#040404' headerColor='#fdfdfd'>
+                    <TeamCardGallery teamMembers={vfxTeamMembers} />
+                </Section>
+
+                {/* Contact Us Section */}
+                <Section title='CONTACT US' number='4' bgColor='#040404' headerColor='#fdfdfd'>
+                    <ContactSection bgColor='black' />
                 </Section>
             </main>
 

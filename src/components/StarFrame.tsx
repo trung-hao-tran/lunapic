@@ -39,8 +39,8 @@ export function StarFrame({
     const showStar = (corner: Corner) => direction.includes(corner);
 
     return (
-        <div className={`relative inline-block ${className}`}>
-            <div style={{ padding: `${padding}px`, position: 'relative' }}>
+        <div className={`relative ${className}`}>
+            <div style={{ padding: `${padding}px`, position: 'relative', height: '100%', width: '100%' }}>
                 {/* Border segments */}
                 {haveBorder && (
                     <>

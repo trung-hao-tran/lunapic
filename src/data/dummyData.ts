@@ -148,6 +148,30 @@ export const teamMembers: TeamMember[] = [
     }
 ];
 
+export const vfxTeamMembers: TeamMember[] = [
+    {
+        id: '1',
+        name: 'TRAM NGUYEN',
+        role: 'VFX Team',
+        image: '/images/team/Tram Nguyen.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+    {
+        id: '2',
+        name: 'LONG DINH',
+        role: 'VFX Team',
+        image: '/images/team/Long Dinh.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+    {
+        id: '3',
+        name: 'MINH NGUYEN',
+        role: 'VFX & Production Team',
+        image: '/images/team/Minh Nguyen.jpg',
+        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    }
+];
+
 export interface AccordionItem {
     id: string;
     question: string;
@@ -158,25 +182,70 @@ export const faqItems: AccordionItem[] = [
     {
         id: '1',
         question: 'WHAT TYPES OF VIDEO DO WE PRODUCE ?',
-        answer:
-            'We produce a wide range of videos including corporate videos, commercials, music videos, documentaries, event coverage, and social media content. Our team can handle any video production need you have.'
+        answer: 'We produce a wide range of videos including corporate videos, commercials, music videos, documentaries, event coverage, and social media content. Our team can handle any video production need you have.'
     },
     {
         id: '2',
         question: 'WHAT IS THE TURNAROUND TIME FOR VIDEO PRODUCTION ?',
-        answer:
-            'Turnaround time varies depending on the project scope and complexity. Typically, a simple video can be completed in 2-3 weeks, while more complex productions may take 4-8 weeks. We will provide you with a detailed timeline during the initial consultation.'
+        answer: 'Turnaround time varies depending on the project scope and complexity. Typically, a simple video can be completed in 2-3 weeks, while more complex productions may take 4-8 weeks. We will provide you with a detailed timeline during the initial consultation.'
     },
     {
         id: '3',
         question: 'CAN YOU HELP WITH VIDEO MARKETING AND PROMOTION ?',
-        answer:
-            'Yes! We offer comprehensive video marketing services including social media strategy, YouTube optimization, video SEO, and distribution across multiple platforms. We can help you maximize the reach and impact of your video content.'
+        answer: 'Yes! We offer comprehensive video marketing services including social media strategy, YouTube optimization, video SEO, and distribution across multiple platforms. We can help you maximize the reach and impact of your video content.'
     },
     {
         id: '4',
         question: 'HOW CAN I REQUEST A CUSTOM VIDEO ?',
-        answer:
-            'Simply contact us through our contact form or give us a call. We will schedule a consultation to discuss your vision, goals, budget, and timeline. From there, we will provide you with a detailed proposal and production plan.'
+        answer: 'Simply contact us through our contact form or give us a call. We will schedule a consultation to discuss your vision, goals, budget, and timeline. From there, we will provide you with a detailed proposal and production plan.'
+    }
+];
+
+export interface ShowreelItem {
+    id: string;
+    number: string;
+    title: string;
+    date: string;
+    client: string;
+    type: string;
+    image: string;
+}
+
+export const showreelItems: ShowreelItem[] = [
+    {
+        id: '1',
+        number: '01',
+        title: 'THE SMOKE',
+        date: "Aug '25",
+        client: 'COMPANY',
+        type: 'COMMERCIAL',
+        image: '/images/projects/proj1.png'
+    },
+    {
+        id: '2',
+        number: '02',
+        title: 'VIDEO TITLE',
+        date: "Aug '25",
+        client: 'COMPANY',
+        type: 'COMMERCIAL',
+        image: '/images/projects/proj2.png'
+    },
+    {
+        id: '3',
+        number: '03',
+        title: 'URBAN NIGHTS',
+        date: "Sep '25",
+        client: 'STUDIO X',
+        type: 'MUSIC VIDEO',
+        image: '/images/projects/proj3.png'
+    },
+    {
+        id: '4',
+        number: '04',
+        title: 'REFLECTION',
+        date: "Oct '25",
+        client: 'BRAND CO',
+        type: 'DOCUMENTARY',
+        image: '/images/projects/proj4.png'
     }
 ];
