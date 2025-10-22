@@ -63,7 +63,7 @@ const AboutPage = () => {
                                     key={index}
                                     style={{
                                         color: '#FFF',
-                                        fontFamily: 'var(--font-geist-mono), monospace',
+                                        fontFamily: '"Geist Mono", monospace',
                                         fontSize: '1.25rem',
                                         fontStyle: 'normal',
                                         fontWeight: 700,
@@ -81,7 +81,7 @@ const AboutPage = () => {
                                 key={index}
                                 style={{
                                     color: '#FFF',
-                                    fontFamily: 'var(--font-geist-mono), monospace',
+                                    fontFamily: '"Geist Mono", monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
                                     fontWeight: 500,

@@ -25,7 +25,7 @@ const desktopMenuItems: MenuItem[] = [
     {
         label: 'SERVICES',
         dropdown: [
-            { label: 'VFX', href: '#vfx' },
+            { label: 'VFX', href: '/vfx' },
             { label: 'PRODUCTION', href: '#production' }
         ]
     },
@@ -35,7 +35,7 @@ const desktopMenuItems: MenuItem[] = [
 
 const mobileMenuItems = [
     { label: 'ABOUT US', href: '/about' },
-    { label: 'VFX', href: '#vfx' },
+    { label: 'VFX', href: '/vfx' },
     { label: 'PRODUCTION', href: '#production' },
     { label: 'WORK', href: '#work' },
     { label: 'CONTACT US', href: '#contact' }

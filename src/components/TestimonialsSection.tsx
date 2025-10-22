@@ -64,7 +64,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                     <p
                         style={{
                             color: '#000',
-                            fontFamily: 'var(--font-geist-mono), monospace',
+                            fontFamily: '"Geist Mono", monospace',
                             fontSize: '2.25rem',
                             fontStyle: 'normal',
                             fontWeight: 500,
@@ -75,7 +75,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                         <span
                             style={{
                                 color: '#000',
-                                fontFamily: 'var(--font-geist-mono), monospace',
+                                fontFamily: '"Geist Mono", monospace',
                                 fontSize: '2.25rem',
                                 fontStyle: 'normal',
                                 fontWeight: 700,
@@ -125,7 +125,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                                 <p
                                     style={{
                                         color: '#FFF',
-                                        fontFamily: 'var(--font-inter), Inter, sans-serif',
+                                        fontFamily: 'Inter, sans-serif',
                                         fontSize: '1.5rem',
                                         fontStyle: 'normal',
                                         fontWeight: 500,
@@ -137,7 +137,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                                 <p
                                     style={{
                                         color: '#FFF',
-                                        fontFamily: 'var(--font-inter), Inter, sans-serif',
+                                        fontFamily: 'Inter, sans-serif',
                                         fontSize: '0.9375rem',
                                         fontStyle: 'normal',
                                         fontWeight: 300,
@@ -169,7 +169,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                         className='mb-8'
                         style={{
                             color: '#000',
-                            fontFamily: 'var(--font-inter), Inter, sans-serif',
+                            fontFamily: 'Inter, sans-serif',
                             fontSize: '2.25rem',
                             fontStyle: 'normal',
                             fontWeight: 400,
@@ -191,7 +191,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                                 className='absolute top-0 left-0 italic'
                                 style={{
                                     color: '#000',
-                                    fontFamily: 'var(--font-inter), Inter, sans-serif',
+                                    fontFamily: 'Inter, sans-serif',
                                     fontSize: '1.5rem',
                                     fontStyle: 'italic',
                                     fontWeight: 250,

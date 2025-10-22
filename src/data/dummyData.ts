@@ -147,3 +147,36 @@ export const teamMembers: TeamMember[] = [
         bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     }
 ];
+
+export interface AccordionItem {
+    id: string;
+    question: string;
+    answer: string;
+}
+
+export const faqItems: AccordionItem[] = [
+    {
+        id: '1',
+        question: 'WHAT TYPES OF VIDEO DO WE PRODUCE ?',
+        answer:
+            'We produce a wide range of videos including corporate videos, commercials, music videos, documentaries, event coverage, and social media content. Our team can handle any video production need you have.'
+    },
+    {
+        id: '2',
+        question: 'WHAT IS THE TURNAROUND TIME FOR VIDEO PRODUCTION ?',
+        answer:
+            'Turnaround time varies depending on the project scope and complexity. Typically, a simple video can be completed in 2-3 weeks, while more complex productions may take 4-8 weeks. We will provide you with a detailed timeline during the initial consultation.'
+    },
+    {
+        id: '3',
+        question: 'CAN YOU HELP WITH VIDEO MARKETING AND PROMOTION ?',
+        answer:
+            'Yes! We offer comprehensive video marketing services including social media strategy, YouTube optimization, video SEO, and distribution across multiple platforms. We can help you maximize the reach and impact of your video content.'
+    },
+    {
+        id: '4',
+        question: 'HOW CAN I REQUEST A CUSTOM VIDEO ?',
+        answer:
+            'Simply contact us through our contact form or give us a call. We will schedule a consultation to discuss your vision, goals, budget, and timeline. From there, we will provide you with a detailed proposal and production plan.'
+    }
+];

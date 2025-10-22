@@ -192,7 +192,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     htmlFor='name'
                                     style={{
                                         color: errors.name ? errorColor : textColor,
-                                        fontFamily: 'var(--font-geist-mono), monospace',
+                                        fontFamily: '"Geist Mono", monospace',
                                         fontSize: '1rem',
                                         fontStyle: 'normal',
                                         fontWeight: 500,
@@ -212,7 +212,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 className='w-full border-0 border-b bg-transparent pb-1 focus:ring-0 focus:outline-none'
                                 style={{
                                     color: textColor,
-                                    fontFamily: 'var(--font-inter), sans-serif',
+                                    fontFamily: 'Inter, sans-serif',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
                                     fontWeight: 400,
@@ -233,7 +233,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     htmlFor='email'
                                     style={{
                                         color: errors.email ? errorColor : textColor,
-                                        fontFamily: 'var(--font-geist-mono), monospace',
+                                        fontFamily: '"Geist Mono", monospace',
                                         fontSize: '1rem',
                                         fontStyle: 'normal',
                                         fontWeight: 500,
@@ -253,7 +253,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 className='w-full border-0 border-b bg-transparent pb-1 focus:ring-0 focus:outline-none'
                                 style={{
                                     color: textColor,
-                                    fontFamily: 'var(--font-inter), sans-serif',
+                                    fontFamily: 'Inter, sans-serif',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
                                     fontWeight: 400,
@@ -279,7 +279,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 htmlFor='company'
                                 style={{
                                     color: errors.company ? errorColor : textColor,
-                                    fontFamily: 'var(--font-geist-mono), monospace',
+                                    fontFamily: '"Geist Mono", monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
                                     fontWeight: 500,
@@ -299,7 +299,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                             className='w-full border-0 border-b bg-transparent pb-1 focus:ring-0 focus:outline-none'
                             style={{
                                 color: textColor,
-                                fontFamily: 'var(--font-inter), sans-serif',
+                                fontFamily: 'Inter, sans-serif',
                                 fontSize: '1rem',
                                 fontStyle: 'normal',
                                 fontWeight: 400,
@@ -322,7 +322,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 htmlFor='service'
                                 style={{
                                     color: errors.service ? errorColor : textColor,
-                                    fontFamily: 'var(--font-geist-mono), monospace',
+                                    fontFamily: '"Geist Mono", monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
                                     fontWeight: 500,
@@ -345,7 +345,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 className='w-full rounded-none border-0 border-b bg-transparent px-0 pb-1 shadow-none focus:ring-0'
                                 style={{
                                     color: textColor,
-                                    fontFamily: 'var(--font-inter), sans-serif',
+                                    fontFamily: 'Inter, sans-serif',
                                     fontSize: '1rem',
                                     fontWeight: 400,
                                     letterSpacing: '-0.005rem',
@@ -364,7 +364,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     Web Development
                                 </SelectItem>
@@ -373,7 +373,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     Mobile App Development
                                 </SelectItem>
@@ -382,7 +382,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     UI/UX Design
                                 </SelectItem>
@@ -391,7 +391,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     Branding
                                 </SelectItem>
@@ -400,7 +400,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     Consulting
                                 </SelectItem>
@@ -415,7 +415,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 htmlFor='budget'
                                 style={{
                                     color: errors.budget ? errorColor : textColor,
-                                    fontFamily: 'var(--font-geist-mono), monospace',
+                                    fontFamily: '"Geist Mono", monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
                                     fontWeight: 500,
@@ -438,7 +438,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 className='w-full rounded-none border-0 border-b bg-transparent px-0 pb-1 shadow-none focus:ring-0'
                                 style={{
                                     color: textColor,
-                                    fontFamily: 'var(--font-inter), sans-serif',
+                                    fontFamily: 'Inter, sans-serif',
                                     fontSize: '1rem',
                                     fontWeight: 400,
                                     letterSpacing: '-0.005rem',
@@ -457,7 +457,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     Under $10,000
                                 </SelectItem>
@@ -466,7 +466,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     $10,000 - $25,000
                                 </SelectItem>
@@ -475,7 +475,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     $25,000 - $50,000
                                 </SelectItem>
@@ -484,7 +484,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     $50,000 - $100,000
                                 </SelectItem>
@@ -493,7 +493,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
                                     style={{
                                         color: textColor,
-                                        fontFamily: 'var(--font-inter), sans-serif'
+                                        fontFamily: 'Inter, sans-serif'
                                     }}>
                                     Over $100,000
                                 </SelectItem>
@@ -508,7 +508,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 htmlFor='message'
                                 style={{
                                     color: errors.message ? errorColor : textColor,
-                                    fontFamily: 'var(--font-geist-mono), monospace',
+                                    fontFamily: '"Geist Mono", monospace',
                                     fontSize: '1rem',
                                     fontStyle: 'normal',
                                     fontWeight: 500,
@@ -529,7 +529,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                             className='w-full resize-none border-0 border-b bg-transparent pb-1 placeholder:text-gray-400 focus:ring-0 focus:outline-none'
                             style={{
                                 color: textColor,
-                                fontFamily: 'var(--font-inter), sans-serif',
+                                fontFamily: 'Inter, sans-serif',
                                 fontSize: '1rem',
                                 fontStyle: 'normal',
                                 fontWeight: 400,
@@ -551,7 +551,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                             type='submit'
                             className='border-2 bg-transparent px-12 py-3 transition-colors'
                             style={{
-                                fontFamily: 'var(--font-geist-mono), monospace',
+                                fontFamily: '"Geist Mono", monospace',
                                 fontSize: '0.875rem',
                                 fontWeight: 400,
                                 letterSpacing: '0.02em',

@@ -92,7 +92,7 @@ export function TeamCardGallery({ teamMembers }: TeamCardGalleryProps) {
                                                         width: '9.8125rem',
                                                         height: '1.5rem',
                                                         flexShrink: 0,
-                                                        fontFamily: 'var(--font-geist-mono)',
+                                                        fontFamily: '"Geist Mono", monospace',
                                                         fontSize: '0.75rem',
                                                         color: '#999'
                                                     }}>
