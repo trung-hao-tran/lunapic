@@ -11,13 +11,41 @@ import { StarFrame } from '@/components/StarFrame';
 import { categoryFilters, portfolioItems } from '@/data/dummyData';
 
 const WorkPage = () => {
-    const [selectedService, setSelectedService] = useState<'vfx' | 'production'>('vfx');
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
     const toggleCategory = (categoryId: string) => {
         setSelectedCategories((prev) =>
             prev.includes(categoryId) ? prev.filter((id) => id !== categoryId) : [...prev, categoryId]
         );
+    };
+
+    const handleScrollToSection = (sectionId: string) => {
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            const duration = 1500;
+            let start: number | null = null;
+
+            const animation = (currentTime: number) => {
+                if (start === null) start = currentTime;
+                const timeElapsed = currentTime - start;
+                const progress = Math.min(timeElapsed / duration, 1);
+
+                // Easing function for smooth animation
+                const easeInOutCubic =
+                    progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+                window.scrollTo(0, startPosition + distance * easeInOutCubic);
+
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            };
+
+            requestAnimationFrame(animation);
+        }
     };
 
     // For now, using all portfolio items for both sections
@@ -56,10 +84,8 @@ const WorkPage = () => {
                         <div className='mb-16 grid grid-cols-2'>
                             {/* VFX Productions Button */}
                             <button
-                                onClick={() => setSelectedService('vfx')}
-                                className={`group relative justify-self-center transition-colors duration-300 ${
-                                    selectedService === 'vfx' ? 'text-white' : 'text-white/50'
-                                }`}
+                                onClick={() => handleScrollToSection('vfx-section')}
+                                className='group relative justify-self-center text-white transition-colors duration-300'
                                 style={{
                                     color: '#FFF',
                                     fontFamily: '"Geist Mono", monospace',
@@ -70,28 +96,29 @@ const WorkPage = () => {
                                     letterSpacing: '-0.005rem'
                                 }}>
                                 {/* Left Plus */}
-                                <span className='absolute top-1/2 -left-8 -translate-y-1/2'>+</span>
+                                <span className='absolute top-1/2 -left-4 -translate-y-1/2'>+</span>
 
-                                {/* Border */}
-                                <div
-                                    className={`border px-6 py-3 transition-colors duration-300 ${
-                                        selectedService === 'vfx'
-                                            ? 'border-white'
-                                            : 'border-white/50 group-hover:border-white/80'
-                                    }`}>
+                                {/* Border with gap in center of left/right borders */}
+                                <div className='relative border-t border-b border-white px-6 py-3 transition-colors duration-300 group-hover:border-white/80'>
+                                    {/* Left border - top segment */}
+                                    <span className='absolute top-0 left-0 h-[calc(50%-1rem)] w-[1px] bg-white'></span>
+                                    {/* Left border - bottom segment */}
+                                    <span className='absolute bottom-0 left-0 h-[calc(50%-1rem)] w-[1px] bg-white'></span>
+                                    {/* Right border - top segment */}
+                                    <span className='absolute top-0 right-0 h-[calc(50%-1rem)] w-[1px] bg-white'></span>
+                                    {/* Right border - bottom segment */}
+                                    <span className='absolute right-0 bottom-0 h-[calc(50%-1rem)] w-[1px] bg-white'></span>
                                     VFX PRODUCTIONS
                                 </div>
 
                                 {/* Right Plus */}
-                                <span className='absolute top-1/2 -right-8 -translate-y-1/2'>+</span>
+                                <span className='absolute top-1/2 -right-4 -translate-y-1/2'>+</span>
                             </button>
 
                             {/* Video Production Button */}
                             <button
-                                onClick={() => setSelectedService('production')}
-                                className={`group relative justify-self-center transition-colors duration-300 ${
-                                    selectedService === 'production' ? 'text-white' : 'text-white/50'
-                                }`}
+                                onClick={() => handleScrollToSection('production-section')}
+                                className='group relative justify-self-center text-white transition-colors duration-300'
                                 style={{
                                     color: '#FFF',
                                     fontFamily: '"Geist Mono", monospace',
@@ -102,20 +129,23 @@ const WorkPage = () => {
                                     letterSpacing: '-0.005rem'
                                 }}>
                                 {/* Left Plus */}
-                                <span className='absolute top-1/2 -left-8 -translate-y-1/2'>+</span>
+                                <span className='absolute top-1/2 -left-4 -translate-y-1/2'>+</span>
 
-                                {/* Border */}
-                                <div
-                                    className={`border px-6 py-3 transition-colors duration-300 ${
-                                        selectedService === 'production'
-                                            ? 'border-white'
-                                            : 'border-white/50 group-hover:border-white/80'
-                                    }`}>
+                                {/* Border with gap in center of left/right borders */}
+                                <div className='relative border-t border-b border-white px-6 py-3 transition-colors duration-300 group-hover:border-white/80'>
+                                    {/* Left border - top segment */}
+                                    <span className='absolute top-0 left-0 h-[calc(50%-0.2rem)] w-[1px] bg-white'></span>
+                                    {/* Left border - bottom segment */}
+                                    <span className='absolute bottom-0 left-0 h-[calc(50%-0.2rem)] w-[1px] bg-white'></span>
+                                    {/* Right border - top segment */}
+                                    <span className='absolute top-0 right-0 h-[calc(50%-0.2rem)] w-[1px] bg-white'></span>
+                                    {/* Right border - bottom segment */}
+                                    <span className='absolute right-0 bottom-0 h-[calc(50%-0.2rem)] w-[1px] bg-white'></span>
                                     VIDEO PRODUCTION
                                 </div>
 
                                 {/* Right Plus */}
-                                <span className='absolute top-1/2 -right-8 -translate-y-1/2'>+</span>
+                                <span className='absolute top-1/2 -right-4 -translate-y-1/2'>+</span>
                             </button>
                         </div>
 
@@ -165,12 +195,17 @@ const WorkPage = () => {
                 </section>
 
                 {/* VFX Productions Section */}
-                <Section title='VFX' number='1' bgColor='#040404' headerColor='#fdfdfd'>
+                <Section id='vfx-section' title='VFX' number='1' bgColor='#040404' headerColor='#fdfdfd'>
                     <PortfolioGallery items={vfxItems} hasViewMoreButton={true} />
                 </Section>
 
                 {/* Video Production Section */}
-                <Section title='VIDEO PRODUCTION' number='2' bgColor='#040404' headerColor='#fdfdfd'>
+                <Section
+                    id='production-section'
+                    title='VIDEO PRODUCTION'
+                    number='2'
+                    bgColor='#040404'
+                    headerColor='#fdfdfd'>
                     <PortfolioGallery items={productionItems} />
                 </Section>
 
