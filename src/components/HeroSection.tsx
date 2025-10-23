@@ -52,7 +52,7 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video', sc
 
             {/* Hero Content */}
             <div className='relative z-10 container mx-auto flex flex-col justify-end px-6 pt-32 md:px-12 lg:px-16' style={{ minHeight: `${vh}vh`, paddingBottom: `${vh / 5}vh` }}>
-                <div className='max-w-2xl space-y-4'>{children}</div>
+                <div className='w-fit space-y-4'>{children}</div>
             </div>
 
             {/* Scroll Indicator - Positioned at bottom center */}
