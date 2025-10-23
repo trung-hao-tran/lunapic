@@ -85,7 +85,7 @@ const WorkPage = () => {
                             {/* VFX Productions Button */}
                             <button
                                 onClick={() => handleScrollToSection('vfx-section')}
-                                className='group relative justify-self-center text-white transition-colors duration-300'
+                                className='group relative justify-self-center text-white transition-colors duration-300 cursor-pointer'
                                 style={{
                                     color: '#FFF',
                                     fontFamily: '"Geist Mono", monospace',
@@ -101,13 +101,18 @@ const WorkPage = () => {
                                 {/* Border with gap in center of left/right borders */}
                                 <div className='relative border-t border-b border-white px-6 py-3 transition-colors duration-300 group-hover:border-white/80'>
                                     {/* Left border - top segment */}
-                                    <span className='absolute top-0 left-0 h-[calc(50%-1rem)] w-[1px] bg-white'></span>
+                                    <span className='absolute top-0 left-0 h-[calc(50%-0.2rem)] w-[1px] bg-white pointer-events-none'></span>
                                     {/* Left border - bottom segment */}
-                                    <span className='absolute bottom-0 left-0 h-[calc(50%-1rem)] w-[1px] bg-white'></span>
+                                    <span className='absolute bottom-0 left-0 h-[calc(50%-0.2rem)] w-[1px] bg-white pointer-events-none'></span>
                                     {/* Right border - top segment */}
-                                    <span className='absolute top-0 right-0 h-[calc(50%-1rem)] w-[1px] bg-white'></span>
+                                    <span className='absolute top-0 right-0 h-[calc(50%-0.2rem)] w-[1px] bg-white pointer-events-none'></span>
                                     {/* Right border - bottom segment */}
-                                    <span className='absolute right-0 bottom-0 h-[calc(50%-1rem)] w-[1px] bg-white'></span>
+                                    <span className='absolute right-0 bottom-0 h-[calc(50%-0.2rem)] w-[1px] bg-white pointer-events-none'></span>
+
+                                    {/* Invisible clickable areas covering the gaps */}
+                                    <span className='absolute top-1/2 left-0 h-[0.4rem] w-[1px] -translate-y-1/2'></span>
+                                    <span className='absolute top-1/2 right-0 h-[0.4rem] w-[1px] -translate-y-1/2'></span>
+
                                     VFX PRODUCTIONS
                                 </div>
 
@@ -118,7 +123,7 @@ const WorkPage = () => {
                             {/* Video Production Button */}
                             <button
                                 onClick={() => handleScrollToSection('production-section')}
-                                className='group relative justify-self-center text-white transition-colors duration-300'
+                                className='group relative justify-self-center text-white transition-colors duration-300 cursor-pointer'
                                 style={{
                                     color: '#FFF',
                                     fontFamily: '"Geist Mono", monospace',
@@ -134,13 +139,18 @@ const WorkPage = () => {
                                 {/* Border with gap in center of left/right borders */}
                                 <div className='relative border-t border-b border-white px-6 py-3 transition-colors duration-300 group-hover:border-white/80'>
                                     {/* Left border - top segment */}
-                                    <span className='absolute top-0 left-0 h-[calc(50%-0.2rem)] w-[1px] bg-white'></span>
+                                    <span className='absolute top-0 left-0 h-[calc(50%-0.2rem)] w-[1px] bg-white pointer-events-none'></span>
                                     {/* Left border - bottom segment */}
-                                    <span className='absolute bottom-0 left-0 h-[calc(50%-0.2rem)] w-[1px] bg-white'></span>
+                                    <span className='absolute bottom-0 left-0 h-[calc(50%-0.2rem)] w-[1px] bg-white pointer-events-none'></span>
                                     {/* Right border - top segment */}
-                                    <span className='absolute top-0 right-0 h-[calc(50%-0.2rem)] w-[1px] bg-white'></span>
+                                    <span className='absolute top-0 right-0 h-[calc(50%-0.2rem)] w-[1px] bg-white pointer-events-none'></span>
                                     {/* Right border - bottom segment */}
-                                    <span className='absolute right-0 bottom-0 h-[calc(50%-0.2rem)] w-[1px] bg-white'></span>
+                                    <span className='absolute right-0 bottom-0 h-[calc(50%-0.2rem)] w-[1px] bg-white pointer-events-none'></span>
+
+                                    {/* Invisible clickable areas covering the gaps */}
+                                    <span className='absolute top-1/2 left-0 h-[0.4rem] w-[1px] -translate-y-1/2'></span>
+                                    <span className='absolute top-1/2 right-0 h-[0.4rem] w-[1px] -translate-y-1/2'></span>
+
                                     VIDEO PRODUCTION
                                 </div>
 
