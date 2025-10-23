@@ -2,12 +2,11 @@ export interface PortfolioItem {
     id: string;
     title: string;
     date: string;
-    category: string;
+    categories: string[]; // Array of categories since one video might have multiple
     image: string;
     href?: string;
-    weight?: number; // How many slots this item takes (default: 1). E.g., 1.5 = 1.5x width
-    height?: string; // Optional fixed height for this item (e.g., "400px")
-    row?: number; // Which row this item belongs to
+    order: number; // Determines sequence (1, 2, 3...)
+    weight?: number; // How much space item takes (default: 1, min: 1, max: 3.1)
 }
 
 export const portfolioItems: PortfolioItem[] = [
@@ -15,53 +14,81 @@ export const portfolioItems: PortfolioItem[] = [
         id: '1',
         title: 'Urban Dreams',
         date: 'Mai 3 2020',
-        category: 'Documentary',
+        categories: ['Documentary'],
         image: '/images/portfolio-1.jpg',
         href: '#',
-        weight: 1.5,
-        height: '400px',
-        row: 1
+        order: 1,
+        weight: 1.25
     },
     {
         id: '2',
         title: 'Sunset Sessions',
         date: 'Mai 3 2020',
-        category: 'Music Video',
+        categories: ['Music Video', 'Commercial'],
         image: '/images/portfolio-2.jpg',
         href: '#',
-        weight: 2.25,
-        height: '400px',
-        row: 1
+        order: 2,
+        weight: 1.8
     },
     {
         id: '3',
         title: 'Behind the Lens',
         date: 'Mai 3 2020',
-        category: 'Commercial',
+        categories: ['Commercial'],
         image: '/images/portfolio-3.jpg',
         href: '#',
-        weight: 1,
-        row: 2
+        order: 3,
+        weight: 1
     },
     {
         id: '4',
         title: 'Light Symphony',
         date: 'Mai 3 2020',
-        category: 'Event',
+        categories: ['Event'],
         image: '/images/portfolio-4.jpg',
         href: '#',
-        weight: 1,
-        row: 2
+        order: 4,
+        weight: 1
     },
     {
         id: '5',
         title: 'Cinematic Moments',
         date: 'Mai 3 2020',
-        category: 'Commercial',
+        categories: ['Commercial', 'Documentary'],
         image: '/images/portfolio-5.jpg',
         href: '#',
-        weight: 1,
-        row: 2
+        order: 5,
+        weight: 1
+    },
+    {
+        id: '6',
+        title: 'Midnight Stories',
+        date: 'Jun 15 2020',
+        categories: ['Music Video'],
+        image: '/images/portfolio-1.jpg',
+        href: '#',
+        order: 6,
+        weight: 2
+    },
+    {
+        id: '7',
+        title: 'Urban Pulse',
+        date: 'Jul 8 2020',
+        categories: ['Documentary'],
+        image: '/images/portfolio-2.jpg',
+        href: '#',
+        order: 7,
+        weight: 1.5
+    },
+    {
+        id: '8',
+        title: 'Frame by Frame',
+        date: 'Aug 22 2020',
+        categories: ['Commercial'],
+        image: '/images/portfolio-3.jpg',
+        href: '#',
+        order: 8,
+        weight: 1
     }
 ];
 
