@@ -29,7 +29,7 @@ const desktopMenuItems: MenuItem[] = [
             { label: 'PRODUCTION', href: '/production' }
         ]
     },
-    { label: 'WORK', href: '#work' },
+    { label: 'WORK', href: '/work' },
     { label: 'CONTACT US', href: '#contact' }
 ];
 

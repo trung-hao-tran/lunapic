@@ -293,3 +293,20 @@ export const showreelItems: ShowreelItem[] = [
         image: '/images/projects/proj4.png'
     }
 ];
+
+export interface CategoryFilter {
+    id: string;
+    label: string;
+    count: number;
+}
+
+export const categoryFilters: CategoryFilter[] = [
+    { id: 'commercial', label: 'Commercial', count: 12 },
+    { id: 'documentary', label: 'Documentary', count: 8 },
+    { id: 'music-video', label: 'Music Video', count: 15 },
+    { id: 'corporate', label: 'Corporate', count: 6 },
+    { id: 'social-media', label: 'Social Media', count: 20 },
+    { id: 'event', label: 'Event Coverage', count: 4 },
+    { id: 'animation', label: 'Animation', count: 9 },
+    { id: 'short-film', label: 'Short Film', count: 3 }
+];

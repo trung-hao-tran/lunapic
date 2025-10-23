@@ -143,7 +143,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                         <span
                             style={{
                                 color: bgColor === 'black' ? 'rgba(255, 255, 255, 0.50)' : 'rgba(0, 0, 0, 0.50)',
-                                fontFamily: 'Inter',
+                                fontFamily: 'Inter, sans-serif',
                                 fontSize: '2.25rem',
                                 fontStyle: 'normal',
                                 fontWeight: 400,
@@ -156,7 +156,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                             style={{
                                 display: 'block',
                                 color: textColor,
-                                fontFamily: 'Inter',
+                                fontFamily: 'Inter, sans-serif',
                                 fontSize: '2.25rem',
                                 fontStyle: 'normal',
                                 fontWeight: 400,
@@ -169,7 +169,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                     <p
                         style={{
                             color: textColor,
-                            fontFamily: 'Inter',
+                            fontFamily: ', sans-serif',
                             fontSize: '1rem',
                             fontStyle: 'normal',
                             fontWeight: 400,
@@ -221,7 +221,9 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     borderBottomWidth: '1px',
                                     borderBottomColor: errors.name ? errorColor : borderColor
                                 }}
-                                onFocus={(e) => (e.target.style.borderBottomColor = errors.name ? errorColor : solidBorderColor)}
+                                onFocus={(e) =>
+                                    (e.target.style.borderBottomColor = errors.name ? errorColor : solidBorderColor)
+                                }
                                 onBlur={(e) =>
                                     (e.target.style.borderBottomColor = errors.name ? errorColor : borderColor)
                                 }
@@ -262,11 +264,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                     borderBottomWidth: '1px',
                                     borderBottomColor: errors.email ? errorColor : borderColor
                                 }}
-                                onFocus={(e) => (e.target.style.borderBottomColor = errors.email ? errorColor : solidBorderColor)}
+                                onFocus={(e) =>
+                                    (e.target.style.borderBottomColor = errors.email ? errorColor : solidBorderColor)
+                                }
                                 onBlur={(e) =>
-                                    (e.target.style.borderBottomColor = errors.email
-                                        ? errorColor
-                                        : borderColor)
+                                    (e.target.style.borderBottomColor = errors.email ? errorColor : borderColor)
                                 }
                             />
                         </div>
@@ -308,7 +310,9 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 borderBottomWidth: '1px',
                                 borderBottomColor: errors.company ? errorColor : borderColor
                             }}
-                            onFocus={(e) => (e.target.style.borderBottomColor = errors.company ? errorColor : solidBorderColor)}
+                            onFocus={(e) =>
+                                (e.target.style.borderBottomColor = errors.company ? errorColor : solidBorderColor)
+                            }
                             onBlur={(e) =>
                                 (e.target.style.borderBottomColor = errors.company ? errorColor : borderColor)
                             }
@@ -361,7 +365,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 }}>
                                 <SelectItem
                                     value='web-development'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -370,7 +378,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 </SelectItem>
                                 <SelectItem
                                     value='mobile-app'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -379,7 +391,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 </SelectItem>
                                 <SelectItem
                                     value='ui-ux-design'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -388,7 +404,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 </SelectItem>
                                 <SelectItem
                                     value='branding'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -397,7 +417,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 </SelectItem>
                                 <SelectItem
                                     value='consulting'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -454,7 +478,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 }}>
                                 <SelectItem
                                     value='under-10k'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -463,7 +491,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 </SelectItem>
                                 <SelectItem
                                     value='10k-25k'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -472,7 +504,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 </SelectItem>
                                 <SelectItem
                                     value='25k-50k'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -481,7 +517,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 </SelectItem>
                                 <SelectItem
                                     value='50k-100k'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -490,7 +530,11 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 </SelectItem>
                                 <SelectItem
                                     value='over-100k'
-                                    className={bgColor === 'black' ? 'hover:bg-[#151515] focus:bg-[#151515]' : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'}
+                                    className={
+                                        bgColor === 'black'
+                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                    }
                                     style={{
                                         color: textColor,
                                         fontFamily: 'Inter, sans-serif'
@@ -538,7 +582,9 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                                 borderBottomWidth: '1px',
                                 borderBottomColor: errors.message ? errorColor : borderColor
                             }}
-                            onFocus={(e) => (e.target.style.borderBottomColor = errors.message ? errorColor : solidBorderColor)}
+                            onFocus={(e) =>
+                                (e.target.style.borderBottomColor = errors.message ? errorColor : solidBorderColor)
+                            }
                             onBlur={(e) =>
                                 (e.target.style.borderBottomColor = errors.message ? errorColor : borderColor)
                             }

@@ -2,12 +2,14 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface BoxButtonProps {
   text: string;
   icon?: React.ReactNode;
   onClick?: () => void;
   className?: string;
+  href?: string;
 }
 
 // Default icon - Acclaim icon with white and blue versions, rotated to point right
@@ -47,15 +49,11 @@ const DefaultIcon = () => (
  * BoxButton component with animated border effect
  * Two-section button (text | icon) where vertical borders grow from top/bottom on hover
  */
-export function BoxButton({ text, icon, onClick, className = '' }: BoxButtonProps) {
+export function BoxButton({ text, icon, onClick, className = '', href }: BoxButtonProps) {
   const displayIcon = icon || <DefaultIcon />;
 
-  return (
-    <button
-      onClick={onClick}
-      className={`group relative inline-flex items-stretch text-sm md:text-base font-medium text-white transition-all duration-300 ${className}`}
-      style={{ fontFamily: '"Geist Mono", monospace' }}
-    >
+  const buttonContent = (
+    <>
       {/* Text Section */}
       <span className="relative px-4 py-2 md:px-6 md:py-3 whitespace-nowrap transition-colors duration-300 ease-out group-hover:text-blue-500">
         {/* Top border - full width */}
@@ -95,6 +93,23 @@ export function BoxButton({ text, icon, onClick, className = '' }: BoxButtonProp
 
         {displayIcon}
       </span>
+    </>
+  );
+
+  const sharedClassName = `group relative inline-flex items-stretch text-sm md:text-base font-medium text-white transition-all duration-300 ${className}`;
+  const sharedStyle = { fontFamily: '"Geist Mono", monospace' };
+
+  if (href) {
+    return (
+      <Link href={href} className={sharedClassName} style={sharedStyle}>
+        {buttonContent}
+      </Link>
+    );
+  }
+
+  return (
+    <button onClick={onClick} className={sharedClassName} style={sharedStyle}>
+      {buttonContent}
     </button>
   );
 }

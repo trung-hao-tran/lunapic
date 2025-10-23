@@ -1,19 +1,58 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { PortfolioItem } from '@/data/dummyData';
 
+import { BoxButton } from './BoxButton';
 import { StarFrame } from './StarFrame';
 
 interface PortfolioGalleryProps {
     items: PortfolioItem[];
+    hasViewMoreButton?: boolean;
+    hasViewWorkButton?: boolean;
 }
 
-export function PortfolioGallery({ items }: PortfolioGalleryProps) {
+// Downward arrow icon for View More button
+const DownArrowIcon = () => (
+    <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='20'
+        height='20'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        className='transition-transform duration-300 group-hover:translate-y-1'>
+        <path d='M12 5v14M19 12l-7 7-7-7' />
+    </svg>
+);
+
+// Upward arrow icon for View Less button
+const UpArrowIcon = () => (
+    <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='20'
+        height='20'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        className='transition-transform duration-300 group-hover:-translate-y-1'>
+        <path d='M12 19V5M5 12l7-7 7 7' />
+    </svg>
+);
+
+export function PortfolioGallery({ items, hasViewMoreButton = false, hasViewWorkButton = false }: PortfolioGalleryProps) {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     return (
         <>
             {(() => {
@@ -53,8 +92,11 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                     rows.push(currentRow);
                 }
 
+                // Limit to 2 rows if hasViewMoreButton and not expanded
+                const displayRows = hasViewMoreButton && !isExpanded ? rows.slice(0, 2) : rows;
+
                 // Render rows
-                return rows.map((rowItems, rowIdx) => {
+                return displayRows.map((rowItems, rowIdx) => {
                     // Calculate grid template columns as percentages based on 3.1 max width
                     // Gap weight is 0.05, which is (0.05/3.1) = 1.61% of container
                     const gapPercentage = (GAP / MAX_ROW_WIDTH) * 100;
@@ -70,14 +112,23 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                     // Calculate gap size as percentage
                     const gapSize = `${gapPercentage.toFixed(4)}%`;
 
+                    // Animation classes - rows beyond first 2 get staggered animation
+                    const isNewRow = hasViewMoreButton && rowIdx >= 2;
+                    const animationDelay = isNewRow ? `${(rowIdx - 2) * 150}ms` : '0ms';
+                    const animationClass = isNewRow && isExpanded
+                        ? 'animate-[fadeInUp_0.6s_ease-out_forwards]'
+                        : '';
+
                     return (
                         <div
                             key={rowIdx}
-                            className='grid grid-cols-1 md:[grid-template-columns:var(--grid-template)] md:[gap:var(--gap-size)]'
+                            className={`grid grid-cols-1 md:[grid-template-columns:var(--grid-template)] md:[gap:var(--gap-size)] ${animationClass}`}
                             style={
                                 {
                                     '--grid-template': gridCols,
-                                    '--gap-size': gapSize
+                                    '--gap-size': gapSize,
+                                    animationDelay: animationDelay,
+                                    opacity: isNewRow && !isExpanded ? 0 : 1
                                 } as React.CSSProperties
                             }>
                             {rowItems.map((item, idx) => {
@@ -185,6 +236,24 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
                     );
                 });
             })()}
+
+            {/* View Portfolio Button */}
+            {hasViewWorkButton && (
+                <div className='flex justify-center pt-8'>
+                    <BoxButton text='VIEW PORTFOLIO' href='/work' />
+                </div>
+            )}
+
+            {/* View More/Less Buttons */}
+            {hasViewMoreButton && (
+                <div className='flex justify-center pt-8'>
+                    {!isExpanded ? (
+                        <BoxButton text='VIEW MORE' icon={<DownArrowIcon />} onClick={() => setIsExpanded(true)} />
+                    ) : (
+                        <BoxButton text='VIEW LESS' icon={<UpArrowIcon />} onClick={() => setIsExpanded(false)} />
+                    )}
+                </div>
+            )}
         </>
     );
 }
