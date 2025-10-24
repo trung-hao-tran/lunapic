@@ -9,19 +9,22 @@ import './globals.css';
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
     variable: '--font-geist-sans',
-    weight: '100 900'
+    weight: '100 900',
+    display: 'swap'
 });
 
 const geistMono = localFont({
     src: './fonts/GeistMonoVF.woff',
     variable: '--font-geist-mono',
-    weight: '100 900'
+    weight: '100 900',
+    display: 'swap'
 });
 
 const inter = Inter({
     subsets: ['latin'],
     variable: '--font-inter',
-    weight: ['300', '400', '500', '600', '700']
+    weight: ['300', '400', '500', '600', '700'],
+    display: 'swap'
 });
 
 export const metadata: Metadata = {
