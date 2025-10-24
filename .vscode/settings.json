@@ -38,5 +38,6 @@
         "typescriptreact": "javascript"
     },
     "tailwindCSS.validate": true,
-    "css.validate": false
+    "css.validate": false,
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }
