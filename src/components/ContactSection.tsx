@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 
+import { motion } from 'framer-motion';
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ContactSectionProps {
@@ -134,56 +136,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
     };
 
     return (
-        <div className='mx-auto px-6'>
-            {/* Two Column Layout */}
-            <div className='grid grid-cols-1 gap-24 lg:grid-cols-[3fr_7fr]'>
-                {/* Left Column - Heading & Description */}
-                <div>
-                    <h2 className='mb-6'>
-                        <span
-                            style={{
-                                color: bgColor === 'black' ? 'rgba(255, 255, 255, 0.50)' : 'rgba(0, 0, 0, 0.50)',
-                                fontFamily: 'Inter, sans-serif',
-                                fontSize: '2.25rem',
-                                fontStyle: 'normal',
-                                fontWeight: 400,
-                                lineHeight: 'normal',
-                                letterSpacing: '-0.1125rem'
-                            }}>
-                            Let&apos;s make your vision
-                        </span>{' '}
-                        <span
-                            style={{
-                                display: 'block',
-                                color: textColor,
-                                fontFamily: 'Inter, sans-serif',
-                                fontSize: '2.25rem',
-                                fontStyle: 'normal',
-                                fontWeight: 400,
-                                lineHeight: 'normal',
-                                letterSpacing: '-0.1125rem'
-                            }}>
-                            come true
-                        </span>
-                    </h2>
-                    <p
-                        style={{
-                            color: textColor,
-                            fontFamily: ', sans-serif',
-                            fontSize: '1rem',
-                            fontStyle: 'normal',
-                            fontWeight: 400,
-                            lineHeight: 'normal',
-                            letterSpacing: '-0.005rem',
-                            maxWidth: '400px'
-                        }}>
-                        Lorem ipsum dolor sit amet consectetur ultrices tempus scelerisque et nulla vestibulum lacus
-                        ultrices proin nunc semper urna urna.
-                    </p>
-                </div>
-
-                {/* Right Column - Contact Form */}
-                <form onSubmit={handleSubmit} className='space-y-12'>
+        <form onSubmit={handleSubmit} className='space-y-12'>
                     {/* Name and Email Row */}
                     <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
                         <div>
@@ -591,32 +544,32 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                         />
                     </div>
 
-                    {/* Submit Button */}
-                    <div className='flex justify-center pt-4'>
-                        <button
-                            type='submit'
-                            className='border-2 bg-transparent px-12 py-3 transition-colors'
-                            style={{
-                                fontFamily: '"Geist Mono", monospace',
-                                fontSize: '0.875rem',
-                                fontWeight: 400,
-                                letterSpacing: '0.02em',
-                                borderColor: solidBorderColor,
-                                color: textColor
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = hoverBg;
-                                e.currentTarget.style.color = hoverText;
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'transparent';
-                                e.currentTarget.style.color = textColor;
-                            }}>
-                            SEND MESSAGE
-                        </button>
-                    </div>
-                </form>
+            {/* Submit Button */}
+            <div className='flex justify-center pt-4'>
+                <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    type='submit'
+                    className='border-2 bg-transparent px-12 py-3 transition-colors'
+                    style={{
+                        fontFamily: '"Geist Mono", monospace',
+                        fontSize: '0.875rem',
+                        fontWeight: 400,
+                        letterSpacing: '0.02em',
+                        borderColor: solidBorderColor,
+                        color: textColor
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = hoverBg;
+                        e.currentTarget.style.color = hoverText;
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = textColor;
+                    }}>
+                    SEND MESSAGE
+                </motion.button>
             </div>
-        </div>
+        </form>
     );
 }

@@ -105,7 +105,7 @@ export function Navigation() {
                                     onMouseLeave={() => setServicesDropdownOpen(false)}>
                                     {/* Button - first item with top bracket */}
                                     <button
-                                        className='group relative flex items-center gap-1 px-3 py-1'
+                                        className='group relative flex items-center gap-1 px-3 py-1 text-white'
                                         style={MENU_FONT_STYLE}>
                                         {/* Top bracket corners when expanded */}
                                         {servicesDropdownOpen && (
@@ -161,7 +161,7 @@ export function Navigation() {
                                                     <Link
                                                         key={subItem.label}
                                                         href={subItem.href}
-                                                        className='group relative block px-4 py-1 text-sm transition-colors'
+                                                        className='group relative block px-4 py-1 text-sm text-white transition-colors'
                                                         style={MENU_FONT_STYLE}>
                                                         {/* Left and right borders for all items */}
                                                         <span
@@ -192,7 +192,7 @@ export function Navigation() {
                                 <Link
                                     key={item.label}
                                     href={item.href!}
-                                    className='group relative px-3 py-1'
+                                    className='group relative px-3 py-1 text-white'
                                     style={MENU_FONT_STYLE}>
                                     {/* Left bracket using borders */}
                                     <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-b border-l border-white/40 transition-colors group-hover:border-white' />
@@ -253,7 +253,7 @@ export function Navigation() {
                             key={item.label}
                             href={item.href}
                             onClick={() => setMobileMenuOpen(false)}
-                            className='relative inline-block w-fit px-3 py-1 text-sm font-medium'
+                            className='relative inline-block w-fit px-3 py-1 text-sm font-medium text-white'
                             style={MENU_FONT_STYLE}>
                             {/* Left bracket using borders */}
                             <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-b border-l border-white/40' />
