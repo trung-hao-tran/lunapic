@@ -272,7 +272,7 @@ export default function ContactPage() {
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -20 }}
                                             transition={BASE_TRANSITION}>
-                                            <ContactSection bgColor='black' />
+                                            <ContactSection bgColor='black' showLeftColumn={false} />
                                         </motion.div>
                                     ) : (
                                         <motion.div

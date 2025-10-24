@@ -8,9 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 interface ContactSectionProps {
     bgColor?: 'white' | 'black';
+    showLeftColumn?: boolean;
 }
 
-export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
+export function ContactSection({ bgColor = 'white', showLeftColumn = true }: ContactSectionProps) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -136,7 +137,57 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className='space-y-12'>
+        <div className={showLeftColumn ? 'mx-auto px-6' : ''}>
+            <div className={showLeftColumn ? 'grid grid-cols-1 gap-24 lg:grid-cols-[3fr_7fr]' : ''}>
+                {/* Left Column - Heading & Description */}
+                {showLeftColumn && (
+                    <div>
+                        <h2 className='mb-6'>
+                            <span
+                                style={{
+                                    color: bgColor === 'black' ? 'rgba(255, 255, 255, 0.50)' : 'rgba(0, 0, 0, 0.50)',
+                                    fontFamily: 'Inter, sans-serif',
+                                    fontSize: '2.25rem',
+                                    fontStyle: 'normal',
+                                    fontWeight: 400,
+                                    lineHeight: 'normal',
+                                    letterSpacing: '-0.1125rem'
+                                }}>
+                                Let&apos;s make your vision
+                            </span>{' '}
+                            <span
+                                style={{
+                                    display: 'block',
+                                    color: textColor,
+                                    fontFamily: 'Inter, sans-serif',
+                                    fontSize: '2.25rem',
+                                    fontStyle: 'normal',
+                                    fontWeight: 400,
+                                    lineHeight: 'normal',
+                                    letterSpacing: '-0.1125rem'
+                                }}>
+                                come true
+                            </span>
+                        </h2>
+                        <p
+                            style={{
+                                color: textColor,
+                                fontFamily: 'Inter, sans-serif',
+                                fontSize: '1rem',
+                                fontStyle: 'normal',
+                                fontWeight: 400,
+                                lineHeight: 'normal',
+                                letterSpacing: '-0.005rem',
+                                maxWidth: '400px'
+                            }}>
+                            Lorem ipsum dolor sit amet consectetur ultrices tempus scelerisque et nulla vestibulum lacus
+                            ultrices proin nunc semper urna urna.
+                        </p>
+                    </div>
+                )}
+
+                {/* Right Column - Contact Form */}
+                <form onSubmit={handleSubmit} className='space-y-12'>
                     {/* Name and Email Row */}
                     <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
                         <div>
@@ -571,5 +622,7 @@ export function ContactSection({ bgColor = 'white' }: ContactSectionProps) {
                 </motion.button>
             </div>
         </form>
+            </div>
+        </div>
     );
 }
