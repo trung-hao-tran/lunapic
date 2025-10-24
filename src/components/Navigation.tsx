@@ -30,7 +30,7 @@ const desktopMenuItems: MenuItem[] = [
         ]
     },
     { label: 'WORK', href: '/work' },
-    { label: 'CONTACT US', href: '#contact' }
+    { label: 'CONTACT US', href: '/contact' }
 ];
 
 const mobileMenuItems = [

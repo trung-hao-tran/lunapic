@@ -25,8 +25,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: 'Next.js Starter',
-    description: 'A minimal Next.js starter with Tailwind CSS'
+    title: 'Luna Pictures',
+    description: 'A minimal Next.js starter with Tailwind CSS',
+    icons: {
+        icon: '/logo.svg'
+    }
 };
 
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {

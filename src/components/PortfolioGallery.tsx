@@ -50,7 +50,11 @@ const UpArrowIcon = () => (
     </svg>
 );
 
-export function PortfolioGallery({ items, hasViewMoreButton = false, hasViewWorkButton = false }: PortfolioGalleryProps) {
+export function PortfolioGallery({
+    items,
+    hasViewMoreButton = false,
+    hasViewWorkButton = false
+}: PortfolioGalleryProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
@@ -60,7 +64,7 @@ export function PortfolioGallery({ items, hasViewMoreButton = false, hasViewWork
                 const sortedItems = [...items].sort((a, b) => a.order - b.order);
 
                 // Build rows based on weight
-                const rows: typeof items[] = [];
+                const rows: (typeof items)[] = [];
                 let currentRow: typeof items = [];
                 let currentRowWidth = 0;
                 const GAP = 0.05;
@@ -105,6 +109,7 @@ export function PortfolioGallery({ items, hasViewMoreButton = false, hasViewWork
                         .map((item) => {
                             const weight = item.weight || 1;
                             const percentage = (weight / MAX_ROW_WIDTH) * 100;
+
                             return `${percentage.toFixed(4)}%`;
                         })
                         .join(' ');
@@ -115,9 +120,7 @@ export function PortfolioGallery({ items, hasViewMoreButton = false, hasViewWork
                     // Animation classes - rows beyond first 2 get staggered animation
                     const isNewRow = hasViewMoreButton && rowIdx >= 2;
                     const animationDelay = isNewRow ? `${(rowIdx - 2) * 150}ms` : '0ms';
-                    const animationClass = isNewRow && isExpanded
-                        ? 'animate-[fadeInUp_0.6s_ease-out_forwards]'
-                        : '';
+                    const animationClass = isNewRow && isExpanded ? 'animate-[fadeInUp_0.6s_ease-out_forwards]' : '';
 
                     return (
                         <div
@@ -156,7 +159,7 @@ export function PortfolioGallery({ items, hasViewMoreButton = false, hasViewWork
                                             borderColor='white'
                                             padding={7}
                                             className='w-full'>
-                                            <div className='relative w-full overflow-hidden aspect-[4/3] md:aspect-auto md:h-[25rem]'>
+                                            <div className='relative aspect-[4/3] w-full overflow-hidden md:aspect-auto md:h-[25rem]'>
                                                 <Image
                                                     src={item.image}
                                                     alt={item.title}
@@ -194,7 +197,7 @@ export function PortfolioGallery({ items, hasViewMoreButton = false, hasViewWork
                                             </div>
                                             <div className='flex flex-col items-end justify-between gap-2'>
                                                 {/* Display all categories */}
-                                                <div className='flex flex-wrap gap-2 justify-end'>
+                                                <div className='flex flex-wrap justify-end gap-2'>
                                                     {item.categories.map((category, catIdx) => (
                                                         <span
                                                             key={catIdx}

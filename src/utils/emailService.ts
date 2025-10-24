@@ -1,13 +1,12 @@
-import emailjs from '@emailjs/browser';
-
 import { EMAIL_CONFIG } from '@/config/email';
+import { init, send } from '@emailjs/browser';
 
 /**
  * Initialize EmailJS with public key
  * Call this once when the app starts
  */
 export const initEmailJS = () => {
-    emailjs.init(EMAIL_CONFIG.publicKey);
+    init(EMAIL_CONFIG.publicKey);
 };
 
 /**
@@ -32,11 +31,7 @@ export const sendWorkWithUsEmail = async (formData: {
             message: formData.message
         };
 
-        const response = await emailjs.send(
-            EMAIL_CONFIG.serviceId,
-            EMAIL_CONFIG.workWithUsTemplateId,
-            templateParams
-        );
+        const response = await send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.workWithUsTemplateId, templateParams);
 
         return response;
     } catch (error) {
@@ -84,11 +79,7 @@ export const sendJoinTeamEmail = async (formData: {
             resume_data: resumeData.slice(0, 50000) // Truncate if too large
         };
 
-        const response = await emailjs.send(
-            EMAIL_CONFIG.serviceId,
-            EMAIL_CONFIG.joinTeamTemplateId,
-            templateParams
-        );
+        const response = await send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.joinTeamTemplateId, templateParams);
 
         return response;
     } catch (error) {

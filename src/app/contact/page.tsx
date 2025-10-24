@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 
 import { ContactSection } from '@/components/ContactSection';
@@ -11,8 +12,6 @@ import { Navigation } from '@/components/Navigation';
 import { StarFrame } from '@/components/StarFrame';
 import { EMAIL_CONFIG } from '@/config/email';
 import { initEmailJS, sendJoinTeamEmail } from '@/utils/emailService';
-
-import { AnimatePresence, motion } from 'framer-motion';
 
 type FormType = 'work' | 'join';
 
