@@ -20,7 +20,10 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
     const numberRef = useRef<HTMLSpanElement>(null);
     const bannerRef = useRef<HTMLDivElement>(null);
     const [showPlus, setShowPlus] = useState(false);
-    const isInView = useInView(bannerRef, { once: true });
+    const isInView = useInView(bannerRef, {
+        once: true,
+        margin: "-30% 0px 0px 0px"
+    });
 
     // Animate the number when banner comes into view
     useEffect(() => {
