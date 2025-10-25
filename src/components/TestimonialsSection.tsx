@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
 import { Testimonial } from '@/data/dummyData';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, animate, motion, useInView } from 'framer-motion';
 
 interface TestimonialsSectionProps {
     testimonials: Testimonial[];
@@ -15,6 +15,30 @@ interface TestimonialsSectionProps {
 export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
     const [selected, setSelected] = useState(0);
     const currentTestimonial = testimonials[selected];
+
+    // Animation refs and state for rolling number
+    const numberRef = useRef<HTMLSpanElement>(null);
+    const bannerRef = useRef<HTMLDivElement>(null);
+    const [showPlus, setShowPlus] = useState(false);
+    const isInView = useInView(bannerRef, { once: true });
+
+    // Animate the number when banner comes into view
+    useEffect(() => {
+        if (!isInView || !numberRef.current) return;
+
+        animate(0, 5034, {
+            duration: 2,
+            onUpdate(value) {
+                if (!numberRef.current) return;
+                numberRef.current.textContent = Math.floor(value).toString();
+            },
+            onComplete() {
+                setTimeout(() => {
+                    setShowPlus(true);
+                }, 500);
+            }
+        });
+    }, [isInView]);
 
     // Parse quote text and highlight words wrapped in []
     const renderQuote = (quote: string) => {
@@ -44,9 +68,9 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
             {/* Banner */}
             <div className='mb-16'>
                 <div
-                    className='relative flex w-full items-center border-2 border-black bg-white px-8 py-4'
+                    ref={bannerRef}
+                    className='relative flex w-full flex-col items-center justify-center border-2 border-black bg-white px-8 py-6 md:h-[4.9375rem] md:flex-row md:py-4'
                     style={{
-                        height: '4.9375rem',
                         flexShrink: 0
                     }}>
                     {/* Top line - left to right 65% */}
@@ -62,6 +86,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                     />
 
                     <p
+                        className='text-center md:text-left'
                         style={{
                             color: '#000',
                             fontFamily: '"Geist Mono", monospace',
@@ -71,8 +96,9 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                             lineHeight: 'normal',
                             letterSpacing: '-0.01125rem'
                         }}>
-                        LUNA HAS HELPED{' '}
+                        <span className='block md:inline'>LUNA HAS HELPED</span>{' '}
                         <span
+                            className='block md:inline'
                             style={{
                                 color: '#000',
                                 fontFamily: '"Geist Mono", monospace',
@@ -82,9 +108,23 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                                 lineHeight: 'normal',
                                 letterSpacing: '-0.01125rem'
                             }}>
-                            5034+
+                            <span ref={numberRef}>0</span>
+                            {showPlus && (
+                                <motion.span
+                                    initial={{ scale: 0, opacity: 0, rotate: -180 }}
+                                    animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 800,
+                                        damping: 10,
+                                        mass: 0.5
+                                    }}
+                                    style={{ display: 'inline-block' }}>
+                                    +
+                                </motion.span>
+                            )}
                         </span>{' '}
-                        PROJECTS
+                        <span className='block md:inline'>PROJECTS</span>
                     </p>
                 </div>
             </div>
