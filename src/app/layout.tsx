@@ -38,7 +38,9 @@ export const metadata: Metadata = {
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     return (
         <html lang='en'>
-            <body className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
+                style={{ backgroundColor: '#040404' }}>
                 {children}
             </body>
         </html>

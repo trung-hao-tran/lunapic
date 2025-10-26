@@ -3,30 +3,51 @@ export interface PortfolioItem {
     title: string;
     date: string;
     categories: string[]; // Array of categories since one video might have multiple
-    image: string;
-    href?: string;
+    thumbnail: string;
     order: number; // Determines sequence (1, 2, 3...)
     weight?: number; // How much space item takes (default: 1, min: 1, max: 3.1)
+
+    // Portfolio detail page fields - URL will be /portfolio/{id}
+    description?: string; // Project description
+    headerLeft?: string; // Video URL or image path for left header
+    headerRight?: string; // Video URL or image path for right header
+    projectOverview?: string; // Detailed project overview text
+    crew?: string[]; // Array of crew member names or IDs involved in the project
+    gallery?: string[]; // Array of image URLs for horizontal gallery
 }
 
 export const portfolioItems: PortfolioItem[] = [
     {
         id: '1',
-        title: 'Urban Dreams',
+        title: 'Urban Dreams (2020)',
         date: 'Mai 3 2020',
         categories: ['Documentary'],
-        image: '/images/portfolio-1.jpg',
-        href: '#',
+        thumbnail: '/images/portfolio-1.jpg',
         order: 1,
-        weight: 1.25
+        weight: 1.25,
+        description:
+            'Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.',
+        headerLeft: '/images/placeholder.png',
+        headerRight: '/images/placeholder.png',
+        projectOverview:
+            'Venenatis sollicitudin posuere elit consequat et enim. Neque tortor amet dictum tempor. Leo facilisis aliquet viverra scelerisque eleifend viverra est. At massa erat vel amet enim laoreet dictum pellentesque. Urna cursus quam pulvinar tellus duis fermentum nibh volutpat.',
+        crew: ['Minh Nguyen', 'Linh Mai', 'Tram Nguyen', 'Long Dinh'],
+        gallery: [
+            '/images/placeholder.png',
+            '/images/placeholder.png',
+            '/images/placeholder.png',
+            '/images/placeholder.png',
+            '/images/placeholder.png',
+            '/images/placeholder.png',
+            '/images/placeholder.png'
+        ]
     },
     {
         id: '2',
         title: 'Sunset Sessions',
         date: 'Mai 3 2020',
         categories: ['Music Video', 'Commercial'],
-        image: '/images/portfolio-2.jpg',
-        href: '#',
+        thumbnail: '/images/portfolio-2.jpg',
         order: 2,
         weight: 1.8
     },
@@ -35,8 +56,7 @@ export const portfolioItems: PortfolioItem[] = [
         title: 'Behind the Lens',
         date: 'Mai 3 2020',
         categories: ['Commercial'],
-        image: '/images/portfolio-3.jpg',
-        href: '#',
+        thumbnail: '/images/portfolio-3.jpg',
         order: 3,
         weight: 1
     },
@@ -45,8 +65,7 @@ export const portfolioItems: PortfolioItem[] = [
         title: 'Light Symphony',
         date: 'Mai 3 2020',
         categories: ['Event'],
-        image: '/images/portfolio-4.jpg',
-        href: '#',
+        thumbnail: '/images/portfolio-4.jpg',
         order: 4,
         weight: 1
     },
@@ -55,8 +74,7 @@ export const portfolioItems: PortfolioItem[] = [
         title: 'Cinematic Moments',
         date: 'Mai 3 2020',
         categories: ['Commercial', 'Documentary'],
-        image: '/images/portfolio-5.jpg',
-        href: '#',
+        thumbnail: '/images/portfolio-5.jpg',
         order: 5,
         weight: 1
     },
@@ -65,8 +83,7 @@ export const portfolioItems: PortfolioItem[] = [
         title: 'Midnight Stories',
         date: 'Jun 15 2020',
         categories: ['Music Video'],
-        image: '/images/portfolio-1.jpg',
-        href: '#',
+        thumbnail: '/images/portfolio-1.jpg',
         order: 6,
         weight: 2
     },
@@ -75,8 +92,7 @@ export const portfolioItems: PortfolioItem[] = [
         title: 'Urban Pulse',
         date: 'Jul 8 2020',
         categories: ['Documentary'],
-        image: '/images/portfolio-2.jpg',
-        href: '#',
+        thumbnail: '/images/portfolio-2.jpg',
         order: 7,
         weight: 1.5
     },
@@ -85,8 +101,7 @@ export const portfolioItems: PortfolioItem[] = [
         title: 'Frame by Frame',
         date: 'Aug 22 2020',
         categories: ['Commercial'],
-        image: '/images/portfolio-3.jpg',
-        href: '#',
+        thumbnail: '/images/portfolio-3.jpg',
         order: 8,
         weight: 1
     }

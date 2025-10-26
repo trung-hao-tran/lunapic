@@ -149,7 +149,7 @@ export function PortfolioGallery({
                                 return (
                                     <Link
                                         key={item.id}
-                                        href={item.href || '#'}
+                                        href={`/portfolio/${item.id}`}
                                         className='group relative block transition-transform duration-300 hover:scale-[1.02]'>
                                         <StarFrame
                                             haveBorder={true}
@@ -161,7 +161,7 @@ export function PortfolioGallery({
                                             className='w-full'>
                                             <div className='relative aspect-[4/3] w-full overflow-hidden md:aspect-auto md:h-[25rem]'>
                                                 <Image
-                                                    src={item.image}
+                                                    src={item.thumbnail}
                                                     alt={item.title}
                                                     fill
                                                     className='object-cover transition-transform duration-300 group-hover:scale-105'
