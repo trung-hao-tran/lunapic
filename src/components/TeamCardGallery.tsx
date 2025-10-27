@@ -145,7 +145,7 @@ export function TeamCardGallery({ teamMembers }: TeamCardGalleryProps) {
                                         lineHeight: 'normal',
                                         letterSpacing: '-0.00438rem'
                                     }}>
-                                    {member.bio}
+                                    {member.description}
                                 </p>
                             </div>
                         </div>

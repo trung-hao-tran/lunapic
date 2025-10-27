@@ -155,8 +155,19 @@ export interface TeamMember {
     id: string;
     name: string;
     role: string;
+    tags: string[]; // Array of teams the member belongs to (e.g., ["VFX", "Production"])
     image: string;
-    bio: string;
+    description: string; // Short description
+    fullBio?: string; // Full biography in markdown format or path to .md file
+    email?: string;
+    phone?: string;
+    contactLink?: string; // Link for "Get In Touch" button
+}
+
+export interface TeamMemberGalleryItem {
+    portfolioItemId: string; // Reference to PortfolioItem by ID
+    order: number; // Display order in this specific gallery
+    weight?: number; // Custom weight for this gallery (overrides default if provided)
 }
 
 export const teamMembers: TeamMember[] = [
@@ -164,29 +175,45 @@ export const teamMembers: TeamMember[] = [
         id: '1',
         name: 'TRAM NGUYEN',
         role: 'VFX Team',
+        tags: ['VFX'],
         image: '/images/team/Tram Nguyen.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        email: 'tram.nguyen@lunapictures.com',
+        phone: '+1 (555) 123-4567'
     },
     {
         id: '2',
         name: 'LONG DINH',
         role: 'VFX Team',
+        tags: ['VFX'],
         image: '/images/team/Long Dinh.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        email: 'long.dinh@lunapictures.com',
+        phone: '+1 (555) 234-5678'
     },
     {
         id: '3',
         name: 'MINH NGUYEN',
         role: 'VFX & Production Team',
+        tags: ['VFX', 'Production'],
         image: '/images/team/Minh Nguyen.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        email: 'minh.nguyen@lunapictures.com',
+        phone: '+1 (555) 345-6789'
     },
     {
         id: '4',
         name: 'LINH MAI',
         role: 'Production Team',
+        tags: ['Production'],
         image: '/images/team/Linh Mai.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        email: 'linh.mai@lunapictures.com',
+        phone: '+1 (555) 456-7890'
     }
 ];
 
@@ -195,15 +222,19 @@ export const productionTeamMembers: TeamMember[] = [
         id: '3',
         name: 'MINH NGUYEN',
         role: 'VFX & Production Team',
+        tags: ['VFX', 'Production'],
         image: '/images/team/Minh Nguyen.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
         id: '4',
         name: 'LINH MAI',
         role: 'Production Team',
+        tags: ['Production'],
         image: '/images/team/Linh Mai.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     }
 ];
 
@@ -212,22 +243,28 @@ export const vfxTeamMembers: TeamMember[] = [
         id: '1',
         name: 'TRAM NGUYEN',
         role: 'VFX Team',
+        tags: ['VFX'],
         image: '/images/team/Tram Nguyen.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
         id: '2',
         name: 'LONG DINH',
         role: 'VFX Team',
+        tags: ['VFX'],
         image: '/images/team/Long Dinh.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
     {
         id: '3',
         name: 'MINH NGUYEN',
         role: 'VFX & Production Team',
+        tags: ['VFX', 'Production'],
         image: '/images/team/Minh Nguyen.jpg',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     }
 ];
 
