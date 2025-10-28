@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { use } from 'react';
 
 import Image from 'next/image';
 
@@ -12,10 +12,13 @@ import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
 import { portfolioItems, teamMembers } from '@/data/dummyData';
 
-const TeamMemberPage = ({ params }: { params: { name: string } }) => {
+const TeamMemberPage = ({ params }: { params: Promise<{ name: string }> }) => {
+    // Unwrap params using React.use()
+    const { name } = use(params);
+
     // Find team member by name (convert URL format to name format)
     // e.g., "minh-nguyen" -> "MINH NGUYEN"
-    const formattedName = params.name
+    const formattedName = name
         .split('-')
         .map((word) => word.toUpperCase())
         .join(' ');
