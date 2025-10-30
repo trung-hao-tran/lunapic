@@ -148,3 +148,18 @@ export interface ProductionConfig {
         contentText?: string; // Loaded markdown content (populated by dataLoader)
     };
 }
+
+/**
+ * Contact page configuration structure
+ * Used for: Contact (/contact) page configuration
+ */
+export interface ContactConfig {
+    title: string; // Title with [bracket] syntax for highlighting
+    description: string;
+    image: string;
+    studioDetails: {
+        address: string;
+        phone: string;
+        email: string;
+    };
+}

@@ -46,7 +46,7 @@ export function TeamCardGallery({ teamMembers }: TeamCardGalleryProps) {
                         ultrices in semper turpis una nunc aliquam eleifend sagittis elementum.
                     </p>
                 </div>
-                <BoxButton text='JOIN OUR TEAM' />
+                <BoxButton text='JOIN OUR TEAM' href='/contact?form=join' />
             </div>
 
             {/* Team Grid */}
