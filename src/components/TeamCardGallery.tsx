@@ -3,10 +3,11 @@
 import React from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { BoxButton } from '@/components/BoxButton';
 import { StarFrame } from '@/components/StarFrame';
-import { TeamMember } from '@/data/dummyData';
+import { TeamMember } from '@/types/content.types';
 
 interface TeamCardGalleryProps {
     teamMembers: TeamMember[];
@@ -108,23 +109,24 @@ export function TeamCardGallery({ teamMembers }: TeamCardGalleryProps) {
                                                         {member.role}
                                                     </p>
                                                 </div>
-                                                <button
-                                                    className='cursor-pointer border border-white bg-transparent text-white transition-all duration-300 hover:bg-white hover:text-black'
-                                                    style={{
-                                                        color: '#FFF',
-                                                        fontFamily: '"Geist Mono", monospace',
-                                                        fontSize: '0.875rem',
-                                                        fontStyle: 'normal',
-                                                        fontWeight: 500,
-                                                        lineHeight: 'normal',
-                                                        letterSpacing: '-0.00438rem',
-                                                        width: '6.4375rem',
-                                                        height: '2.1875rem',
-                                                        flexShrink: 0,
-                                                        borderRadius: '9999px'
-                                                    }}>
-                                                    READ BIO
-                                                </button>
+                                                <Link href={`/team/${member.id}`}>
+                                                    <button
+                                                        className='cursor-pointer border border-white bg-transparent text-white transition-all duration-300 hover:bg-white hover:text-black'
+                                                        style={{
+                                                            fontFamily: '"Geist Mono", monospace',
+                                                            fontSize: '0.875rem',
+                                                            fontStyle: 'normal',
+                                                            fontWeight: 500,
+                                                            lineHeight: 'normal',
+                                                            letterSpacing: '-0.00438rem',
+                                                            width: '6.4375rem',
+                                                            height: '2.1875rem',
+                                                            flexShrink: 0,
+                                                            borderRadius: '9999px'
+                                                        }}>
+                                                        READ BIO
+                                                    </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

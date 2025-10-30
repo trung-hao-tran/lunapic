@@ -1,6 +1,4 @@
-'use client';
-
-import React, { use } from 'react';
+import React from 'react';
 
 import Image from 'next/image';
 
@@ -10,20 +8,25 @@ import { Navigation } from '@/components/Navigation';
 import { PortfolioGallery } from '@/components/PortfolioGallery';
 import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
-import { portfolioItems, teamMembers } from '@/data/dummyData';
+import { loadTeamMember, getAllTeamMemberIds, loadPagePortfolio } from '@/lib/dataLoader';
 
-const TeamMemberPage = ({ params }: { params: Promise<{ name: string }> }) => {
-    // Unwrap params using React.use()
-    const { name } = use(params);
+// Generate static params for all team members
+export async function generateStaticParams() {
+    const memberIds = await getAllTeamMemberIds();
 
-    // Find team member by name (convert URL format to name format)
-    // e.g., "minh-nguyen" -> "MINH NGUYEN"
-    const formattedName = name
-        .split('-')
-        .map((word) => word.toUpperCase())
-        .join(' ');
+    return memberIds.map((id) => ({
+        name: id
+    }));
+}
 
-    const member = teamMembers.find((m) => m.name === formattedName);
+const TeamMemberPage = async ({ params }: { params: Promise<{ name: string }> }) => {
+    const { name } = await params;
+
+    // Load team member data from content folder
+    const member = await loadTeamMember(name);
+
+    // Load portfolio items for the "Work by" section
+    const portfolioItems = await loadPagePortfolio('homepage');
 
     if (!member) {
         return (
@@ -38,16 +41,8 @@ const TeamMemberPage = ({ params }: { params: Promise<{ name: string }> }) => {
         );
     }
 
-    // Mock fullBio data - will be loaded from .md file in the future
-    const fullBioContent = `Venenatis sollicitudin posuere elit consequat et enim neque tortor amet dictum tempor. Leo facilisis aliquet viverra scelerisque eleifend viverra est. At massa erat vel amet enim laoreet dictum pellentesque. Urna cursus quam pulvinar tellus duis fermentum nibh volutpat.
-
-Venenatis sollicitudin posuere elit consequat et enim neque tortor amet dictum tempor. Leo facilisis aliquet viverra scelerisque eleifend viverra est. At massa erat vel amet enim laoreet dictum pellentesque. Urna cursus quam pulvinar tellus duis fermentum nibh volutpat sed.
-
-• Morbi feugiat molestie magna sed dictum praesent pharetra turpis.
-• Cras mi ligula, mollis vitae duis sit amet, tincidunt fringilla lorem.
-• Non mattis urna ex nec sem sodales varius diam et suscipit venenatis.
-
-Quis faucibus massa et egestas at fermentum est ac pulvinar est sagittis sed sit ut quis faucibus eleifend nibh vestibulum enim mi id sollicitudin ultrices et enim felis molestie sodales semper maecenas nunc auctor nunc molestie purus urna arcu dolor euismod porttitor et magna adipiscing dictum et adipiscing mollis.`;
+    // Use fullBio from loaded data, or fallback to description
+    const fullBioContent = member.fullBio || member.description;
 
     return (
         <>
