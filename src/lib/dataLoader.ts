@@ -1,6 +1,6 @@
 import { readFile, readdir, access } from 'fs/promises';
 import { join } from 'path';
-import type { PortfolioItem, Testimonial, HomepageConfig, AboutConfig, VFXConfig, TeamMember } from '@/types/content.types';
+import type { PortfolioItem, Testimonial, HomepageConfig, AboutConfig, VFXConfig, ProductionConfig, TeamMember } from '@/types/content.types';
 import type { AccordionItem, ShowreelItem, CategoryFilter } from '@/data/dummyData';
 
 // Content directory path
@@ -42,10 +42,11 @@ async function readMarkdownFile(filePath: string): Promise<string> {
 export async function loadPageConfig(page: 'homepage'): Promise<HomepageConfig>;
 export async function loadPageConfig(page: 'about'): Promise<AboutConfig>;
 export async function loadPageConfig(page: 'vfx'): Promise<VFXConfig>;
+export async function loadPageConfig(page: 'production'): Promise<ProductionConfig>;
 export async function loadPageConfig(page: string): Promise<Record<string, unknown>>;
-export async function loadPageConfig(page: string): Promise<HomepageConfig | AboutConfig | VFXConfig | Record<string, unknown>> {
+export async function loadPageConfig(page: string): Promise<HomepageConfig | AboutConfig | VFXConfig | ProductionConfig | Record<string, unknown>> {
     const configPath = join(CONTENT_DIR, 'pages', page, 'config.json');
-    const config = await readJsonFile<HomepageConfig | AboutConfig | VFXConfig | Record<string, unknown>>(configPath);
+    const config = await readJsonFile<HomepageConfig | AboutConfig | VFXConfig | ProductionConfig | Record<string, unknown>>(configPath);
 
     // If config references markdown files, load them
     const configRecord = config as Record<string, unknown>;

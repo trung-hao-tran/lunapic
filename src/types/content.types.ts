@@ -132,3 +132,19 @@ export interface VFXConfig {
         contentText?: string; // Loaded markdown content (populated by dataLoader)
     };
 }
+
+/**
+ * Production page configuration structure
+ * Used for: Production (/production) page configuration
+ * Same structure as VFXConfig
+ */
+export interface ProductionConfig {
+    hero: {
+        backgroundMedia: string;
+        mediaType?: 'image' | 'youtube' | 'vimeo';
+    };
+    whyChooseUs: {
+        content: string; // Path to markdown file (e.g., "why-choose-us.md")
+        contentText?: string; // Loaded markdown content (populated by dataLoader)
+    };
+}

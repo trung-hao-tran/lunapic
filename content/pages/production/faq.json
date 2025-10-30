@@ -1,0 +1,29 @@
+{
+    "items": [
+        {
+            "id": "1",
+            "question": "What types of video production services do you offer?",
+            "answer": "We offer a wide range of video production services, including corporate videos, commercials, music videos, event coverage, and more. Our team is equipped to handle projects of all sizes and complexities."
+        },
+        {
+            "id": "2",
+            "question": "How long does it take to complete a video project?",
+            "answer": "The timeline for a video project varies depending on its complexity and scope. On average, a standard project can take anywhere from 2 to 6 weeks from initial concept to final delivery. We work closely with you to establish a timeline that meets your needs."
+        },
+        {
+            "id": "3",
+            "question": "Can you help with scriptwriting and storyboarding?",
+            "answer": "Absolutely! Our creative team can assist with scriptwriting, storyboarding, and concept development to ensure your video effectively communicates your message and engages your audience."
+        },
+        {
+            "id": "4",
+            "question": "What is your pricing structure?",
+            "answer": "Our pricing is tailored to each project based on factors such as length, complexity, and specific requirements. We provide detailed quotes after an initial consultation to understand your vision and goals."
+        },
+        {
+            "id": "5",
+            "question": "Do you provide post-production services?",
+            "answer": "Yes, we offer comprehensive post-production services including editing, color grading, sound design, and visual effects. Our team ensures your video meets the highest quality standards."
+        }
+    ]
+}
