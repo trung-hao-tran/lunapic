@@ -1,11 +1,13 @@
 {
-  "id": "linh-mai",
-  "name": "LINH MAI",
-  "role": "Production Team",
-  "tags": ["Production"],
-  "image": "/images/team/Linh Mai.jpg",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "email": "linh.mai@lunapictures.com",
-  "phone": "+1 (555) 456-7890",
-  "contactLink": "/contact"
+    "id": "linh-mai",
+    "name": "LINH MAI",
+    "role": "Production Team",
+    "tags": [
+        "Production"
+    ],
+    "image": "/images/team/linh-mai/Linh Mai.jpg",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "email": "linh.mai@lunapictures.com",
+    "phone": "+1 (555) 456-7890",
+    "contactLink": "/contact"
 }

@@ -10,29 +10,19 @@ import { ScrollIndicator } from './ScrollIndicator';
 interface HeroSectionProps {
     children: React.ReactNode;
     backgroundMedia?: string;
-    mediaType?: 'image' | 'video' | 'youtube' | 'vimeo';
+    mediaType?: 'image' | 'youtube' | 'vimeo';
     scrollTargetId?: string;
     scrollDuration?: number;
     vh?: number;
 }
 
-export function HeroSection({ children, backgroundMedia, mediaType = 'video', scrollTargetId, scrollDuration, vh = 55 }: HeroSectionProps) {
+export function HeroSection({ children, backgroundMedia, mediaType = 'image', scrollTargetId, scrollDuration, vh = 55 }: HeroSectionProps) {
     return (
         <section className='relative overflow-hidden bg-[#080808] text-white' style={{ minHeight: `${vh}vh` }}>
-            {/* Background Media */}
-            {backgroundMedia && (
+            {/* Background Media - Only render if backgroundMedia is not empty */}
+            {backgroundMedia && backgroundMedia.trim() !== '' && (
                 <>
-                    {mediaType === 'video' ? (
-                        <video
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className='absolute inset-0 h-full w-full object-cover'
-                            style={{ zIndex: 0, transform: 'scale(1.43)', transformOrigin: 'center' }}>
-                            <source src={backgroundMedia} type='video/mp4' />
-                        </video>
-                    ) : mediaType === 'youtube' || mediaType === 'vimeo' ? (
+                    {mediaType === 'youtube' || mediaType === 'vimeo' ? (
                         <iframe
                             src={backgroundMedia}
                             title='Hero background video'

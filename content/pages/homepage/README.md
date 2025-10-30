@@ -21,17 +21,21 @@ content/pages/homepage/
 ### 1. Hero Section (`config.json` → `hero`)
 
 **Configurable:**
-- `backgroundMedia` - Video (YouTube URL) or image path
+- `backgroundMedia` - YouTube/Vimeo embed URL or image path (no local video files)
+  - If empty (`""`) or null, only shows background color (#080808)
+- `mediaType` - Type of media: `"image"`, `"youtube"`, or `"vimeo"` (optional, defaults to `"image"`)
 - `subtitle` - Text below logo
-- `ctaButtonLink` - "LET'S TALK" button destination (set to `/contact`)
 
 **Fixed (in code):**
 - Logo: `/Logo full.svg`
 - Button text: "LET'S TALK"
+- Button link: `/contact`
 - Scroll target: About Us section
+- Background color: `#080808` (dark gray/black)
 
 **Display:**
-- 📍 Full-screen hero with video/image background
+- 📍 Full-screen hero with YouTube/Vimeo embed or image background
+- 📍 If `backgroundMedia` is empty, only dark background color is shown
 - 📍 Logo centered with star frame decoration
 - 📍 Subtitle below logo
 - 📍 CTA button at bottom

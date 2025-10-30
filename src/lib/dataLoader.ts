@@ -1,7 +1,7 @@
 import { readFile, readdir, access } from 'fs/promises';
 import { join } from 'path';
-import type { PortfolioItem, Testimonial, HomepageConfig } from '@/types/content.types';
-import type { TeamMember, AccordionItem, ShowreelItem, CategoryFilter } from '@/data/dummyData';
+import type { PortfolioItem, Testimonial, HomepageConfig, AboutConfig, TeamMember } from '@/types/content.types';
+import type { AccordionItem, ShowreelItem, CategoryFilter } from '@/data/dummyData';
 
 // Content directory path
 const CONTENT_DIR = join(process.cwd(), 'content');
@@ -40,19 +40,35 @@ async function readMarkdownFile(filePath: string): Promise<string> {
  * Automatically loads any referenced markdown files
  */
 export async function loadPageConfig(page: 'homepage'): Promise<HomepageConfig>;
+export async function loadPageConfig(page: 'about'): Promise<AboutConfig>;
 export async function loadPageConfig(page: string): Promise<Record<string, unknown>>;
-export async function loadPageConfig(page: string): Promise<HomepageConfig | Record<string, unknown>> {
+export async function loadPageConfig(page: string): Promise<HomepageConfig | AboutConfig | Record<string, unknown>> {
     const configPath = join(CONTENT_DIR, 'pages', page, 'config.json');
-    const config = await readJsonFile<HomepageConfig | Record<string, unknown>>(configPath);
+    const config = await readJsonFile<HomepageConfig | AboutConfig | Record<string, unknown>>(configPath);
 
     // If config references markdown files, load them
     const configRecord = config as Record<string, unknown>;
+
+    // Check for introText (general case)
     if (
         typeof configRecord.introText === 'string' &&
         configRecord.introText.endsWith('.md')
     ) {
         const mdPath = join(CONTENT_DIR, 'pages', page, configRecord.introText);
         configRecord.introTextContent = await readMarkdownFile(mdPath);
+    }
+
+    // Check for ourStory.content (About page specific)
+    if (
+        configRecord.ourStory &&
+        typeof configRecord.ourStory === 'object' &&
+        'content' in configRecord.ourStory &&
+        typeof configRecord.ourStory.content === 'string' &&
+        configRecord.ourStory.content.endsWith('.md')
+    ) {
+        const mdPath = join(CONTENT_DIR, 'pages', page, configRecord.ourStory.content);
+        const storyContent = await readMarkdownFile(mdPath);
+        (configRecord.ourStory as Record<string, unknown>).contentText = storyContent;
     }
 
     return config;
@@ -128,10 +144,16 @@ export async function getAllPortfolioIds(): Promise<string[]> {
 /**
  * Load page-specific team members
  * Merges shared team data with page-specific order
+ * If team.json is empty/blank, returns all team members
  */
 export async function loadPageTeam(page: string): Promise<TeamMember[]> {
     const teamPath = join(CONTENT_DIR, 'pages', page, 'team.json');
     const teamData = await readJsonFile<{ members: Array<{ memberId: string; order: number }> }>(teamPath);
+
+    // If members array is empty, return all team members
+    if (!teamData.members || teamData.members.length === 0) {
+        return await loadAllTeamMembers();
+    }
 
     const members = await Promise.all(
         teamData.members.map(async (ref) => {
@@ -186,6 +208,21 @@ export async function getAllTeamMemberIds(): Promise<string[]> {
     return entries
         .filter((entry) => entry.isDirectory() && entry.name !== '_template')
         .map((entry) => entry.name);
+}
+
+/**
+ * Load all team members (no filtering)
+ */
+export async function loadAllTeamMembers(): Promise<TeamMember[]> {
+    const allMemberIds = await getAllTeamMemberIds();
+
+    const members = await Promise.all(
+        allMemberIds.map(async (memberId) => {
+            return await loadTeamMember(memberId);
+        })
+    );
+
+    return members;
 }
 
 /**

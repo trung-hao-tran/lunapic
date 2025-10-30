@@ -44,6 +44,25 @@ export interface Testimonial {
     signatureImage?: string;
 }
 
+// ==================== TEAM MEMBERS ====================
+
+/**
+ * Team member data
+ * Used for: About page, VFX page, Production page
+ */
+export interface TeamMember {
+    id: string;
+    name: string;
+    role: string;
+    tags: string[]; // Array of teams (e.g., ["VFX", "Production"])
+    image: string;
+    description: string; // Short description
+    fullBio?: string; // Full biography in markdown format
+    email?: string;
+    phone?: string;
+    contactLink?: string; // Link for "Get In Touch" button
+}
+
 // ==================== PAGE CONFIGURATIONS ====================
 
 /**
@@ -52,8 +71,8 @@ export interface Testimonial {
  */
 export interface HomepageConfig {
     hero: {
-        backgroundMedia: string; // Video or image URL
-        mediaType?: 'image' | 'video' | 'youtube' | 'vimeo'; // Type of media (default: 'video')
+        backgroundMedia: string; // Image or YouTube/Vimeo URL
+        mediaType?: 'image' | 'youtube' | 'vimeo'; // Type of media (default: 'image')
         subtitle: string;
     };
     aboutUs: {
@@ -70,5 +89,26 @@ export interface HomepageConfig {
     };
     testimonials: {
         bannerNumber: number; // Number to animate to
+    };
+}
+
+/**
+ * About page configuration structure
+ * Used for: About (/about) page configuration
+ * Only includes customizable content (hero media, banner image, story content, mission statement)
+ * Titles, section numbers, and other static text remain hardcoded
+ */
+export interface AboutConfig {
+    hero: {
+        backgroundMedia: string;
+        mediaType?: 'image' | 'youtube' | 'vimeo';
+    };
+    ourStory: {
+        content: string; // Path to markdown file (e.g., "story.md")
+        contentText?: string; // Loaded markdown content (populated by dataLoader)
+    };
+    ourMission: {
+        bannerImage: string;
+        statement: string; // Mission statement text
     };
 }

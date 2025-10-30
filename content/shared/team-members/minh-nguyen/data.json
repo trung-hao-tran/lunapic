@@ -1,11 +1,14 @@
 {
-  "id": "minh-nguyen",
-  "name": "MINH NGUYEN",
-  "role": "VFX & Production Team",
-  "tags": ["VFX", "Production"],
-  "image": "/images/team/Minh Nguyen.jpg",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "email": "minh.nguyen@lunapictures.com",
-  "phone": "+1 (555) 345-6789",
-  "contactLink": "/contact"
+    "id": "minh-nguyen",
+    "name": "MINH NGUYEN",
+    "role": "VFX & Production Team",
+    "tags": [
+        "VFX",
+        "Production"
+    ],
+    "image": "/images/team/minh-nguyen/Minh Nguyen.jpg",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "email": "minh.nguyen@lunapictures.com",
+    "phone": "+1 (555) 345-6789",
+    "contactLink": "/contact"
 }
