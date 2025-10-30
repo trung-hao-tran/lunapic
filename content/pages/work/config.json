@@ -1,0 +1,14 @@
+{
+  "vfxSection": {
+    "galleryConfig": {
+      "hasViewMoreButton": true,
+      "hasViewWorkButton": false
+    }
+  },
+  "productionSection": {
+    "galleryConfig": {
+      "hasViewMoreButton": true,
+      "hasViewWorkButton": false
+    }
+  }
+}

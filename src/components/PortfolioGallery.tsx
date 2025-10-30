@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,12 +9,67 @@ import { PortfolioItem } from '@/types/content.types';
 
 import { BoxButton } from './BoxButton';
 import { StarFrame } from './StarFrame';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface PortfolioGalleryProps {
     items: PortfolioItem[];
     hasViewMoreButton?: boolean;
     hasViewWorkButton?: boolean;
+    selectedCategories?: string[];
 }
+
+// Constant empty array to prevent infinite loops
+const EMPTY_CATEGORIES: string[] = [];
+
+// Fuzzy overlay component for portfolio items
+const FuzzyOverlay = ({ show }: { show: boolean }) => {
+    return (
+        <AnimatePresence>
+            {show && (
+                <>
+                    {/* Dark background layer */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.95 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                            duration: 1,
+                            ease: 'easeInOut'
+                        }}
+                        className='pointer-events-none absolute inset-0 z-10 bg-black'
+                    />
+                    {/* Animated noise overlay */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.15 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                            duration: 1,
+                            ease: 'easeInOut'
+                        }}
+                        className='pointer-events-none absolute inset-0 z-10 opacity-[15%]'>
+                        <motion.div
+                            initial={{ transform: 'translateX(-20%) translateY(-20%)' }}
+                            animate={{
+                                transform: 'translateX(20%) translateY(20%)'
+                            }}
+                            transition={{
+                                repeat: Infinity,
+                                duration: 0.2,
+                                ease: 'linear',
+                                repeatType: 'mirror'
+                            }}
+                            style={{
+                                backgroundImage: 'url("/black-noise.png")'
+                            }}
+                            className='absolute -inset-[100%]'
+                        />
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
+    );
+};
 
 // Downward arrow icon for View More button
 const DownArrowIcon = () => (
@@ -53,9 +108,63 @@ const UpArrowIcon = () => (
 export function PortfolioGallery({
     items,
     hasViewMoreButton = false,
-    hasViewWorkButton = false
+    hasViewWorkButton = false,
+    selectedCategories = EMPTY_CATEGORIES
 }: PortfolioGalleryProps) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [tempUngrayscaledItems, setTempUngrayscaledItems] = useState<Set<string>>(new Set());
+    const hoverTimerRef = useRef<Record<string, NodeJS.Timeout>>({});
+
+    // Helper to check if item should be grayscale
+    const shouldBeGrayscale = (item: PortfolioItem): boolean => {
+        if (selectedCategories.length === 0) return false;
+
+        const hasSelectedCategory = item.categories.some((cat) =>
+            selectedCategories.includes(cat.toLowerCase().replace(/\s+/g, '-'))
+        );
+
+        return !hasSelectedCategory;
+    };
+
+    // Start 5-second timer on hover
+    const handleMouseEnter = (itemId: string) => {
+        if (hoverTimerRef.current[itemId]) {
+            clearTimeout(hoverTimerRef.current[itemId]);
+        }
+
+        hoverTimerRef.current[itemId] = setTimeout(() => {
+            setTempUngrayscaledItems((prev) => new Set(prev).add(itemId));
+        }, 5000);
+    };
+
+    // Cancel timer and reset on mouse leave
+    const handleMouseLeave = (itemId: string) => {
+        if (hoverTimerRef.current[itemId]) {
+            clearTimeout(hoverTimerRef.current[itemId]);
+            delete hoverTimerRef.current[itemId];
+        }
+
+        setTempUngrayscaledItems((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(itemId);
+
+            return newSet;
+        });
+    };
+
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => {
+            Object.values(hoverTimerRef.current).forEach((timer) => clearTimeout(timer));
+        };
+    }, []);
+
+    // Reset when categories change
+    useEffect(() => {
+        setTempUngrayscaledItems(new Set());
+        Object.values(hoverTimerRef.current).forEach((timer) => clearTimeout(timer));
+        hoverTimerRef.current = {};
+    }, [selectedCategories]);
 
     return (
         <>
@@ -146,11 +255,18 @@ export function PortfolioGallery({
                                             ? ['tr', 'br']
                                             : [];
 
+                                // Fuzzy overlay logic
+                                const shouldShowFuzzy = shouldBeGrayscale(item);
+                                const isTempUnfuzzed = tempUngrayscaledItems.has(item.id);
+                                const showFuzzyOverlay = shouldShowFuzzy && !isTempUnfuzzed;
+
                                 return (
                                     <Link
                                         key={item.id}
                                         href={`/portfolio/${item.id}`}
-                                        className='group relative block transition-transform duration-300 hover:scale-[1.02]'>
+                                        className='group relative block transition-transform duration-300 hover:scale-[1.02]'
+                                        onMouseEnter={() => shouldShowFuzzy && handleMouseEnter(item.id)}
+                                        onMouseLeave={() => shouldShowFuzzy && handleMouseLeave(item.id)}>
                                         <StarFrame
                                             haveBorder={true}
                                             direction={starDirection as Array<'tl' | 'tr' | 'bl' | 'br'>}
@@ -166,6 +282,8 @@ export function PortfolioGallery({
                                                     fill
                                                     className='object-cover transition-transform duration-300 group-hover:scale-105'
                                                 />
+                                                {/* Fuzzy Overlay - Only covers image */}
+                                                <FuzzyOverlay show={showFuzzyOverlay} />
                                             </div>
                                         </StarFrame>
 

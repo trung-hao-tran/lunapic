@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
-import { Testimonial } from '@/data/dummyData';
+import type { Testimonial } from '@/types/content.types';
 
 import { AnimatePresence, animate, motion, useInView } from 'framer-motion';
 

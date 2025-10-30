@@ -163,3 +163,59 @@ export interface ContactConfig {
         email: string;
     };
 }
+
+/**
+ * Work page configuration structure
+ * Used for: Work (/work) page configuration
+ * Titles and section numbers are hardcoded in the component
+ */
+export interface WorkConfig {
+    vfxSection: {
+        galleryConfig: {
+            hasViewMoreButton: boolean;
+            hasViewWorkButton: boolean;
+        };
+    };
+    productionSection: {
+        galleryConfig: {
+            hasViewMoreButton: boolean;
+            hasViewWorkButton: boolean;
+        };
+    };
+}
+
+// ==================== OTHER DATA TYPES ====================
+
+/**
+ * FAQ/Accordion item
+ * Used for: About page, VFX page, Production page FAQ sections
+ */
+export interface AccordionItem {
+    id: string;
+    question: string;
+    answer: string;
+}
+
+/**
+ * Showreel item for featured video projects
+ * Used for: Work page showreel section
+ */
+export interface ShowreelItem {
+    id: string;
+    number: string;
+    title: string;
+    date: string;
+    client: string;
+    type: string;
+    image: string;
+}
+
+/**
+ * Category filter for portfolio filtering
+ * Used for: Work page filtering
+ */
+export interface CategoryFilter {
+    id: string;
+    label: string;
+    count: number;
+}

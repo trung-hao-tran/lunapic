@@ -1,21 +1,28 @@
 {
-  "id": "3",
-  "title": "Behind the Lens",
-  "date": "Mai 3 2020",
-  "categories": ["Commercial"],
-  "tags": ["Production"],
-  "thumbnail": "/images/projects/proj3.png",
-  "featureThumbnail": "/images/projects/proj3.png",
-  "client": "Coca-Cola",
-  "type": "Commercial",
-  "description": "Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.",
-  "headerLeft": "/images/placeholder.png",
-  "headerRight": "/images/placeholder.png",
-  "crew": ["Linh Mai", "Minh Nguyen"],
-  "gallery": [
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png"
-  ]
+    "id": "3",
+    "title": "Behind the Lens",
+    "date": "Mai 3 2020",
+    "categories": [
+        "Commercial"
+    ],
+    "tags": [
+        "VFX"
+    ],
+    "thumbnail": "/images/projects/proj3.png",
+    "featureThumbnail": "/images/projects/proj3.png",
+    "client": "Coca-Cola",
+    "type": "Commercial",
+    "description": "Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.",
+    "headerLeft": "/images/placeholder.png",
+    "headerRight": "/images/placeholder.png",
+    "crew": [
+        "Linh Mai",
+        "Minh Nguyen"
+    ],
+    "gallery": [
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png"
+    ]
 }

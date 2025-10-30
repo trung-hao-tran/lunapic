@@ -1,7 +1,19 @@
 import { readFile, readdir, access } from 'fs/promises';
 import { join } from 'path';
-import type { PortfolioItem, Testimonial, HomepageConfig, AboutConfig, VFXConfig, ProductionConfig, ContactConfig, TeamMember } from '@/types/content.types';
-import type { AccordionItem, ShowreelItem, CategoryFilter } from '@/data/dummyData';
+import type {
+    PortfolioItem,
+    Testimonial,
+    HomepageConfig,
+    AboutConfig,
+    VFXConfig,
+    ProductionConfig,
+    ContactConfig,
+    WorkConfig,
+    TeamMember,
+    AccordionItem,
+    ShowreelItem,
+    CategoryFilter
+} from '@/types/content.types';
 
 // Content directory path
 const CONTENT_DIR = join(process.cwd(), 'content');
@@ -44,8 +56,9 @@ export async function loadPageConfig(page: 'about'): Promise<AboutConfig>;
 export async function loadPageConfig(page: 'vfx'): Promise<VFXConfig>;
 export async function loadPageConfig(page: 'production'): Promise<ProductionConfig>;
 export async function loadPageConfig(page: 'contact'): Promise<ContactConfig>;
+export async function loadPageConfig(page: 'work'): Promise<WorkConfig>;
 export async function loadPageConfig(page: string): Promise<Record<string, unknown>>;
-export async function loadPageConfig(page: string): Promise<HomepageConfig | AboutConfig | VFXConfig | ProductionConfig | ContactConfig | Record<string, unknown>> {
+export async function loadPageConfig(page: string): Promise<HomepageConfig | AboutConfig | VFXConfig | ProductionConfig | ContactConfig | WorkConfig | Record<string, unknown>> {
     const configPath = join(CONTENT_DIR, 'pages', page, 'config.json');
     const config = await readJsonFile<HomepageConfig | AboutConfig | VFXConfig | ProductionConfig | ContactConfig | Record<string, unknown>>(configPath);
 
@@ -153,6 +166,78 @@ export async function getAllPortfolioIds(): Promise<string[]> {
     return entries
         .filter((entry) => entry.isDirectory() && entry.name !== '_template')
         .map((entry) => entry.name);
+}
+
+/**
+ * Load ALL portfolio items from shared pool (for work page)
+ * Does not use page-specific order/weight
+ */
+export async function loadAllPortfolioItems(): Promise<PortfolioItem[]> {
+    const allItemIds = await getAllPortfolioIds();
+
+    const items = await Promise.all(
+        allItemIds.map(async (itemId) => {
+            return await loadPortfolioItem(itemId);
+        })
+    );
+
+    return items;
+}
+
+/**
+ * Load work page portfolio items (VFX and Production sections separately)
+ * Each section has manually configured items with custom weights
+ */
+export async function loadWorkPortfolio(): Promise<{
+    vfxItems: PortfolioItem[];
+    productionItems: PortfolioItem[];
+}> {
+    const portfolioPath = join(CONTENT_DIR, 'pages', 'work', 'portfolio.json');
+    const portfolioData = await readJsonFile<{
+        vfxItems: Array<{ itemId: string; order: number; weight?: number }>;
+        productionItems: Array<{ itemId: string; order: number; weight?: number }>;
+    }>(portfolioPath);
+
+    // Load VFX items
+    const vfxItems = await Promise.all(
+        portfolioData.vfxItems.map(async (ref) => {
+            const itemPath = join(CONTENT_DIR, 'shared', 'portfolio-items', ref.itemId, 'data.json');
+            const itemData = await readJsonFile<PortfolioItem>(itemPath);
+
+            const overviewPath = join(CONTENT_DIR, 'shared', 'portfolio-items', ref.itemId, 'overview.md');
+            const overview = await readMarkdownFile(overviewPath);
+
+            return {
+                ...itemData,
+                projectOverview: overview || itemData.projectOverview,
+                order: ref.order,
+                weight: ref.weight ?? itemData.weight
+            };
+        })
+    );
+
+    // Load Production items
+    const productionItems = await Promise.all(
+        portfolioData.productionItems.map(async (ref) => {
+            const itemPath = join(CONTENT_DIR, 'shared', 'portfolio-items', ref.itemId, 'data.json');
+            const itemData = await readJsonFile<PortfolioItem>(itemPath);
+
+            const overviewPath = join(CONTENT_DIR, 'shared', 'portfolio-items', ref.itemId, 'overview.md');
+            const overview = await readMarkdownFile(overviewPath);
+
+            return {
+                ...itemData,
+                projectOverview: overview || itemData.projectOverview,
+                order: ref.order,
+                weight: ref.weight ?? itemData.weight
+            };
+        })
+    );
+
+    return {
+        vfxItems: vfxItems.sort((a, b) => a.order - b.order),
+        productionItems: productionItems.sort((a, b) => a.order - b.order)
+    };
 }
 
 // ==================== TEAM MEMBERS ====================
@@ -313,6 +398,47 @@ export async function loadCategoryFilters(page: string = 'work'): Promise<Catego
     const data = await readJsonFile<{ filters: CategoryFilter[] }>(filePath);
 
     return data.filters;
+}
+
+/**
+ * Generate dynamic category filters for work page
+ * Extracts unique categories from all portfolio items
+ * Filters by whitelist if provided in categories.json
+ * Calculates item counts for each category
+ */
+export async function loadWorkCategories(): Promise<CategoryFilter[]> {
+    // Load all portfolio items
+    const allItems = await loadAllPortfolioItems();
+
+    // Load whitelist from categories.json
+    const categoriesPath = join(CONTENT_DIR, 'pages', 'work', 'categories.json');
+    const categoriesData = await readJsonFile<{ whitelist: string[] }>(categoriesPath);
+    const whitelist = categoriesData.whitelist || [];
+
+    // Extract all unique categories from portfolio items
+    const categoryMap = new Map<string, number>();
+
+    allItems.forEach((item) => {
+        item.categories.forEach((category) => {
+            const count = categoryMap.get(category) || 0;
+            categoryMap.set(category, count + 1);
+        });
+    });
+
+    // Convert to CategoryFilter array
+    let categories = Array.from(categoryMap.entries()).map(([label, count]) => ({
+        id: label.toLowerCase().replace(/\s+/g, '-'),
+        label,
+        count
+    }));
+
+    // Filter by whitelist if not empty
+    if (whitelist.length > 0) {
+        categories = categories.filter((cat) => whitelist.includes(cat.label));
+    }
+
+    // Sort alphabetically by label
+    return categories.sort((a, b) => a.label.localeCompare(b.label));
 }
 
 // ==================== UTILITY FUNCTIONS ====================

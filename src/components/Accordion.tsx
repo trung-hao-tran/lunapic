@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { AccordionItem } from '@/data/dummyData';
+import type { AccordionItem } from '@/types/content.types';
 
 interface AccordionProps {
     items: AccordionItem[];

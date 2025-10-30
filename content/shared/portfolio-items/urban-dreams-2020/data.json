@@ -1,24 +1,33 @@
 {
-  "id": "1",
-  "title": "Urban Dreams (2020)",
-  "date": "Mai 3 2020",
-  "categories": ["Documentary"],
-  "tags": ["VFX", "Production"],
-  "thumbnail": "/images/projects/proj1.png",
-  "featureThumbnail": "/images/projects/proj1.png",
-  "client": "Netflix",
-  "type": "Documentary",
-  "description": "Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.",
-  "headerLeft": "/images/placeholder.png",
-  "headerRight": "/images/placeholder.png",
-  "crew": ["Minh Nguyen", "Linh Mai", "Tram Nguyen", "Long Dinh"],
-  "gallery": [
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png"
-  ]
+    "id": "1",
+    "title": "Urban Dreams (2020)",
+    "date": "Mai 3 2020",
+    "categories": [
+        "Documentary"
+    ],
+    "tags": [
+        "VFX"
+    ],
+    "thumbnail": "/images/projects/proj1.png",
+    "featureThumbnail": "/images/projects/proj1.png",
+    "client": "Netflix",
+    "type": "Documentary",
+    "description": "Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.",
+    "headerLeft": "/images/placeholder.png",
+    "headerRight": "/images/placeholder.png",
+    "crew": [
+        "Minh Nguyen",
+        "Linh Mai",
+        "Tram Nguyen",
+        "Long Dinh"
+    ],
+    "gallery": [
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png"
+    ]
 }
