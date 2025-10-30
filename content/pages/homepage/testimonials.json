@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "id": "1",
+            "name": "Sarah Johnson",
+            "title": "Director, Creative Studios",
+            "company": "MG",
+            "quote": "Luna Pictures transformed our vision into something [extraordinary]. Their attention to detail and creative expertise exceeded all our expectations. The final result was simply [breathtaking].",
+            "image": "/images/testimonial-1.jpg"
+        },
+        {
+            "id": "2",
+            "name": "Michael Chen",
+            "title": "CEO, Tech Innovations",
+            "company": "TI",
+            "quote": "Working with Luna Pictures was an absolute pleasure. Their professionalism and artistic vision brought our brand story to life in ways we never imagined possible.",
+            "image": "/images/testimonial-2.jpg"
+        },
+        {
+            "id": "3",
+            "name": "Emma Rodriguez",
+            "title": "Marketing Director",
+            "company": "BR",
+            "quote": "The team at Luna Pictures is exceptional. They understood our needs perfectly and delivered beyond our wildest expectations. Truly a game-changing partnership.",
+            "image": "/images/testimonial-3.jpg"
+        }
+    ]
+}

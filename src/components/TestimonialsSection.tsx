@@ -10,9 +10,10 @@ import { AnimatePresence, animate, motion, useInView } from 'framer-motion';
 
 interface TestimonialsSectionProps {
     testimonials: Testimonial[];
+    bannerNumber?: number; // Number to animate to (default: 5034)
 }
 
-export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+export function TestimonialsSection({ testimonials, bannerNumber = 5034 }: TestimonialsSectionProps) {
     const [selected, setSelected] = useState(0);
     const currentTestimonial = testimonials[selected];
 
@@ -29,7 +30,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
     useEffect(() => {
         if (!isInView || !numberRef.current) return;
 
-        animate(0, 5034, {
+        animate(0, bannerNumber, {
             duration: 2,
             onUpdate(value) {
                 if (!numberRef.current) return;
@@ -41,7 +42,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                 }, 500);
             }
         });
-    }, [isInView]);
+    }, [isInView, bannerNumber]);
 
     // Parse quote text and highlight words wrapped in []
     const renderQuote = (quote: string) => {

@@ -8,14 +8,21 @@ import { PortfolioGallery } from '@/components/PortfolioGallery';
 import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
-import { portfolioItems, testimonials } from '@/data/dummyData';
+import { parseHighlightedText } from '@/lib/contentHelpers';
+import { loadPageConfig, loadPagePortfolio, loadTestimonials } from '@/lib/dataLoader';
 
-const Page = () => {
+const Page = async () => {
+    // Load data from content files
+    const config = await loadPageConfig('homepage');
+    const portfolioItems = await loadPagePortfolio('homepage');
+    const testimonials = await loadTestimonials('homepage');
+
     return (
         <>
             <main>
                 <HeroSection
-                    backgroundMedia='/videos/hero.mp4'
+                    backgroundMedia={config.hero.backgroundMedia}
+                    mediaType={config.hero.mediaType}
                     scrollTargetId='about-us'
                     scrollDuration={1500}
                     vh={100}>
@@ -38,12 +45,12 @@ const Page = () => {
                             fontFamily: '"Geist Mono", monospace',
                             letterSpacing: '-0.07px'
                         }}>
-                        Premier video production studio in the heart of Australia
+                        {config.hero.subtitle}
                     </p>
 
                     {/* CTA Button */}
                     <div className='pt-4'>
-                        <BoxButton text="LET'S TALK" />
+                        <BoxButton text="LET'S TALK" href={'/contact'} />
                     </div>
                 </HeroSection>
 
@@ -60,10 +67,7 @@ const Page = () => {
                                     lineHeight: 'normal',
                                     letterSpacing: '-0.1125rem'
                                 }}>
-                                <span style={{ color: 'rgba(255, 255, 255, 0.70)' }}>
-                                    We transform ideas into visual stories that{' '}
-                                </span>
-                                <span style={{ color: '#FFF' }}>inspire and connect</span>
+                                {parseHighlightedText(config.aboutUs.heading)}
                             </h3>
 
                             <p
@@ -72,14 +76,11 @@ const Page = () => {
                                     fontFamily: '"Geist Mono", monospace',
                                     letterSpacing: '-0.07px'
                                 }}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore. Et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris. Nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit.
+                                {config.aboutUs.description}
                             </p>
 
                             <div className='pt-4'>
-                                <BoxButton text='OUR STORY' />
+                                <BoxButton text='OUR STORY' href='/about' />
                             </div>
                         </div>
 
@@ -93,12 +94,7 @@ const Page = () => {
                                 padding={7}
                                 className='w-full'>
                                 <div className='relative aspect-[3/2] w-full overflow-hidden'>
-                                    <Image
-                                        src='/images/home_about_us.jpg'
-                                        alt='About Us'
-                                        fill
-                                        className='object-cover'
-                                    />
+                                    <Image src={config.aboutUs.image} alt='About Us' fill className='object-cover' />
                                 </div>
                             </StarFrame>
                         </div>
@@ -151,7 +147,7 @@ const Page = () => {
                                 padding={2}>
                                 <div className='relative aspect-video w-full overflow-hidden'>
                                     <iframe
-                                        src='https://www.youtube.com/embed/RL-mQorhj-4'
+                                        src={config.ourWork.showreelUrl}
                                         title='Showreel'
                                         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                                         allowFullScreen
@@ -179,13 +175,17 @@ const Page = () => {
                         </h2>
 
                         {/* Dynamic Portfolio Rows */}
-                        <PortfolioGallery items={portfolioItems} hasViewWorkButton={true} />
+                        <PortfolioGallery
+                            items={portfolioItems}
+                            hasViewWorkButton={config.ourWork.galleryConfig.hasViewWorkButton}
+                            hasViewMoreButton={config.ourWork.galleryConfig.hasViewMoreButton}
+                        />
                     </div>
                 </Section>
 
                 {/* Testimonials Section */}
                 <Section title='TESTIMONIALS' number='4' bgColor='#FDFDFD' headerColor='#000000'>
-                    <TestimonialsSection testimonials={testimonials} />
+                    <TestimonialsSection testimonials={testimonials} bannerNumber={config.testimonials.bannerNumber} />
                 </Section>
 
                 {/* Contact Section */}

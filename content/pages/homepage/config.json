@@ -1,0 +1,22 @@
+{
+    "hero": {
+        "backgroundMedia": "https://www.youtube.com/embed/eLuucbOv1Tg?autoplay=1&mute=1&loop=1&playlist=eLuucbOv1Tg&controls=0&showinfo=0&modestbranding=1&vq=hd1080&hd=1",
+        "mediaType": "youtube",
+        "subtitle": "Premier video production studio in the heart of Australia"
+    },
+    "aboutUs": {
+        "heading": "We transform ideas into visual stories that [inspire and connect]",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.",
+        "image": "/images/home_about_us.jpg"
+    },
+    "ourWork": {
+        "showreelUrl": "https://www.youtube.com/embed/RL-mQorhj-4",
+        "galleryConfig": {
+            "hasViewWorkButton": true,
+            "hasViewMoreButton": false
+        }
+    },
+    "testimonials": {
+        "bannerNumber": 5034
+    }
+}

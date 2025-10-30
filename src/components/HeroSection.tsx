@@ -10,7 +10,7 @@ import { ScrollIndicator } from './ScrollIndicator';
 interface HeroSectionProps {
     children: React.ReactNode;
     backgroundMedia?: string;
-    mediaType?: 'image' | 'video';
+    mediaType?: 'image' | 'video' | 'youtube' | 'vimeo';
     scrollTargetId?: string;
     scrollDuration?: number;
     vh?: number;
@@ -32,6 +32,20 @@ export function HeroSection({ children, backgroundMedia, mediaType = 'video', sc
                             style={{ zIndex: 0, transform: 'scale(1.43)', transformOrigin: 'center' }}>
                             <source src={backgroundMedia} type='video/mp4' />
                         </video>
+                    ) : mediaType === 'youtube' || mediaType === 'vimeo' ? (
+                        <iframe
+                            src={backgroundMedia}
+                            title='Hero background video'
+                            allow='autoplay; loop; muted; encrypted-media'
+                            className='absolute inset-0 h-full w-full object-cover'
+                            style={{
+                                zIndex: 0,
+                                transform: 'scale(1.43)',
+                                transformOrigin: 'center',
+                                border: 'none',
+                                pointerEvents: 'none'
+                            }}
+                        />
                     ) : (
                         <Image
                             src={backgroundMedia}

@@ -12,6 +12,45 @@ const nextConfig: NextConfig = {
     output: 'standalone',
     experimental: {
         optimizePackageImports: ['@emailjs/browser', 'framer-motion']
+    },
+    // Enable YouTube and Vimeo thumbnails with Next.js Image component
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'img.youtube.com',
+                pathname: '/vi/**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'i.ytimg.com',
+                pathname: '/**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'i.vimeocdn.com',
+                pathname: '/**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'vumbnail.com',
+                pathname: '/**'
+            }
+        ]
+    },
+    // Allow iframe embeds from YouTube and Vimeo
+    async headers() {
+        return [
+            {
+                source: '/:path*',
+                headers: [
+                    {
+                        key: 'Content-Security-Policy',
+                        value: "frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://vimeo.com;"
+                    }
+                ]
+            }
+        ];
     }
 };
 
