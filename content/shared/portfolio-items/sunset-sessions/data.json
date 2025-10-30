@@ -1,0 +1,19 @@
+{
+  "id": "2",
+  "title": "Sunset Sessions",
+  "date": "Mai 3 2020",
+  "categories": ["Music Video", "Commercial"],
+  "tags": ["VFX", "Production"],
+  "thumbnail": "/content/shared/portfolio-items/sunset-sessions/images/thumbnail.jpg",
+  "description": "Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.",
+  "headerLeft": "/images/placeholder.png",
+  "headerRight": "/images/placeholder.png",
+  "crew": ["Minh Nguyen", "Long Dinh"],
+  "gallery": [
+    "/images/placeholder.png",
+    "/images/placeholder.png",
+    "/images/placeholder.png",
+    "/images/placeholder.png",
+    "/images/placeholder.png"
+  ]
+}

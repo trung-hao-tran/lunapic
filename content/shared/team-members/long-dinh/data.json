@@ -1,0 +1,11 @@
+{
+  "id": "long-dinh",
+  "name": "LONG DINH",
+  "role": "VFX Team",
+  "tags": ["VFX"],
+  "image": "/images/team/Long Dinh.jpg",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "email": "long.dinh@lunapictures.com",
+  "phone": "+1 (555) 234-5678",
+  "contactLink": "/contact"
+}

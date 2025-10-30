@@ -1,0 +1,20 @@
+{
+  "id": "4",
+  "title": "Light Symphony",
+  "date": "Mai 3 2020",
+  "categories": ["Event"],
+  "tags": ["VFX"],
+  "thumbnail": "/content/shared/portfolio-items/light-symphony/images/thumbnail.jpg",
+  "description": "Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.",
+  "headerLeft": "/images/placeholder.png",
+  "headerRight": "/images/placeholder.png",
+  "crew": ["Tram Nguyen", "Long Dinh", "Minh Nguyen"],
+  "gallery": [
+    "/images/placeholder.png",
+    "/images/placeholder.png",
+    "/images/placeholder.png",
+    "/images/placeholder.png",
+    "/images/placeholder.png",
+    "/images/placeholder.png"
+  ]
+}

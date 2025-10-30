@@ -1,0 +1,13 @@
+{
+    "id": "tram-nguyen",
+    "name": "TRAM NGUYEN",
+    "role": "VFX Team",
+    "tags": [
+        "VFX"
+    ],
+    "image": "/Tram Nguyen.jpg",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "email": "tram.nguyen@lunapictures.com",
+    "phone": "+1 (555) 123-4567",
+    "contactLink": "/contact"
+}
