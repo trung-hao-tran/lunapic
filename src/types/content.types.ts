@@ -15,6 +15,7 @@ export interface PortfolioItem {
     date: string;
     categories: string[]; // Array of categories since one video might have multiple
     thumbnail: string;
+    featureThumbnail?: string; // Large feature image for showreel/featured gallery
     order: number; // Determines sequence (1, 2, 3...)
     weight?: number; // How much space item takes (default: 1, min: 1, max: 3.1)
 
@@ -26,6 +27,8 @@ export interface PortfolioItem {
     crew?: string[]; // Array of crew member names or IDs involved in the project
     gallery?: string[]; // Array of image URLs for horizontal gallery
     tags?: string[]; // Array of tags (e.g., ["VFX", "Production"])
+    client?: string; // Client name for featured display
+    type?: string; // Project type for featured display
 }
 
 // ==================== TESTIMONIALS ====================
@@ -110,5 +113,22 @@ export interface AboutConfig {
     ourMission: {
         bannerImage: string;
         statement: string; // Mission statement text
+    };
+}
+
+/**
+ * VFX page configuration structure
+ * Used for: VFX (/vfx) page configuration
+ * Only includes customizable content (hero media, why choose us content)
+ * Titles, section numbers, button links remain hardcoded
+ */
+export interface VFXConfig {
+    hero: {
+        backgroundMedia: string;
+        mediaType?: 'image' | 'youtube' | 'vimeo';
+    };
+    whyChooseUs: {
+        content: string; // Path to markdown file (e.g., "why-choose-us.md")
+        contentText?: string; // Loaded markdown content (populated by dataLoader)
     };
 }

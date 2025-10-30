@@ -31,6 +31,7 @@ When a user wants to create a new portfolio item, help them by:
      "categories": ["Category1", "Category2"],
      "tags": ["VFX", "Production"],
      "thumbnail": "/content/shared/portfolio-items/{project-slug}/images/thumbnail.jpg",
+     "featureThumbnail": "/content/shared/portfolio-items/{project-slug}/images/feature-thumbnail.jpg",
      "description": "Brief description...",
      "headerLeft": "YouTube URL or image path",
      "headerRight": "YouTube URL or image path",
@@ -51,7 +52,8 @@ When a user wants to create a new portfolio item, help them by:
 5. **Instruct user to add images:**
    - Tell them to place images in the `images/` folder
    - Recommended sizes:
-     - Thumbnail: 1200x900px (4:3 ratio)
+     - Thumbnail: 1200x900px (4:3 ratio) - for standard gallery
+     - Feature Thumbnail: 1920x1440px (4:3 ratio) - for featured gallery (homepage)
      - Gallery: portrait (9:16) or landscape (16:9)
 
 ## Field Reference & Display Locations:
@@ -74,10 +76,15 @@ When a user wants to create a new portfolio item, help them by:
   - 📍 Portfolio detail page: In "Type" field of project details
 
 - **`thumbnail`** - Path to thumbnail image
-  - 📍 Gallery grid: Main image displayed in gallery
+  - 📍 Gallery grid: Main image displayed in standard gallery
   - 📍 Size determines card width in masonry layout
 
 ### Optional Fields:
+
+- **`featureThumbnail`** - Path to large feature image (optional)
+  - 📍 Feature gallery: Large hero image in featured portfolio gallery (e.g., homepage)
+  - 📍 Falls back to `thumbnail` if not provided
+  - 📍 Recommended: Higher resolution than thumbnail for better quality
 
 - **`tags`** - ["VFX"] or ["Production"] or both
   - 📍 Used for: Filtering which team pages show this item

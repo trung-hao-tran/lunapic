@@ -1,0 +1,9 @@
+{
+    "hero": {
+        "backgroundMedia": "/images/hero/VFX_hero.png",
+        "mediaType": "image"
+    },
+    "whyChooseUs": {
+        "content": "why-choose-us.md"
+    }
+}

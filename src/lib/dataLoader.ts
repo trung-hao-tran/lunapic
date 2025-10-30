@@ -1,6 +1,6 @@
 import { readFile, readdir, access } from 'fs/promises';
 import { join } from 'path';
-import type { PortfolioItem, Testimonial, HomepageConfig, AboutConfig, TeamMember } from '@/types/content.types';
+import type { PortfolioItem, Testimonial, HomepageConfig, AboutConfig, VFXConfig, TeamMember } from '@/types/content.types';
 import type { AccordionItem, ShowreelItem, CategoryFilter } from '@/data/dummyData';
 
 // Content directory path
@@ -41,10 +41,11 @@ async function readMarkdownFile(filePath: string): Promise<string> {
  */
 export async function loadPageConfig(page: 'homepage'): Promise<HomepageConfig>;
 export async function loadPageConfig(page: 'about'): Promise<AboutConfig>;
+export async function loadPageConfig(page: 'vfx'): Promise<VFXConfig>;
 export async function loadPageConfig(page: string): Promise<Record<string, unknown>>;
-export async function loadPageConfig(page: string): Promise<HomepageConfig | AboutConfig | Record<string, unknown>> {
+export async function loadPageConfig(page: string): Promise<HomepageConfig | AboutConfig | VFXConfig | Record<string, unknown>> {
     const configPath = join(CONTENT_DIR, 'pages', page, 'config.json');
-    const config = await readJsonFile<HomepageConfig | AboutConfig | Record<string, unknown>>(configPath);
+    const config = await readJsonFile<HomepageConfig | AboutConfig | VFXConfig | Record<string, unknown>>(configPath);
 
     // If config references markdown files, load them
     const configRecord = config as Record<string, unknown>;
@@ -69,6 +70,19 @@ export async function loadPageConfig(page: string): Promise<HomepageConfig | Abo
         const mdPath = join(CONTENT_DIR, 'pages', page, configRecord.ourStory.content);
         const storyContent = await readMarkdownFile(mdPath);
         (configRecord.ourStory as Record<string, unknown>).contentText = storyContent;
+    }
+
+    // Check for whyChooseUs.content (VFX/Production page specific)
+    if (
+        configRecord.whyChooseUs &&
+        typeof configRecord.whyChooseUs === 'object' &&
+        'content' in configRecord.whyChooseUs &&
+        typeof configRecord.whyChooseUs.content === 'string' &&
+        configRecord.whyChooseUs.content.endsWith('.md')
+    ) {
+        const mdPath = join(CONTENT_DIR, 'pages', page, configRecord.whyChooseUs.content);
+        const whyChooseUsContent = await readMarkdownFile(mdPath);
+        (configRecord.whyChooseUs as Record<string, unknown>).contentText = whyChooseUsContent;
     }
 
     return config;
@@ -144,14 +158,24 @@ export async function getAllPortfolioIds(): Promise<string[]> {
 /**
  * Load page-specific team members
  * Merges shared team data with page-specific order
- * If team.json is empty/blank, returns all team members
+ * If team.json is empty/blank, returns all team members (or filtered by tags if specified)
+ * Supports filterByTags to show only team members with specific tags
  */
 export async function loadPageTeam(page: string): Promise<TeamMember[]> {
     const teamPath = join(CONTENT_DIR, 'pages', page, 'team.json');
-    const teamData = await readJsonFile<{ members: Array<{ memberId: string; order: number }> }>(teamPath);
+    const teamData = await readJsonFile<{
+        filterByTags?: string[];
+        members: Array<{ memberId: string; order: number }>;
+    }>(teamPath);
 
-    // If members array is empty, return all team members
+    // If members array is empty, load all members (or filtered by tags)
     if (!teamData.members || teamData.members.length === 0) {
+        if (teamData.filterByTags && teamData.filterByTags.length > 0) {
+            // Filter by tags
+            return await loadTeamByTags(teamData.filterByTags);
+        }
+
+        // Return all team members
         return await loadAllTeamMembers();
     }
 
