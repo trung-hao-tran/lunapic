@@ -2,10 +2,11 @@
 
 import React, { useState } from 'react';
 
-import { EMAIL_CONFIG } from '@/config/email';
 import { send } from '@emailjs/browser';
-
 import { motion } from 'framer-motion';
+
+import { EMAIL_CONFIG } from '@/config/email';
+import { MessageModal } from '@/components/MessageModal';
 
 interface JoinTeamFormProps {
     bgColor?: 'white' | 'black';
@@ -30,6 +31,8 @@ export function JoinTeamForm({ bgColor = 'white' }: JoinTeamFormProps) {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [uploadProgress, setUploadProgress] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalType, setModalType] = useState<'success' | 'error'>('success');
 
     // Determine colors based on background
     const textColor = bgColor === 'black' ? '#FFF' : '#000';
@@ -134,7 +137,8 @@ export function JoinTeamForm({ bgColor = 'white' }: JoinTeamFormProps) {
             );
 
             // Success!
-            alert("Application submitted successfully! We'll review your CV and get back to you soon.");
+            setModalType('success');
+            setIsModalOpen(true);
 
             // Reset form after successful submission
             setFormData({
@@ -153,7 +157,8 @@ export function JoinTeamForm({ bgColor = 'white' }: JoinTeamFormProps) {
             });
         } catch (error) {
             console.error('Form submission error:', error);
-            alert('Failed to submit application. Please try again.');
+            setModalType('error');
+            setIsModalOpen(true);
         } finally {
             setIsSubmitting(false);
             setUploadProgress('');
@@ -190,6 +195,7 @@ export function JoinTeamForm({ bgColor = 'white' }: JoinTeamFormProps) {
     };
 
     return (
+        <>
         <form onSubmit={handleSubmit} className='space-y-12'>
             {/* Name and Email Row */}
             <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
@@ -447,5 +453,18 @@ export function JoinTeamForm({ bgColor = 'white' }: JoinTeamFormProps) {
                 </motion.button>
             </div>
         </form>
+
+        {/* Success/Error Modal */}
+        <MessageModal
+            isOpen={isModalOpen}
+            setIsOpen={setIsModalOpen}
+            type={modalType}
+            title={modalType === 'success' ? 'APPLICATION SENT!' : 'OOPS!'}
+            message={modalType === 'success'
+                ? "Thank you for applying! We've received your CV and will review it carefully. We'll get back to you soon."
+                : "Failed to submit your application. Please try again or send your CV directly to minhnguyen@lunapictures.com.au"
+            }
+        />
+        </>
     );
 }

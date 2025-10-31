@@ -6,6 +6,7 @@ import { send } from '@emailjs/browser';
 import { motion } from 'framer-motion';
 
 import { EMAIL_CONFIG } from '@/config/email';
+import { MessageModal } from '@/components/MessageModal';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ContactSectionProps {
@@ -34,6 +35,8 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalType, setModalType] = useState<'success' | 'error'>('success');
 
     // Determine colors based on background
     const textColor = bgColor === 'black' ? '#FFF' : '#000';
@@ -129,7 +132,8 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
 
             // Success!
             setSubmitStatus('success');
-            alert('Message sent successfully! We\'ll get back to you soon.');
+            setModalType('success');
+            setIsModalOpen(true);
 
             // Reset form
             setFormData({
@@ -151,7 +155,8 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
         } catch (error) {
             console.error('EmailJS Error:', error);
             setSubmitStatus('error');
-            alert('Failed to send message. Please try again or contact us directly.');
+            setModalType('error');
+            setIsModalOpen(true);
         } finally {
             setIsSubmitting(false);
         }
@@ -173,6 +178,7 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
     };
 
     return (
+        <>
         <div className={showLeftColumn ? 'mx-auto px-6' : ''}>
             <div className={showLeftColumn ? 'grid grid-cols-1 gap-24 lg:grid-cols-[3fr_7fr]' : ''}>
                 {/* Left Column - Heading & Description */}
@@ -663,5 +669,9 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
         </form>
             </div>
         </div>
+
+        {/* Success/Error Modal */}
+        <MessageModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} type={modalType} />
+    </>
     );
 }
