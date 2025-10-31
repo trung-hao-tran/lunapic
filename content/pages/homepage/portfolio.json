@@ -11,7 +11,7 @@
       "ratio": "9:16"
     },
     {
-      "itemID":"vigilante-shit",
+      "itemId": "vigilante-shit",
       "order": 3,
       "ratio": "16:9"
     },
@@ -21,17 +21,17 @@
       "ratio": "16:9"
     },
     {
-      "itemID":"the-smoke",
+      "itemId": "the-smoke",
       "order": 5,
       "ratio": "16:9"
     },
     {
-      "itemID":"unseen-enemy",
+      "itemId": "unseen-enemy",
       "order": 6,
       "ratio": "16:9"
     },
     {
-      "itemID":"coffee-love",
+      "itemId": "coffee-love",
       "order": 7,
       "ratio": "16:9"
     },
