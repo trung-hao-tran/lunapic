@@ -1,18 +1,23 @@
 {
     "items": [
         {
-            "itemId": "urban-dreams-2020",
+            "itemId": "vigilante-shit",
             "order": 1,
             "weight": 1
         },
         {
-            "itemId": "sunset-sessions",
+            "itemId": "the-smoke",
             "order": 2,
             "weight": 1
         },
         {
-            "itemId": "behind-the-lens",
+            "itemId": "living-in-limbo",
             "order": 3,
+            "weight": 1
+        },
+        {
+            "itemId": "coffee-love",
+            "order": 4,
             "weight": 1
         }
     ]

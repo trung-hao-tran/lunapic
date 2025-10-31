@@ -1,23 +1,48 @@
 {
   "items": [
     {
-      "itemId": "urban-dreams-2020",
+      "itemId": "the-little-witch",
       "order": 1,
-      "ratio": "4:3"
+      "ratio": "9:16"
     },
     {
-      "itemId": "sunset-sessions",
+      "itemId": "mmml",
       "order": 2,
+      "ratio": "9:16"
+    },
+    {
+      "itemID":"vigilante-shit",
+      "order": 3,
       "ratio": "16:9"
     },
     {
-      "itemId": "behind-the-lens",
-      "order": 3,
+      "itemId": "bloodiest-ambition",
+      "order": 4,
+      "ratio": "16:9"
+    },
+    {
+      "itemID":"the-smoke",
+      "order": 5,
+      "ratio": "16:9"
+    },
+    {
+      "itemID":"unseen-enemy",
+      "order": 6,
+      "ratio": "16:9"
+    },
+    {
+      "itemID":"coffee-love",
+      "order": 7,
+      "ratio": "16:9"
+    },
+    {
+      "itemId": "embrace-the-pain",
+      "order": 8,
       "ratio": "3:4"
     },
     {
-      "itemId": "light-symphony",
-      "order": 4,
+      "itemId": "living-in-limbo",
+      "order": 9,
       "ratio": "3:4"
     }
   ]
