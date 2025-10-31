@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 
+import { send } from '@emailjs/browser';
 import { motion } from 'framer-motion';
 
+import { EMAIL_CONFIG } from '@/config/email';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ContactSectionProps {
@@ -29,6 +31,9 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
         budget: '',
         message: ''
     });
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
     // Determine colors based on background
     const textColor = bgColor === 'black' ? '#FFF' : '#000';
@@ -95,12 +100,38 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
         return isValid;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (validateForm()) {
-            console.log('Form submitted:', formData);
-            // Reset form after successful submission
+        if (!validateForm()) {
+            return;
+        }
+
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+
+        try {
+            // Send email using EmailJS with centralized config
+            await send(
+                EMAIL_CONFIG.serviceId,
+                EMAIL_CONFIG.workWithUsTemplateId, // Using "Work With Us" template for contact form
+                {
+                    name: formData.name,
+                    email: formData.email,
+                    company: formData.company,
+                    service: formData.service,
+                    budget: formData.budget,
+                    message: formData.message,
+                    to_email: EMAIL_CONFIG.destinations.workWithUs // Destination email
+                },
+                EMAIL_CONFIG.publicKey
+            );
+
+            // Success!
+            setSubmitStatus('success');
+            alert('Message sent successfully! We\'ll get back to you soon.');
+
+            // Reset form
             setFormData({
                 name: '',
                 email: '',
@@ -117,7 +148,12 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
                 budget: '',
                 message: ''
             });
-            alert('Form submitted successfully!');
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            setSubmitStatus('error');
+            alert('Failed to send message. Please try again or contact us directly.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -598,10 +634,11 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
             {/* Submit Button */}
             <div className='flex justify-center pt-4'>
                 <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                     type='submit'
-                    className='border-2 bg-transparent px-12 py-3 transition-colors'
+                    disabled={isSubmitting}
+                    className='border-2 bg-transparent px-12 py-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                     style={{
                         fontFamily: '"Geist Mono", monospace',
                         fontSize: '0.875rem',
@@ -611,14 +648,16 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
                         color: textColor
                     }}
                     onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = hoverBg;
-                        e.currentTarget.style.color = hoverText;
+                        if (!isSubmitting) {
+                            e.currentTarget.style.backgroundColor = hoverBg;
+                            e.currentTarget.style.color = hoverText;
+                        }
                     }}
                     onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = 'transparent';
                         e.currentTarget.style.color = textColor;
                     }}>
-                    SEND MESSAGE
+                    {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
                 </motion.button>
             </div>
         </form>

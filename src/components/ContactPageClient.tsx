@@ -12,7 +12,7 @@ import { Navigation } from '@/components/Navigation';
 import { StarFrame } from '@/components/StarFrame';
 import { parseHighlightedText } from '@/lib/contentHelpers';
 import type { ContactConfig } from '@/types/content.types';
-import { initEmailJS, sendJoinTeamEmail } from '@/utils/emailService';
+import { initEmailJS } from '@/utils/emailService';
 
 type FormType = 'work' | 'join';
 
@@ -41,23 +41,6 @@ export function ContactPageClient({ config }: ContactPageClientProps) {
     const switchForm = (type: FormType) => {
         setActiveForm(type);
         router.push(`/contact?form=${type}`);
-    };
-
-    const handleJoinFormSubmit = async (formData: {
-        name: string;
-        email: string;
-        resume: File | null;
-        message: string;
-        linkedin: string;
-    }) => {
-        try {
-            await sendJoinTeamEmail(formData);
-            alert('Thank you! Your application has been sent successfully.');
-        } catch (error) {
-            console.error('Error sending email:', error);
-            alert('Failed to send application. Please try again or email us directly.');
-            throw error;
-        }
     };
 
     return (
@@ -291,7 +274,7 @@ export function ContactPageClient({ config }: ContactPageClientProps) {
                                         animate={{ opacity: 1, x: 0 }}
                                         exit={{ opacity: 0, x: -20 }}
                                         transition={BASE_TRANSITION}>
-                                        <JoinTeamForm bgColor='black' onSubmit={handleJoinFormSubmit} />
+                                        <JoinTeamForm bgColor='black' />
                                     </motion.div>
                                 )}
                             </AnimatePresence>

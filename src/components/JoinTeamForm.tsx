@@ -2,20 +2,16 @@
 
 import React, { useState } from 'react';
 
+import { EMAIL_CONFIG } from '@/config/email';
+import { send } from '@emailjs/browser';
+
 import { motion } from 'framer-motion';
 
 interface JoinTeamFormProps {
     bgColor?: 'white' | 'black';
-    onSubmit: (formData: {
-        name: string;
-        email: string;
-        resume: File | null;
-        message: string;
-        linkedin: string;
-    }) => Promise<void>;
 }
 
-export function JoinTeamForm({ bgColor = 'white', onSubmit }: JoinTeamFormProps) {
+export function JoinTeamForm({ bgColor = 'white' }: JoinTeamFormProps) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -33,6 +29,7 @@ export function JoinTeamForm({ bgColor = 'white', onSubmit }: JoinTeamFormProps)
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState('');
 
     // Determine colors based on background
     const textColor = bgColor === 'black' ? '#FFF' : '#000';
@@ -90,31 +87,76 @@ export function JoinTeamForm({ bgColor = 'white', onSubmit }: JoinTeamFormProps)
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (validateForm()) {
-            setIsSubmitting(true);
-            try {
-                await onSubmit(formData);
-                // Reset form after successful submission
-                setFormData({
-                    name: '',
-                    email: '',
-                    resume: null,
-                    message: '',
-                    linkedin: ''
-                });
-                setErrors({
-                    name: '',
-                    email: '',
-                    resume: '',
-                    message: '',
-                    linkedin: ''
-                });
-            } catch (error) {
-                console.error('Form submission error:', error);
-                alert('Failed to submit form. Please try again.');
-            } finally {
-                setIsSubmitting(false);
+        if (!validateForm()) {
+            return;
+        }
+
+        if (!formData.resume) {
+            alert('Please upload your CV/Resume');
+
+            return;
+        }
+
+        setIsSubmitting(true);
+        setUploadProgress('Uploading CV...');
+
+        try {
+            // Step 1: Upload CV to Vercel Blob
+            const uploadFormData = new FormData();
+            uploadFormData.append('cv', formData.resume);
+
+            const uploadResponse = await fetch('/api/upload-cv', {
+                method: 'POST',
+                body: uploadFormData
+            });
+
+            if (!uploadResponse.ok) {
+                throw new Error('Failed to upload CV');
             }
+
+            const { url: cvUrl } = await uploadResponse.json();
+            setUploadProgress('Sending application...');
+
+            // Step 2: Send email with CV link
+            await send(
+                EMAIL_CONFIG.serviceId,
+                EMAIL_CONFIG.joinTeamTemplateId,
+                {
+                    name: formData.name,
+                    email: formData.email,
+                    portfolio_url: formData.linkedin,
+                    message: formData.message,
+                    cv_url: cvUrl, // CV download link
+                    cv_filename: formData.resume.name,
+                    to_email: EMAIL_CONFIG.destinations.joinTeam
+                },
+                EMAIL_CONFIG.publicKey
+            );
+
+            // Success!
+            alert("Application submitted successfully! We'll review your CV and get back to you soon.");
+
+            // Reset form after successful submission
+            setFormData({
+                name: '',
+                email: '',
+                resume: null,
+                message: '',
+                linkedin: ''
+            });
+            setErrors({
+                name: '',
+                email: '',
+                resume: '',
+                message: '',
+                linkedin: ''
+            });
+        } catch (error) {
+            console.error('Form submission error:', error);
+            alert('Failed to submit application. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+            setUploadProgress('');
         }
     };
 
@@ -186,7 +228,9 @@ export function JoinTeamForm({ bgColor = 'white', onSubmit }: JoinTeamFormProps)
                             borderBottomWidth: '1px',
                             borderBottomColor: errors.name ? errorColor : borderColor
                         }}
-                        onFocus={(e) => (e.target.style.borderBottomColor = errors.name ? errorColor : solidBorderColor)}
+                        onFocus={(e) =>
+                            (e.target.style.borderBottomColor = errors.name ? errorColor : solidBorderColor)
+                        }
                         onBlur={(e) => (e.target.style.borderBottomColor = errors.name ? errorColor : borderColor)}
                     />
                 </div>
@@ -225,7 +269,9 @@ export function JoinTeamForm({ bgColor = 'white', onSubmit }: JoinTeamFormProps)
                             borderBottomWidth: '1px',
                             borderBottomColor: errors.email ? errorColor : borderColor
                         }}
-                        onFocus={(e) => (e.target.style.borderBottomColor = errors.email ? errorColor : solidBorderColor)}
+                        onFocus={(e) =>
+                            (e.target.style.borderBottomColor = errors.email ? errorColor : solidBorderColor)
+                        }
                         onBlur={(e) => (e.target.style.borderBottomColor = errors.email ? errorColor : borderColor)}
                     />
                 </div>
@@ -397,7 +443,7 @@ export function JoinTeamForm({ bgColor = 'white', onSubmit }: JoinTeamFormProps)
                         e.currentTarget.style.backgroundColor = 'transparent';
                         e.currentTarget.style.color = textColor;
                     }}>
-                    {isSubmitting ? 'SENDING...' : 'SEND APPLICATION'}
+                    {isSubmitting ? uploadProgress || 'SENDING...' : 'SEND APPLICATION'}
                 </motion.button>
             </div>
         </form>

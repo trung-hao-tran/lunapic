@@ -16,7 +16,9 @@
       "Bash(tree:*)",
       "Bash(npx tsc:*)",
       "Bash(bun run build)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(test -f:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": []
   }
