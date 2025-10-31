@@ -8,6 +8,8 @@ import { Navigation } from '@/components/Navigation';
 import { PortfolioGallery } from '@/components/PortfolioGallery';
 import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
+import { parseMarkdownContent } from '@/lib/contentHelpers';
+import { teamBioMarkdownStyle } from '@/lib/markdownStyles';
 import { loadTeamMember, getAllTeamMemberIds, loadPagePortfolio } from '@/lib/dataLoader';
 
 // Generate static params for all team members
@@ -116,33 +118,8 @@ const TeamMemberPage = async ({ params }: { params: Promise<{ name: string }> })
                             </p>
 
                             {/* Full Bio */}
-                            <div
-                                className='space-y-4'
-                                style={{
-                                    color: '#FFF',
-                                    fontFamily: 'Inter, monospace',
-                                    fontSize: '0.875rem',
-                                    fontStyle: 'normal',
-                                    fontWeight: 400,
-                                    lineHeight: 'normal',
-                                    letterSpacing: '-0.00438rem'
-                                }}>
-                                {fullBioContent.split('\n\n').map((paragraph, index) => {
-                                    // Check if paragraph contains bullet points
-                                    if (paragraph.includes('•')) {
-                                        const bulletPoints = paragraph.split('\n').filter((line) => line.trim());
-
-                                        return (
-                                            <ul key={index} className='list-disc space-y-2 pl-5'>
-                                                {bulletPoints.map((point, i) => (
-                                                    <li key={i}>{point.replace('•', '').trim()}</li>
-                                                ))}
-                                            </ul>
-                                        );
-                                    }
-
-                                    return <p key={index}>{paragraph}</p>;
-                                })}
+                            <div className='space-y-4'>
+                                {parseMarkdownContent(fullBioContent, teamBioMarkdownStyle)}
                             </div>
 
                             {/* Get In Touch Button */}

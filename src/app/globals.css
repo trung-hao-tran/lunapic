@@ -302,4 +302,14 @@
         cursor: pointer;
         border: none;
     }
+
+    /* Hide scrollbar for category filters on mobile */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
 }

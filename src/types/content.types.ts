@@ -17,7 +17,8 @@ export interface PortfolioItem {
     thumbnail: string;
     featureThumbnail?: string; // Large feature image for showreel/featured gallery
     order: number; // Determines sequence (1, 2, 3...)
-    weight?: number; // How much space item takes (default: 1, min: 1, max: 3.1)
+    weight?: number; // DEPRECATED: Use ratio instead. How much space item takes (default: 1, min: 1, max: 3.1)
+    ratio?: '9:16' | '16:9' | '4:3' | '3:4'; // Aspect ratio for the item
 
     // Portfolio detail page fields - URL will be /portfolio/{id}
     description?: string; // Project description

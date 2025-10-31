@@ -5,6 +5,9 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+
 interface MenuItem {
     label: string;
     href?: string;
@@ -151,9 +154,7 @@ export function Navigation() {
                                     {/* Dropdown items - appear on hover */}
                                     {servicesDropdownOpen && (
                                         <div
-                                            className={`absolute top-full right-0 left-0 -mt-1 transition-colors duration-300 ${
-                                                !isAtTop ? NAV_BG_COLOR : ''
-                                            }`}>
+                                            className={`absolute top-full right-0 left-0 -mt-1 ${NAV_BG_COLOR} transition-colors duration-300`}>
                                             {item.dropdown?.map((subItem, idx) => {
                                                 const isLast = item.dropdown && idx === item.dropdown.length - 1;
 
@@ -218,52 +219,90 @@ export function Navigation() {
                         </div>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className='flex flex-col gap-1.5 p-2 md:hidden'
-                        aria-label='Toggle menu'>
-                        <span
-                            className={`block h-[2px] w-6 bg-white transition-all duration-300 ${
-                                mobileMenuOpen ? 'translate-y-2 rotate-45' : ''
-                            }`}
-                        />
-                        <span
-                            className={`block h-[2px] w-6 bg-white transition-all duration-300 ${
-                                mobileMenuOpen ? 'opacity-0' : ''
-                            }`}
-                        />
-                        <span
-                            className={`block h-[2px] w-6 bg-white transition-all duration-300 ${
-                                mobileMenuOpen ? '-translate-y-2 -rotate-45' : ''
-                            }`}
-                        />
-                    </button>
-                </div>
-            </div>
+                    {/* Mobile Menu - shadcn Sheet */}
+                    <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                        <SheetTrigger asChild>
+                            <button className='flex flex-col gap-1.5 p-2 md:hidden' aria-label='Toggle menu'>
+                                <span
+                                    className={`block h-[2px] w-6 bg-white transition-all duration-300 ${
+                                        mobileMenuOpen ? 'translate-y-2 rotate-45' : ''
+                                    }`}
+                                />
+                                <span
+                                    className={`block h-[2px] w-6 bg-white transition-all duration-300 ${
+                                        mobileMenuOpen ? 'opacity-0' : ''
+                                    }`}
+                                />
+                                <span
+                                    className={`block h-[2px] w-6 bg-white transition-all duration-300 ${
+                                        mobileMenuOpen ? '-translate-y-2 -rotate-45' : ''
+                                    }`}
+                                />
+                            </button>
+                        </SheetTrigger>
+                        <SheetContent
+                            side='right'
+                            className={`w-screen ${NAV_BG_COLOR} border-none [&>button]:text-white [&>button]:hover:text-white/80 [&>button>svg]:h-8 [&>button>svg]:w-8`}>
+                            <VisuallyHidden>
+                                <SheetTitle>Navigation Menu</SheetTitle>
+                            </VisuallyHidden>
 
-            {/* Mobile Menu */}
-            <div
-                className={`fixed inset-0 top-[72px] ${NAV_BG_COLOR} transition-all duration-300 md:hidden ${
-                    mobileMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
-                }`}>
-                <div className='container mx-auto flex flex-col gap-4 px-6 pt-6'>
-                    {mobileMenuItems.map((item) => (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className='relative inline-block w-fit px-3 py-1 text-sm font-medium text-white'
-                            style={MENU_FONT_STYLE}>
-                            {/* Left bracket using borders */}
-                            <span className='absolute top-1/2 left-0 h-4 w-2 -translate-y-1/2 border-t border-b border-l border-white/40' />
+                            {/* Logo at top left */}
+                            <div className='absolute top-8 left-8'>
+                                <Link href='/' onClick={() => setMobileMenuOpen(false)}>
+                                    <Image
+                                        src='/Logo full.svg'
+                                        alt='Luna Pictures'
+                                        width={150}
+                                        height={32}
+                                        className='h-8 w-auto'
+                                    />
+                                </Link>
+                            </div>
 
-                            {item.label}
+                            {/* Menu items - centered */}
+                            <div className='flex h-full flex-col items-center justify-center gap-6'>
+                                {mobileMenuItems.map((item) => (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className='relative inline-block w-fit px-4 py-2 text-xl text-white transition-all hover:text-white/80'
+                                        style={MENU_FONT_STYLE}>
+                                        {/* Left bracket using borders */}
+                                        <span className='absolute top-1/2 left-0 h-6 w-3 -translate-y-1/2 border-t border-b border-l border-white/40 transition-colors hover:border-white' />
 
-                            {/* Right bracket using borders */}
-                            <span className='absolute top-1/2 right-0 h-4 w-2 -translate-y-1/2 border-t border-r border-b border-white/40' />
-                        </Link>
-                    ))}
+                                        {item.label}
+
+                                        {/* Right bracket using borders */}
+                                        <span className='absolute top-1/2 right-0 h-6 w-3 -translate-y-1/2 border-t border-r border-b border-white/40 transition-colors hover:border-white' />
+                                    </Link>
+                                ))}
+                            </div>
+
+                            {/* Social media links at bottom - centered horizontally */}
+                            <div className='absolute right-0 bottom-8 left-0 flex items-center justify-center gap-6'>
+                                <Link
+                                    href='#'
+                                    className='text-sm text-white transition-colors hover:text-white/80'
+                                    style={MENU_FONT_STYLE}>
+                                    [INSTAGRAM]
+                                </Link>
+                                <Link
+                                    href='#'
+                                    className='text-sm text-white transition-colors hover:text-white/80'
+                                    style={MENU_FONT_STYLE}>
+                                    [YOUTUBE]
+                                </Link>
+                                <Link
+                                    href='#'
+                                    className='text-sm text-white transition-colors hover:text-white/80'
+                                    style={MENU_FONT_STYLE}>
+                                    [FACEBOOK]
+                                </Link>
+                            </div>
+                        </SheetContent>
+                    </Sheet>
                 </div>
             </div>
         </nav>

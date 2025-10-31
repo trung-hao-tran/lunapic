@@ -32,8 +32,8 @@ export function FeaturePortfolioGallery({ items }: FeaturePortfolioGalleryProps)
                             padding={1}
                             className='h-full w-full'>
                             <div className='group relative h-full w-full'>
-                                {/* Title on the left */}
-                                <div className='absolute bottom-4 left-4 z-10 transition-opacity duration-300 group-hover:opacity-0'>
+                                {/* Title - above date on mobile, bottom-left on desktop */}
+                                <div className='absolute right-4 bottom-[5.5rem] z-10 transition-opacity duration-300 group-hover:opacity-0 md:right-auto md:bottom-4 md:left-4'>
                                     <h3
                                         style={{
                                             color: '#FFF',
@@ -104,7 +104,8 @@ export function FeaturePortfolioGallery({ items }: FeaturePortfolioGalleryProps)
 
             {/* Buttons */}
             <div className='flex items-center justify-center gap-4 pt-8'>
-                <button
+                <Link
+                    href='/work'
                     className='border border-white bg-white px-8 py-3 text-black transition-all duration-300 hover:bg-transparent hover:text-white'
                     style={{
                         fontFamily: '"Geist Mono", monospace',
@@ -116,8 +117,9 @@ export function FeaturePortfolioGallery({ items }: FeaturePortfolioGalleryProps)
                         borderRadius: '9999px'
                     }}>
                     BROWSE ALL PROJECT
-                </button>
-                <button
+                </Link>
+                <Link
+                    href='/contact'
                     className='border border-white bg-transparent px-8 py-3 text-white transition-all duration-300 hover:bg-white hover:text-black'
                     style={{
                         fontFamily: '"Geist Mono", monospace',
@@ -129,7 +131,7 @@ export function FeaturePortfolioGallery({ items }: FeaturePortfolioGalleryProps)
                         borderRadius: '9999px'
                     }}>
                     CONTACT US
-                </button>
+                </Link>
             </div>
         </div>
     );

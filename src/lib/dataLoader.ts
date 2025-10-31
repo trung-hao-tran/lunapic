@@ -186,7 +186,7 @@ export async function loadAllPortfolioItems(): Promise<PortfolioItem[]> {
 
 /**
  * Load work page portfolio items (VFX and Production sections separately)
- * Each section has manually configured items with custom weights
+ * Each section has manually configured items with custom ratios
  */
 export async function loadWorkPortfolio(): Promise<{
     vfxItems: PortfolioItem[];
@@ -194,8 +194,8 @@ export async function loadWorkPortfolio(): Promise<{
 }> {
     const portfolioPath = join(CONTENT_DIR, 'pages', 'work', 'portfolio.json');
     const portfolioData = await readJsonFile<{
-        vfxItems: Array<{ itemId: string; order: number; weight?: number }>;
-        productionItems: Array<{ itemId: string; order: number; weight?: number }>;
+        vfxItems: Array<{ itemId: string; order: number; ratio?: '9:16' | '16:9' | '4:3' | '3:4' }>;
+        productionItems: Array<{ itemId: string; order: number; ratio?: '9:16' | '16:9' | '4:3' | '3:4' }>;
     }>(portfolioPath);
 
     // Load VFX items
@@ -211,7 +211,7 @@ export async function loadWorkPortfolio(): Promise<{
                 ...itemData,
                 projectOverview: overview || itemData.projectOverview,
                 order: ref.order,
-                weight: ref.weight ?? itemData.weight
+                ratio: ref.ratio ?? itemData.ratio
             };
         })
     );
@@ -229,7 +229,7 @@ export async function loadWorkPortfolio(): Promise<{
                 ...itemData,
                 projectOverview: overview || itemData.projectOverview,
                 order: ref.order,
-                weight: ref.weight ?? itemData.weight
+                ratio: ref.ratio ?? itemData.ratio
             };
         })
     );

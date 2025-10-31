@@ -1,23 +1,31 @@
 {
-  "id": "4",
-  "title": "Light Symphony",
-  "date": "Mai 3 2020",
-  "categories": ["Event"],
-  "tags": ["VFX"],
-  "thumbnail": "/images/projects/proj4.png",
-  "featureThumbnail": "/images/projects/proj4.png",
-  "client": "Samsung",
-  "type": "Event Coverage",
-  "description": "Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.",
-  "headerLeft": "/images/placeholder.png",
-  "headerRight": "/images/placeholder.png",
-  "crew": ["Tram Nguyen", "Long Dinh", "Minh Nguyen"],
-  "gallery": [
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png",
-    "/images/placeholder.png"
-  ]
+    "id": "light-symphony",
+    "title": "Light Symphony",
+    "date": "Mai 3 2020",
+    "categories": [
+        "Event"
+    ],
+    "tags": [
+        "VFX"
+    ],
+    "thumbnail": "/images/projects/proj4.png",
+    "featureThumbnail": "/images/projects/proj4.png",
+    "client": "Samsung",
+    "type": "Event Coverage",
+    "description": "Lorem ipsum dolor sit amet consectetur. Ipsum nibh odio dolor nulla eget adipiscing eget turpis dignissim suspendisse dictum nulla amet turpis facilisis magna vehicula elementum aliquam pharetra sit pellentesque feugiat turpis aliquam sem commodo aliquet volutpat ultricies egestas ipsum egestas iaculis magnis.",
+    "headerLeft": "/images/placeholder.png",
+    "headerRight": "/images/placeholder.png",
+    "crew": [
+        "Tram Nguyen",
+        "Long Dinh",
+        "Minh Nguyen"
+    ],
+    "gallery": [
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png",
+        "/images/placeholder.png"
+    ]
 }

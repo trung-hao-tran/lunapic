@@ -3,22 +3,22 @@
     {
       "itemId": "urban-dreams-2020",
       "order": 1,
-      "weight": 1.25
+      "ratio": "4:3"
     },
     {
       "itemId": "sunset-sessions",
       "order": 2,
-      "weight": 1.8
+      "ratio": "16:9"
     },
     {
       "itemId": "behind-the-lens",
       "order": 3,
-      "weight": 1
+      "ratio": "3:4"
     },
     {
       "itemId": "light-symphony",
       "order": 4,
-      "weight": 1
+      "ratio": "3:4"
     }
   ]
 }

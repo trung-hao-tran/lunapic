@@ -134,7 +134,7 @@ export function PortfolioGallery({
 
         hoverTimerRef.current[itemId] = setTimeout(() => {
             setTempUngrayscaledItems((prev) => new Set(prev).add(itemId));
-        }, 5000);
+        }, 3000);
     };
 
     // Cancel timer and reset on mouse leave
@@ -169,40 +169,43 @@ export function PortfolioGallery({
     return (
         <>
             {(() => {
+                // Helper to convert ratio string to numeric value
+                const getRatioValue = (ratio?: string): number => {
+                    switch (ratio) {
+                        case '16:9':
+                            return 16 / 9;
+                        case '9:16':
+                            return 9 / 16;
+                        case '4:3':
+                            return 4 / 3;
+                        case '3:4':
+                            return 3 / 4;
+                        default:
+                            return 4 / 3; // Default to 4:3
+                    }
+                };
+
                 // Sort items by order
                 const sortedItems = [...items].sort((a, b) => a.order - b.order);
 
-                // Build rows based on weight
-                const rows: (typeof items)[] = [];
-                let currentRow: typeof items = [];
-                let currentRowWidth = 0;
-                const GAP = 0.05;
-                const MAX_ROW_WIDTH = 3.1;
+                // Filter out items on mobile if categories are selected
+                const filteredItems = sortedItems.filter((item) => {
+                    if (selectedCategories.length === 0) return true;
 
-                sortedItems.forEach((item) => {
-                    // Clamp weight between 1 and 3.1
-                    const weight = Math.max(1, Math.min(3.1, item.weight || 1));
+                    // Check if item matches any selected category
+                    const hasSelectedCategory = item.categories.some((cat) =>
+                        selectedCategories.includes(cat.toLowerCase().replace(/\s+/g, '-'))
+                    );
 
-                    // Calculate total width including gap (except for first item in row)
-                    const widthWithGap = currentRow.length > 0 ? weight + GAP : weight;
-
-                    // Check if item fits in current row
-                    if (currentRowWidth + widthWithGap <= MAX_ROW_WIDTH) {
-                        currentRow.push({ ...item, weight }); // Use clamped weight
-                        currentRowWidth += widthWithGap;
-                    } else {
-                        // Start new row
-                        if (currentRow.length > 0) {
-                            rows.push(currentRow);
-                        }
-                        currentRow = [{ ...item, weight }];
-                        currentRowWidth = weight;
-                    }
+                    return hasSelectedCategory;
                 });
 
-                // Add last row
-                if (currentRow.length > 0) {
-                    rows.push(currentRow);
+                // Build rows based on ratio (max 3 items per row)
+                const rows: (typeof items)[] = [];
+                const MAX_ITEMS_PER_ROW = 3;
+
+                for (let i = 0; i < filteredItems.length; i += MAX_ITEMS_PER_ROW) {
+                    rows.push(filteredItems.slice(i, i + MAX_ITEMS_PER_ROW));
                 }
 
                 // Limit to 2 rows if hasViewMoreButton and not expanded
@@ -210,21 +213,25 @@ export function PortfolioGallery({
 
                 // Render rows
                 return displayRows.map((rowItems, rowIdx) => {
-                    // Calculate grid template columns as percentages based on 3.1 max width
-                    // Gap weight is 0.05, which is (0.05/3.1) = 1.61% of container
-                    const gapPercentage = (GAP / MAX_ROW_WIDTH) * 100;
+                    // Responsive fixed height (mobile, tablet, desktop)
+                    const FIXED_HEIGHT = 400; // px - adjust based on device in Tailwind
+                    const GAP_PX = 20; // Gap between items in pixels
 
-                    const gridCols = rowItems
-                        .map((item) => {
-                            const weight = item.weight || 1;
-                            const percentage = (weight / MAX_ROW_WIDTH) * 100;
+                    // Calculate base widths from ratios
+                    const itemWidths = rowItems.map((item) => {
+                        const ratio = getRatioValue(item.ratio);
 
-                            return `${percentage.toFixed(4)}%`;
-                        })
-                        .join(' ');
+                        return FIXED_HEIGHT * ratio;
+                    });
 
-                    // Calculate gap size as percentage
-                    const gapSize = `${gapPercentage.toFixed(4)}%`;
+                    // Calculate total width and scale factor
+                    const totalItemWidth = itemWidths.reduce((sum, w) => sum + w, 0);
+                    const totalGapWidth = (rowItems.length - 1) * GAP_PX;
+                    const containerWidth = 100; // We'll use percentage
+
+                    // For now, convert to percentages (we'll calculate actual widths dynamically)
+                    const totalWidth = totalItemWidth + totalGapWidth;
+                    const widthPercentages = itemWidths.map((w) => (w / totalWidth) * 100);
 
                     // Animation classes - rows beyond first 2 get staggered animation
                     const isNewRow = hasViewMoreButton && rowIdx >= 2;
@@ -234,11 +241,9 @@ export function PortfolioGallery({
                     return (
                         <div
                             key={rowIdx}
-                            className={`grid grid-cols-1 md:[grid-template-columns:var(--grid-template)] md:[gap:var(--gap-size)] ${animationClass}`}
+                            className={`mb-16 flex flex-col gap-5 md:flex-row md:h-[400px] ${animationClass}`}
                             style={
                                 {
-                                    '--grid-template': gridCols,
-                                    '--gap-size': gapSize,
                                     animationDelay: animationDelay,
                                     opacity: isNewRow && !isExpanded ? 0 : 1
                                 } as React.CSSProperties
@@ -255,18 +260,16 @@ export function PortfolioGallery({
                                             ? ['tr', 'br']
                                             : [];
 
-                                // Fuzzy overlay logic
-                                const shouldShowFuzzy = shouldBeGrayscale(item);
-                                const isTempUnfuzzed = tempUngrayscaledItems.has(item.id);
-                                const showFuzzyOverlay = shouldShowFuzzy && !isTempUnfuzzed;
+                                // Calculate flex-grow based on ratio (desktop only)
+                                const ratio = getRatioValue(item.ratio);
+                                const flexGrow = ratio;
 
                                 return (
                                     <Link
                                         key={item.id}
                                         href={`/portfolio/${item.id}`}
-                                        className='group relative block transition-transform duration-300 hover:scale-[1.02]'
-                                        onMouseEnter={() => shouldShowFuzzy && handleMouseEnter(item.id)}
-                                        onMouseLeave={() => shouldShowFuzzy && handleMouseLeave(item.id)}>
+                                        className='group relative block w-full transition-transform duration-300 hover:scale-[1.02] md:h-full'
+                                        style={{ flexGrow, flexShrink: 1, flexBasis: 0 }}>
                                         <StarFrame
                                             haveBorder={true}
                                             direction={starDirection as Array<'tl' | 'tr' | 'bl' | 'br'>}
@@ -274,82 +277,51 @@ export function PortfolioGallery({
                                             color='white'
                                             borderColor='white'
                                             padding={7}
-                                            className='w-full'>
-                                            <div className='relative aspect-[4/3] w-full overflow-hidden md:aspect-auto md:h-[25rem]'>
+                                            className='h-full w-full'>
+                                            <div className='relative aspect-[4/3] w-full overflow-hidden md:aspect-auto md:h-full'>
                                                 <Image
                                                     src={item.thumbnail}
                                                     alt={item.title}
                                                     fill
                                                     className='object-cover transition-transform duration-300 group-hover:scale-105'
                                                 />
-                                                {/* Fuzzy Overlay - Only covers image */}
-                                                <FuzzyOverlay show={showFuzzyOverlay} />
+
+                                                {/* Black Gradient Overlay - Bottom */}
+                                                <div
+                                                    className='pointer-events-none absolute inset-x-0 bottom-0 z-10 h-1/2 transition-opacity duration-300 group-hover:opacity-0'
+                                                    style={{
+                                                        background:
+                                                            'linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%)'
+                                                    }}
+                                                />
+
+                                                {/* Item Info - Bottom Left Corner */}
+                                                <div className='absolute bottom-4 left-4 z-20 space-y-1 transition-opacity duration-300 group-hover:opacity-0'>
+                                                    <p
+                                                        style={{
+                                                            color: '#FFF',
+                                                            fontFamily: '"Geist Mono", monospace',
+                                                            fontSize: '1rem',
+                                                            fontWeight: 700,
+                                                            lineHeight: 'normal',
+                                                            letterSpacing: '-0.005rem'
+                                                        }}>
+                                                        [{item.title}]
+                                                    </p>
+                                                    <p
+                                                        style={{
+                                                            color: '#FFF',
+                                                            fontFamily: '"Geist Mono", monospace',
+                                                            fontSize: '1rem',
+                                                            fontWeight: 400,
+                                                            lineHeight: 'normal',
+                                                            letterSpacing: '-0.005rem'
+                                                        }}>
+                                                        {item.date}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </StarFrame>
-
-                                        {/* Item Info */}
-                                        <div className='mt-6 mb-8 flex items-start justify-between'>
-                                            <div className='space-y-2'>
-                                                <p
-                                                    style={{
-                                                        color: '#FFF',
-                                                        fontFamily: '"Geist Mono", monospace',
-                                                        fontSize: '1rem',
-                                                        fontWeight: 700,
-                                                        lineHeight: 'normal',
-                                                        letterSpacing: '-0.005rem'
-                                                    }}>
-                                                    [{item.title}]
-                                                </p>
-                                                <p
-                                                    style={{
-                                                        color: '#FFF',
-                                                        fontFamily: '"Geist Mono", monospace',
-                                                        fontSize: '1rem',
-                                                        fontWeight: 400,
-                                                        lineHeight: 'normal',
-                                                        letterSpacing: '-0.005rem'
-                                                    }}>
-                                                    {item.date}
-                                                </p>
-                                            </div>
-                                            <div className='flex flex-col items-end justify-between gap-2'>
-                                                {/* Display all categories */}
-                                                <div className='flex flex-wrap justify-end gap-2'>
-                                                    {item.categories.map((category, catIdx) => (
-                                                        <span
-                                                            key={catIdx}
-                                                            className='flex items-center justify-center rounded-full border border-white/40 px-4'
-                                                            style={{
-                                                                color: '#FFF',
-                                                                fontFamily: '"Geist Mono", monospace',
-                                                                fontSize: '1rem',
-                                                                fontWeight: 400,
-                                                                lineHeight: 'normal',
-                                                                letterSpacing: '-0.005rem',
-                                                                height: '2.1875rem',
-                                                                flexShrink: 0
-                                                            }}>
-                                                            {category}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                                <svg
-                                                    className='mt-2 transition-transform duration-300 group-hover:translate-x-1'
-                                                    xmlns='http://www.w3.org/2000/svg'
-                                                    width='22'
-                                                    height='22'
-                                                    viewBox='0 0 22 22'
-                                                    fill='none'>
-                                                    <path
-                                                        d='M1 11H20.5M20.5 11L11.5 1M20.5 11L11.5 20.5'
-                                                        stroke='white'
-                                                        strokeWidth='2'
-                                                        strokeLinecap='round'
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
                                     </Link>
                                 );
                             })}

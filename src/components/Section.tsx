@@ -19,10 +19,11 @@ export function Section({
     children,
     id,
     headerSeparator = true,
-    hasHeader = true
-}: SectionProps) {
+    hasHeader = true,
+    ...rest
+}: SectionProps & React.HTMLAttributes<HTMLElement>) {
     return (
-        <section className='pb-24 pt-16' style={{ backgroundColor: bgColor }}>
+        <section className='pb-24 pt-16' style={{ backgroundColor: bgColor }} {...rest}>
             <div className='container mx-auto px-6 md:px-12 lg:px-16'>
                 {/* Section Header */}
                 {hasHeader && (

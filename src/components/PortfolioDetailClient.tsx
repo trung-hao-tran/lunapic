@@ -10,6 +10,7 @@ import { Footer } from '@/components/Footer';
 import { Navigation } from '@/components/Navigation';
 import { Section } from '@/components/Section';
 import { StarFrame } from '@/components/StarFrame';
+import { parseMarkdownContent } from '@/lib/contentHelpers';
 import type { PortfolioItem } from '@/types/content.types';
 
 interface PortfolioDetailClientProps {
@@ -252,19 +253,19 @@ export function PortfolioDetailClient({ item }: PortfolioDetailClientProps) {
                             </h3>
 
                             {/* Project Overview Content */}
-                            <p
-                                className='text-white'
-                                style={{
-                                    color: '#FFF',
-                                    fontFamily: '"Geist Mono", monospace',
-                                    fontSize: '1rem',
-                                    fontStyle: 'normal',
-                                    fontWeight: 400,
-                                    lineHeight: 'normal',
-                                    letterSpacing: '-0.005rem'
-                                }}>
-                                {item.projectOverview || 'Project overview coming soon...'}
-                            </p>
+                            <div className='text-white space-y-8'>
+                                {item.projectOverview
+                                    ? parseMarkdownContent(item.projectOverview)
+                                    : <p style={{
+                                        color: '#FFF',
+                                        fontFamily: '"Geist Mono", monospace',
+                                        fontSize: '1rem',
+                                        fontWeight: 400,
+                                        lineHeight: 'normal',
+                                        letterSpacing: '-0.005rem'
+                                    }}>Project overview coming soon...</p>
+                                }
+                            </div>
                         </div>
                     </div>
                 </Section>

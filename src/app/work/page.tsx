@@ -48,7 +48,7 @@ const WorkPage = async () => {
                 />
 
                 {/* Contact Us Section */}
-                <Section title='CONTACT US' number='3' bgColor='#040404' headerColor='#fdfdfd'>
+                <Section title='CONTACT US' number='3' bgColor='#040404' headerColor='#fdfdfd' data-section='contact'>
                     <ContactSection bgColor='black' />
                 </Section>
             </main>

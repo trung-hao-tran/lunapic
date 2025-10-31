@@ -4,6 +4,8 @@
 
 import React from 'react';
 
+import { defaultMarkdownStyle, type MarkdownStyle } from './markdownStyles';
+
 /**
  * Parse text with [highlighted] syntax and return JSX
  * Words wrapped in [brackets] will be rendered with full opacity (white)
@@ -48,13 +50,14 @@ export function parseHighlightedText(text: string) {
  * - Regular paragraphs
  *
  * @param content - Markdown content string
+ * @param style - Optional custom style object (defaults to defaultMarkdownStyle)
  * @returns Array of JSX elements (headers, bullet lists, paragraphs)
  *
  * @example
  * parseMarkdownContent("# Title\n• Point 1\n• Point 2\nParagraph text")
  * // Returns: [<h2>Title</h2>, <ul><li>Point 1</li><li>Point 2</li></ul>, <p>Paragraph text</p>]
  */
-export function parseMarkdownContent(content: string) {
+export function parseMarkdownContent(content: string, style: MarkdownStyle = defaultMarkdownStyle) {
     const lines = content.split('\n').filter((line) => line.trim() !== '');
     const elements: React.JSX.Element[] = [];
 
@@ -66,18 +69,7 @@ export function parseMarkdownContent(content: string) {
             const headerText = trimmedLine.replace(/^#+\s*/, '');
 
             elements.push(
-                <h2
-                    key={index}
-                    className='mb-12 uppercase'
-                    style={{
-                        color: '#FFF',
-                        fontFamily: 'Inter, sans-serif',
-                        fontSize: '2.25rem',
-                        fontStyle: 'normal',
-                        fontWeight: 600,
-                        lineHeight: 'normal',
-                        letterSpacing: '-0.01125rem'
-                    }}>
+                <h2 key={index} className='mb-12 uppercase' style={style.header}>
                     {headerText}
                 </h2>
             );
@@ -87,7 +79,7 @@ export function parseMarkdownContent(content: string) {
             const bulletText = trimmedLine.substring(1).trim();
 
             elements.push(
-                <li key={index} className='flex items-start gap-3'>
+                <li key={index} className='flex items-start gap-3' style={style.listItem}>
                     <div className='relative mt-1 h-6 w-6 flex-shrink-0'>
                         <img
                             src='/star.svg'
@@ -104,17 +96,7 @@ export function parseMarkdownContent(content: string) {
         // Regular paragraph
         else {
             elements.push(
-                <p
-                    key={index}
-                    style={{
-                        color: '#FFF',
-                        fontFamily: '"Geist Mono", monospace',
-                        fontSize: '1.25rem',
-                        fontStyle: 'normal',
-                        fontWeight: 700,
-                        lineHeight: 'normal',
-                        letterSpacing: '-0.00625rem'
-                    }}>
+                <p key={index} style={style.paragraph}>
                     {trimmedLine}
                 </p>
             );
@@ -131,18 +113,7 @@ export function parseMarkdownContent(content: string) {
         } else {
             if (bulletGroup.length > 0) {
                 finalElements.push(
-                    <ul
-                        key={`ul-${index}`}
-                        className='mb-16 space-y-6'
-                        style={{
-                            color: '#FFF',
-                            fontFamily: '"Geist Mono", monospace',
-                            fontSize: '1.25rem',
-                            fontStyle: 'normal',
-                            fontWeight: 300,
-                            lineHeight: 'normal',
-                            letterSpacing: '-0.00625rem'
-                        }}>
+                    <ul key={`ul-${index}`} className='mb-16 space-y-6' style={style.listContainer}>
                         {bulletGroup}
                     </ul>
                 );
@@ -155,18 +126,7 @@ export function parseMarkdownContent(content: string) {
     // Handle remaining bullet points
     if (bulletGroup.length > 0) {
         finalElements.push(
-            <ul
-                key='ul-final'
-                className='mb-16 space-y-6'
-                style={{
-                    color: '#FFF',
-                    fontFamily: '"Geist Mono", monospace',
-                    fontSize: '1.25rem',
-                    fontStyle: 'normal',
-                    fontWeight: 300,
-                    lineHeight: 'normal',
-                    letterSpacing: '-0.00625rem'
-                }}>
+            <ul key='ul-final' className='mb-16 space-y-6' style={style.listContainer}>
                 {bulletGroup}
             </ul>
         );
