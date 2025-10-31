@@ -8,13 +8,38 @@ import { motion } from 'framer-motion';
 import { EMAIL_CONFIG } from '@/config/email';
 import { MessageModal } from '@/components/MessageModal';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import type { ContactFormConfig } from '@/types/content.types';
+
+// Default form options (fallback if config not provided)
+const DEFAULT_FORM_OPTIONS: ContactFormConfig = {
+    services: [
+        { value: 'vfx', label: 'VFX' },
+        { value: 'production', label: 'Production' },
+        { value: 'post-production', label: 'Post Production' },
+        { value: 'color-grading', label: 'Color Grading' },
+        { value: 'sound-design', label: 'Sound Design' },
+        { value: 'consulting', label: 'Consulting' }
+    ],
+    budgets: [
+        { value: 'under-10k', label: 'Under $10,000' },
+        { value: '10k-25k', label: '$10,000 - $25,000' },
+        { value: '25k-50k', label: '$25,000 - $50,000' },
+        { value: '50k-100k', label: '$50,000 - $100,000' },
+        { value: 'over-100k', label: 'Over $100,000' }
+    ]
+};
 
 interface ContactSectionProps {
     bgColor?: 'white' | 'black';
     showLeftColumn?: boolean;
+    formOptions?: ContactFormConfig;
 }
 
-export function ContactSection({ bgColor = 'white', showLeftColumn = true }: ContactSectionProps) {
+export function ContactSection({
+    bgColor = 'white',
+    showLeftColumn = true,
+    formOptions = DEFAULT_FORM_OPTIONS
+}: ContactSectionProps) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -409,71 +434,22 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
                                     backgroundColor: bgColor === 'black' ? '#000' : '#fff',
                                     borderColor: solidBorderColor
                                 }}>
-                                <SelectItem
-                                    value='web-development'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    Web Development
-                                </SelectItem>
-                                <SelectItem
-                                    value='mobile-app'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    Mobile App Development
-                                </SelectItem>
-                                <SelectItem
-                                    value='ui-ux-design'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    UI/UX Design
-                                </SelectItem>
-                                <SelectItem
-                                    value='branding'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    Branding
-                                </SelectItem>
-                                <SelectItem
-                                    value='consulting'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    Consulting
-                                </SelectItem>
+                                {formOptions.services.map((service) => (
+                                    <SelectItem
+                                        key={service.value}
+                                        value={service.value}
+                                        className={
+                                            bgColor === 'black'
+                                                ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                                : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                        }
+                                        style={{
+                                            color: textColor,
+                                            fontFamily: 'Inter, sans-serif'
+                                        }}>
+                                        {service.label}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>
@@ -522,71 +498,22 @@ export function ContactSection({ bgColor = 'white', showLeftColumn = true }: Con
                                     backgroundColor: bgColor === 'black' ? '#000' : '#fff',
                                     borderColor: solidBorderColor
                                 }}>
-                                <SelectItem
-                                    value='under-10k'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    Under $10,000
-                                </SelectItem>
-                                <SelectItem
-                                    value='10k-25k'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    $10,000 - $25,000
-                                </SelectItem>
-                                <SelectItem
-                                    value='25k-50k'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    $25,000 - $50,000
-                                </SelectItem>
-                                <SelectItem
-                                    value='50k-100k'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    $50,000 - $100,000
-                                </SelectItem>
-                                <SelectItem
-                                    value='over-100k'
-                                    className={
-                                        bgColor === 'black'
-                                            ? 'hover:bg-[#151515] focus:bg-[#151515]'
-                                            : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
-                                    }
-                                    style={{
-                                        color: textColor,
-                                        fontFamily: 'Inter, sans-serif'
-                                    }}>
-                                    Over $100,000
-                                </SelectItem>
+                                {formOptions.budgets.map((budget) => (
+                                    <SelectItem
+                                        key={budget.value}
+                                        value={budget.value}
+                                        className={
+                                            bgColor === 'black'
+                                                ? 'hover:bg-[#151515] focus:bg-[#151515]'
+                                                : 'hover:bg-[#f5f5f5] focus:bg-[#f5f5f5]'
+                                        }
+                                        style={{
+                                            color: textColor,
+                                            fontFamily: 'Inter, sans-serif'
+                                        }}>
+                                        {budget.label}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>

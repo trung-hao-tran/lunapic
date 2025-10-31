@@ -1,0 +1,14 @@
+{
+    "socialLinks": [
+        {
+            "label": "INSTAGRAM",
+            "href": "https://www.instagram.com/lunapictures.com.au/",
+            "icon": "/instagram-icon.svg"
+        },
+        {
+            "label": "YOUTUBE",
+            "href": "https://www.youtube.com/@LunaPicturesau",
+            "icon": "/youtube-icon.svg"
+        }
+    ]
+}

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { StarFrame } from './StarFrame';
+import type { SocialLink } from '@/types/content.types';
 
 const footerLinks = [
     { label: 'HOME', href: '/' },
@@ -12,13 +13,18 @@ const footerLinks = [
     { label: 'CONTACT US', href: 'contact' }
 ];
 
-const socialLinks = [
-    { label: 'INSTAGRAM', href: '#', icon: '/instagram-icon.svg' },
-    { label: 'YOUTUBE', href: '#', icon: '/youtube-icon.svg' },
-    { label: 'FACEBOOK', href: '#', icon: '/facebook-icon.svg' }
+// Default social links (fallback if not provided via props)
+const defaultSocialLinks: SocialLink[] = [
+    { label: 'INSTAGRAM', href: 'https://www.instagram.com/lunapictures', icon: '/instagram-icon.svg' },
+    { label: 'YOUTUBE', href: 'https://www.youtube.com/@lunapictures', icon: '/youtube-icon.svg' },
+    { label: 'FACEBOOK', href: 'https://www.facebook.com/lunapictures', icon: '/facebook-icon.svg' }
 ];
 
-export function Footer() {
+interface FooterProps {
+    socialLinks?: SocialLink[];
+}
+
+export function Footer({ socialLinks = defaultSocialLinks }: FooterProps = {}) {
     return (
         <footer className='bg-[#151515] py-4 text-white'>
             <div className='container mx-auto px-6 md:px-12 lg:px-16'>

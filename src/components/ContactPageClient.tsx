@@ -265,7 +265,11 @@ export function ContactPageClient({ config }: ContactPageClientProps) {
                                         animate={{ opacity: 1, x: 0 }}
                                         exit={{ opacity: 0, x: -20 }}
                                         transition={BASE_TRANSITION}>
-                                        <ContactSection bgColor='black' showLeftColumn={false} />
+                                        <ContactSection
+                                            bgColor='black'
+                                            showLeftColumn={false}
+                                            formOptions={config.formOptions}
+                                        />
                                     </motion.div>
                                 ) : (
                                     <motion.div

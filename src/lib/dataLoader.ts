@@ -12,7 +12,8 @@ import type {
     TeamMember,
     AccordionItem,
     ShowreelItem,
-    CategoryFilter
+    CategoryFilter,
+    SocialLink
 } from '@/types/content.types';
 
 // Content directory path
@@ -439,6 +440,18 @@ export async function loadWorkCategories(): Promise<CategoryFilter[]> {
 
     // Sort alphabetically by label
     return categories.sort((a, b) => a.label.localeCompare(b.label));
+}
+
+// ==================== GLOBAL CONFIGURATION ====================
+
+/**
+ * Load social media links from global navigation config
+ */
+export async function loadSocialLinks(): Promise<SocialLink[]> {
+    const filePath = join(CONTENT_DIR, 'global', 'navigation.json');
+    const data = await readJsonFile<{ socialLinks: SocialLink[] }>(filePath);
+
+    return data.socialLinks;
 }
 
 // ==================== UTILITY FUNCTIONS ====================

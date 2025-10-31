@@ -163,6 +163,7 @@ export interface ContactConfig {
         phone: string;
         email: string;
     };
+    formOptions?: ContactFormConfig; // Optional form dropdown options
 }
 
 /**
@@ -219,4 +220,34 @@ export interface CategoryFilter {
     id: string;
     label: string;
     count: number;
+}
+
+// ==================== GLOBAL CONFIGURATION ====================
+
+/**
+ * Social media link
+ * Used for: Footer, potentially header
+ */
+export interface SocialLink {
+    label: string;
+    href: string;
+    icon?: string; // Optional icon path
+}
+
+/**
+ * Form select option
+ * Used for: Contact form dropdowns
+ */
+export interface FormOption {
+    value: string;
+    label: string;
+}
+
+/**
+ * Contact form configuration
+ * Used for: Contact form service and budget dropdowns
+ */
+export interface ContactFormConfig {
+    services: FormOption[];
+    budgets: FormOption[];
 }
