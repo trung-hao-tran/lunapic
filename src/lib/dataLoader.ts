@@ -199,8 +199,8 @@ export async function loadWorkPortfolio(): Promise<{
         productionItems: Array<{ itemId: string; order: number; ratio?: '9:16' | '16:9' | '4:3' | '3:4' }>;
     }>(portfolioPath);
 
-    // Load VFX items
-    const vfxItems = await Promise.all(
+    // Load VFX items - filter by VFX tag to prevent user errors
+    const vfxItemsRaw = await Promise.all(
         portfolioData.vfxItems.map(async (ref) => {
             const itemPath = join(CONTENT_DIR, 'shared', 'portfolio-items', ref.itemId, 'data.json');
             const itemData = await readJsonFile<PortfolioItem>(itemPath);
@@ -217,8 +217,11 @@ export async function loadWorkPortfolio(): Promise<{
         })
     );
 
-    // Load Production items
-    const productionItems = await Promise.all(
+    // Filter to only include items with VFX tag
+    const vfxItems = vfxItemsRaw.filter((item) => item.tags && item.tags.includes('VFX'));
+
+    // Load Production items - filter by Production tag to prevent user errors
+    const productionItemsRaw = await Promise.all(
         portfolioData.productionItems.map(async (ref) => {
             const itemPath = join(CONTENT_DIR, 'shared', 'portfolio-items', ref.itemId, 'data.json');
             const itemData = await readJsonFile<PortfolioItem>(itemPath);
@@ -234,6 +237,9 @@ export async function loadWorkPortfolio(): Promise<{
             };
         })
     );
+
+    // Filter to only include items with Production tag
+    const productionItems = productionItemsRaw.filter((item) => item.tags && item.tags.includes('Production'));
 
     return {
         vfxItems: vfxItems.sort((a, b) => a.order - b.order),

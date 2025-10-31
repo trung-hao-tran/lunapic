@@ -22,6 +22,7 @@ interface PortfolioGalleryProps {
 const EMPTY_CATEGORIES: string[] = [];
 
 // Fuzzy overlay component for portfolio items
+// Layers above the image and gradient (z-15) but below the text info (z-20)
 const FuzzyOverlay = ({ show }: { show: boolean }) => {
     return (
         <AnimatePresence>
@@ -36,7 +37,7 @@ const FuzzyOverlay = ({ show }: { show: boolean }) => {
                             duration: 1,
                             ease: 'easeInOut'
                         }}
-                        className='pointer-events-none absolute inset-0 z-10 bg-black'
+                        className='pointer-events-none absolute inset-0 z-[15] bg-black'
                     />
                     {/* Animated noise overlay */}
                     <motion.div
@@ -47,7 +48,7 @@ const FuzzyOverlay = ({ show }: { show: boolean }) => {
                             duration: 1,
                             ease: 'easeInOut'
                         }}
-                        className='pointer-events-none absolute inset-0 z-10 opacity-[15%]'>
+                        className='pointer-events-none absolute inset-0 z-[15] opacity-[15%]'>
                         <motion.div
                             initial={{ transform: 'translateX(-20%) translateY(-20%)' }}
                             animate={{
@@ -166,50 +167,55 @@ export function PortfolioGallery({
         hoverTimerRef.current = {};
     }, [selectedCategories]);
 
+    // Helper to convert ratio string to numeric value
+    const getRatioValue = (ratio?: string): number => {
+        switch (ratio) {
+            case '16:9':
+                return 16 / 9;
+            case '9:16':
+                return 9 / 16;
+            case '4:3':
+                return 4 / 3;
+            case '3:4':
+                return 3 / 4;
+            default:
+                return 4 / 3; // Default to 4:3
+        }
+    };
+
+    // Sort items by order
+    const sortedItems = [...items].sort((a, b) => a.order - b.order);
+
+    // Filtering behavior differs by viewport:
+    // - Desktop: Keep ALL items, apply fuzzy overlay to non-matching items
+    // - Mobile: Hide non-matching items completely via CSS (hidden md:block)
+    // We keep all items in the data array and use CSS classes for responsive behavior
+    const filteredItems = sortedItems; // No filtering - all items included
+
+    // Build rows based on ratio (max 3 items per row)
+    const rows: (typeof items)[] = [];
+    const MAX_ITEMS_PER_ROW = 3;
+
+    for (let i = 0; i < filteredItems.length; i += MAX_ITEMS_PER_ROW) {
+        rows.push(filteredItems.slice(i, i + MAX_ITEMS_PER_ROW));
+    }
+
+    // For mobile: count rows that have at least one matching item
+    const mobileVisibleRows = rows.filter((rowItems) =>
+        rowItems.some((item) => !shouldBeGrayscale(item))
+    );
+
+    // Limit to 2 rows if hasViewMoreButton and not expanded
+    const displayRows = hasViewMoreButton && !isExpanded ? rows.slice(0, 2) : rows;
+
+    // Check if there are more rows to show
+    // Desktop: all rows count, Mobile: only rows with visible items count
+    const hasMoreRowsDesktop = rows.length > 2;
+    const hasMoreRowsMobile = mobileVisibleRows.length > 2;
+
     return (
         <>
             {(() => {
-                // Helper to convert ratio string to numeric value
-                const getRatioValue = (ratio?: string): number => {
-                    switch (ratio) {
-                        case '16:9':
-                            return 16 / 9;
-                        case '9:16':
-                            return 9 / 16;
-                        case '4:3':
-                            return 4 / 3;
-                        case '3:4':
-                            return 3 / 4;
-                        default:
-                            return 4 / 3; // Default to 4:3
-                    }
-                };
-
-                // Sort items by order
-                const sortedItems = [...items].sort((a, b) => a.order - b.order);
-
-                // Filter out items on mobile if categories are selected
-                const filteredItems = sortedItems.filter((item) => {
-                    if (selectedCategories.length === 0) return true;
-
-                    // Check if item matches any selected category
-                    const hasSelectedCategory = item.categories.some((cat) =>
-                        selectedCategories.includes(cat.toLowerCase().replace(/\s+/g, '-'))
-                    );
-
-                    return hasSelectedCategory;
-                });
-
-                // Build rows based on ratio (max 3 items per row)
-                const rows: (typeof items)[] = [];
-                const MAX_ITEMS_PER_ROW = 3;
-
-                for (let i = 0; i < filteredItems.length; i += MAX_ITEMS_PER_ROW) {
-                    rows.push(filteredItems.slice(i, i + MAX_ITEMS_PER_ROW));
-                }
-
-                // Limit to 2 rows if hasViewMoreButton and not expanded
-                const displayRows = hasViewMoreButton && !isExpanded ? rows.slice(0, 2) : rows;
 
                 // Render rows
                 return displayRows.map((rowItems, rowIdx) => {
@@ -264,12 +270,23 @@ export function PortfolioGallery({
                                 const ratio = getRatioValue(item.ratio);
                                 const flexGrow = ratio;
 
+                                // Check if item should have fuzzy overlay (desktop) or be hidden (mobile)
+                                const isGrayscale = shouldBeGrayscale(item);
+                                const isTemporarilyUngrayscaled = tempUngrayscaledItems.has(item.id);
+                                const showFuzzy = isGrayscale && !isTemporarilyUngrayscaled;
+
+                                // On mobile: hide non-matching items entirely
+                                // On desktop: show fuzzy overlay
+                                const mobileHiddenClass = isGrayscale ? 'hidden md:block' : '';
+
                                 return (
                                     <Link
                                         key={item.id}
                                         href={`/portfolio/${item.id}`}
-                                        className='group relative block w-full transition-transform duration-300 hover:scale-[1.02] md:h-full'
-                                        style={{ flexGrow, flexShrink: 1, flexBasis: 0 }}>
+                                        className={`group relative block w-full transition-transform duration-300 hover:scale-[1.02] md:h-full ${mobileHiddenClass}`}
+                                        style={{ flexGrow, flexShrink: 1, flexBasis: 0 }}
+                                        onMouseEnter={() => handleMouseEnter(item.id)}
+                                        onMouseLeave={() => handleMouseLeave(item.id)}>
                                         <StarFrame
                                             haveBorder={true}
                                             direction={starDirection as Array<'tl' | 'tr' | 'bl' | 'br'>}
@@ -285,6 +302,9 @@ export function PortfolioGallery({
                                                     fill
                                                     className='object-cover transition-transform duration-300 group-hover:scale-105'
                                                 />
+
+                                                {/* Fuzzy Overlay - Desktop only, when item doesn't match filter */}
+                                                <FuzzyOverlay show={showFuzzy} />
 
                                                 {/* Black Gradient Overlay - Bottom */}
                                                 <div
@@ -337,15 +357,30 @@ export function PortfolioGallery({
                 </div>
             )}
 
-            {/* View More/Less Buttons */}
+            {/* View More/Less Buttons - Responsive visibility based on viewport */}
             {hasViewMoreButton && (
-                <div className='flex justify-center pt-8'>
-                    {!isExpanded ? (
-                        <BoxButton text='VIEW MORE' icon={<DownArrowIcon />} onClick={() => setIsExpanded(true)} />
-                    ) : (
-                        <BoxButton text='VIEW LESS' icon={<UpArrowIcon />} onClick={() => setIsExpanded(false)} />
+                <>
+                    {/* Mobile button - only show if there are more mobile-visible rows */}
+                    {hasMoreRowsMobile && (
+                        <div className='flex justify-center pt-8 md:hidden'>
+                            {!isExpanded ? (
+                                <BoxButton text='VIEW MORE' icon={<DownArrowIcon />} onClick={() => setIsExpanded(true)} />
+                            ) : (
+                                <BoxButton text='VIEW LESS' icon={<UpArrowIcon />} onClick={() => setIsExpanded(false)} />
+                            )}
+                        </div>
                     )}
-                </div>
+                    {/* Desktop button - only show if there are more total rows */}
+                    {hasMoreRowsDesktop && (
+                        <div className='hidden md:flex justify-center pt-8'>
+                            {!isExpanded ? (
+                                <BoxButton text='VIEW MORE' icon={<DownArrowIcon />} onClick={() => setIsExpanded(true)} />
+                            ) : (
+                                <BoxButton text='VIEW LESS' icon={<UpArrowIcon />} onClick={() => setIsExpanded(false)} />
+                            )}
+                        </div>
+                    )}
+                </>
             )}
         </>
     );
